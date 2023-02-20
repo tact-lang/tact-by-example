@@ -5,14 +5,15 @@ console.log(`\nRunning tact post build script`);
 const files = fs.readdirSync("./tact-output");
 for (const file of files) {
   if (!file.endsWith(".ts")) continue;
+  if (file.endsWith(".client.ts")) continue;
   const [example, contract] = file.split(".")[0].split("_");
-  if (!fs.existsSync(`./src/examples/${example}`)) {
-    console.log(`   > WARNING: example ${example} not found in src`);
+  if (!fs.existsSync(`./src/routes/${example}`)) {
+    console.log(`   > WARNING: route ${example} not found in src`);
     continue;
   }
   let content = fs.readFileSync(`./tact-output/${file}`).toString();
   content = modifyTypeScriptWrapper(content, contract);
-  fs.writeFileSync(`./src/examples/${example}/${file}`, content);
+  fs.writeFileSync(`./src/routes/${example}/contract.ts`, content);
   console.log(`   > Moved ${file}`);
 }
 

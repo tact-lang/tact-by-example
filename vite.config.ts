@@ -1,10 +1,21 @@
-import { defineConfig } from 'vite'
-import { svelte } from '@sveltejs/vite-plugin-svelte'
-import lightningcss from 'vite-plugin-lightningcss'
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import { sveltekit } from '@sveltejs/kit/vite';
+import type { UserConfig } from 'vite';
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [svelte(), lightningcss({
-    browserslist: '>= 0.25%',
-  }),],
-})
+const config: UserConfig = {
+	build: {
+		target: 'es2020'
+	},
+	optimizeDeps: {
+		esbuildOptions: {
+			target: 'es2020',
+			
+		}
+	},
+	plugins: [sveltekit(), nodePolyfills()],
+	define: {
+		__APP_VERSION__: 1,
+	},
+};
+
+export default config;
