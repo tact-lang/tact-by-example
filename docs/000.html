@@ -33,14 +33,14 @@
 		-->
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout-ea28d799.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-05ba8aa1.js">
+		<link rel="modulepreload" href="./_app/immutable/start-916c6d7a.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-55652f94.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-aa55d5ad.js">
 		<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-fe042e1f.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/store-28a523f8.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/000/_page.svelte-bce8a9bd.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/000/_page.svelte-1490c2c3.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-9eeb7f13.js">
   </head>
   <body>
@@ -79,7 +79,9 @@ contract Counter with Deployable {
     }
  
     receive("increment") {
+        dump("hello from debug world");
         self.add(1);
+        dump(self.counter);
     }
  
     get fun counter(): Int {
@@ -96,14 +98,14 @@ contract Counter with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1teoai7">
-			import { start } from "./_app/immutable/start-05ba8aa1.js";
+		<script type="module" data-sveltekit-hydrate="1m5wt4e">
+			import { start } from "./_app/immutable/start-916c6d7a.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="1teoai7"]').parentNode,
-				version: "1676853483922",
+				target: document.querySelector('[data-sveltekit-hydrate="1m5wt4e"]').parentNode,
+				version: "1676921508402",
 				hydrate: {
 					node_ids: [0, 3],
 					data: [null,null],

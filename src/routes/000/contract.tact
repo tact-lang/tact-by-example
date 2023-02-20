@@ -29,7 +29,9 @@ contract Counter with Deployable {
     }
  
     receive("increment") {
+        dump("hello from debug world");
         self.add(1);
+        dump(self.counter);
     }
  
     get fun counter(): Int {
