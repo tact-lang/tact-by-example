@@ -238,11 +238,7 @@
       }
     },
     {
-      "scope": [
-        "string",
-        "punctuation.definition.string",
-        "string punctuation.section.embedded source"
-      ],
+      "scope": ["string", "punctuation.definition.string", "string punctuation.section.embedded source"],
       "settings": {
         "foreground": "#032f62"
       }

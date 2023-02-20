@@ -3,22 +3,15 @@
     "commands": [
       {
         "name": "Dev",
-        "command": "npm run dev",
+        "command": "npm run dev"
       }
     ]
   },
   "path-autocomplete.pathMappings": {
-    "/": [
-      "${folder}/static",
-      "${folder}/src/routes",
-    ],
+    "/": ["${folder}/static", "${folder}/src/routes"]
   },
   "search.exclude": {
     "**/docs": true
   },
-  "cSpell.words": [
-    "Scoresheet",
-    "sortablejs",
-    "sveltekit"
-  ]
+  "cSpell.words": ["Scoresheet", "sortablejs", "sveltekit"]
 }

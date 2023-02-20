@@ -18,11 +18,19 @@ for (const file of files) {
 }
 
 function modifyTypeScriptWrapper(content, contract) {
-  content = content.replace(`import { ContractSystem, ContractExecutor } from 'ton-emulator';`, `
-import { Blockchain, SmartContract } from "@ton-community/sandbox";`);
-  content = content.replace(`let system = await ContractSystem.create();`, `
-    /* let system = await ContractSystem.create();`);
-  content = content.replace(`return { code: codeCell, data };`, `
+  content = content.replace(
+    `import { ContractSystem, ContractExecutor } from 'ton-emulator';`,
+    `
+import { Blockchain, SmartContract } from "@ton-community/sandbox";`,
+  );
+  content = content.replace(
+    `let system = await ContractSystem.create();`,
+    `
+    /* let system = await ContractSystem.create();`,
+  );
+  content = content.replace(
+    `return { code: codeCell, data };`,
+    `
     return { code: codeCell, data }; */
 
     let code = initCell;
@@ -38,6 +46,7 @@ import { Blockchain, SmartContract } from "@ton-community/sandbox";`);
         }
     }
 
-    return { code: codeCell, data: res.stackReader.readCell() };`);
+    return { code: codeCell, data: res.stackReader.readCell() };`,
+  );
   return content;
 }
