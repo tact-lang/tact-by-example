@@ -32,23 +32,44 @@
 		/>
 		-->
     <meta http-equiv="content-security-policy" content="">
-		<link href="./_app/immutable/assets/_layout-ea28d799.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-916c6d7a.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-55652f94.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-aa55d5ad.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-fe042e1f.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store-28a523f8.js">
+		<link href="./_app/immutable/assets/_layout-9804a031.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/start-31861eff.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-a89a8bfe.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-d6b47418.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-7e20f517.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store-a084c327.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/010/_page.svelte-8bb82389.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-9eeb7f13.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/010/_page.svelte-67b8142d.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-a94843e2.js">
   </head>
   <body>
     <div style="display: contents">
 
 
-<div class="h-screen flex"><div class="flex-1"><div class="h-full flex flex-col svelte-u3pbld" id="scroll-container">
-      <div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
+
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="this-is-a-title">This is a title</h1>
+<p>This contract has two state variables that persisted between contract calls: owner and counter. The state variables are declared in the contract header and initialized in the init function. The init function is called before contract is deployed.</p>
+<h2 id="another-second-title">Another second title</h2>
+<p>And more text with <code>some code</code> inside.</p>
+<p>We can also have a full code block:</p>
+<pre><code>this is a code block
+</code></pre>
+<h3 id="third-and-final-title">Third and final title</h3>
+<p>Still cool with a <a href="https://ton.org">link</a> somewhere.</p>
+<p>We can have items:</p>
+<ul>
+<li>first</li>
+<li>second</li>
+<li>third</li>
+</ul>
+<!-- HTML_TAG_END --></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter vertical svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+  </div>
+  <div class="secondary svelte-9dft0e">
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
  
 message Add {
     amount: Int as uint32;
@@ -86,24 +107,52 @@ contract Counter with Deployable {
         return self.counter;
     }
 }
-</pre></div>
+</pre></div></div></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter horizontal svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+  		</div>
+  <div class="secondary svelte-9dft0e"><div slot="secondary" class="panelBottom" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column;"><div style="display: flex; gap: 10px; flex-wrap: wrap; overflow: hidden;">
 
-      <button>Deploy</button>
 
-      <button>Get Counter</button>
 
-      <button>Send Increment</button></div></div>
+<button class="buttonAction svelteui-c-TfGwS svelteui-c-TfGwS-hQzioB-variation-filled svelteui-c-TfGwS-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Deploy
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+	
+					
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get Counter
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+		
+					
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send Increment
+		<div class="ripple svelte-1dillie"></div>
+		</button></div>
+				<pre style="flex: 1; color: #666; overflow: scroll;">hello</pre></div></div>
+</div>
+		
+	</div>
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1d4pre8">
-			import { start } from "./_app/immutable/start-916c6d7a.js";
+		<script type="module" data-sveltekit-hydrate="1h222ks">
+			import { start } from "./_app/immutable/start-31861eff.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="1d4pre8"]').parentNode,
-				version: "1676921508402",
+				target: document.querySelector('[data-sveltekit-hydrate="1h222ks"]').parentNode,
+				version: "1677120608036",
 				hydrate: {
 					node_ids: [0, 4],
 					data: [null,null],

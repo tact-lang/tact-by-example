@@ -1,6 +1,7 @@
 import { writable } from "svelte/store";
 
 interface Store {
+  markdown: string;
   tactCode: string;
   deploy: () => Promise<void>;
   messages: { [message: string]: () => Promise<void> };
@@ -8,6 +9,7 @@ interface Store {
 }
 
 export default writable({
+  markdown: "",
   tactCode: "",
   deploy: () => {},
   messages: {},

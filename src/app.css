@@ -1,9 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@layer base {
-  html {
+    html {
     font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu,
       Cantarell, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
     font-size: 14px;
@@ -24,7 +19,7 @@
     overflow: hidden;
     width: 100vw;
     height: 100vh;
-    height: var(— app-height);
+    color: rgb(226, 232, 240);
   }
 
   /* Chrome, Safari, Edge, Opera */
@@ -34,31 +29,70 @@
     margin: 0;
   }
 
-  /* Firefox */
-  input[type="number"] {
-    -moz-appearance: textfield;
+  .panelMarkdown {
+    font-size: 16px;
+    line-height: 28px;;
+    padding: 25px 50px 10px 50px;
   }
 
-  body {
-    -webkit-overflow-scrolling: auto;
+  .panelMarkdown h1 {
+    margin-top: 35px;
+    padding-bottom: 12px;
+    border-bottom: 0.5px solid #333;
   }
-}
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #ffffff;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+  .panelMarkdown h2 {
+    margin-top: 35px;
+  }
+
+  .panelMarkdown h3 {
+    margin-top: 35px;
+  }
+
+  .panelMarkdown a {
+    color: rgb(0, 138, 230);
+  }
+
+  .panelMarkdown code {
+    background-color: rgba(138, 208, 255, 0.05);
+    border-radius: 5px;
+    font-size: 13px;
+    padding: 3px 6px;
+    border: 1px solid #333;
+  }
+
+  .panelMarkdown pre code {
+    background-color: transparent;
+    border: none;
+  }
+
+  .panelMarkdown pre {
+    background-color: rgba(138, 208, 255, 0.05);
+    border-radius: 6px;
+    padding: 5px 10px;
+    border: 1px solid #333;
+  }
+
+  .panelCode {
+    background-color: rgba(138, 208, 255, 0.1);
+    border-radius: 10px;
+    margin: 20px 20px 5px 5px;
+    padding: 10px 10px 5px 25px;
+  }
+
+  .panelBottom {
+    background-color: #000;
+    border-radius: 3px;
+    border: 0.5px solid #444;
+    margin: 5px 20px 20px 5px;
+    padding: 10px 10px 0px 10px;
+  }
+
+  .buttonAction {
+    opacity: 0.8;
+  }
+
+  .panelBottom pre {
+    font-size: 12px;
+    margin-bottom: 5px;
+  }

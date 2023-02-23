@@ -3,6 +3,7 @@
   import { Blockchain, type OpenedContract } from "@ton-community/sandbox";
   import store from "$lib/store";
 
+  import markdown from "./content.md?raw";
   import tactCode from "./contract.tact?raw";
   import { Counter } from "./contract";
 
@@ -10,6 +11,7 @@
   let counter: OpenedContract<Counter>;
 
   $store = {
+    markdown,
     tactCode,
     deploy: async () => {
       console.log(`deploy - start`);
