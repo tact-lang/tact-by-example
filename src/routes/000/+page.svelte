@@ -1,6 +1,6 @@
 <script lang="ts">
   import { toNano, type Sender } from "ton-core";
-  import { Blockchain, type OpenedContract } from "@ton-community/sandbox";
+  import { Blockchain, type SandboxContract } from "@ton-community/sandbox";
   import store from "$lib/store";
 
   import markdown from "./content.md?raw";
@@ -8,7 +8,7 @@
   import { Counter } from "./contract";
 
   let sender: Sender;
-  let counter: OpenedContract<Counter>;
+  let counter: SandboxContract<Counter>;
 
   $store = {
     markdown,
@@ -29,6 +29,10 @@
       counter: async () => {
         return await counter.getCounter();
       },
+    },
+    next: {
+      name: "This is next",
+      id: "010",
     },
   };
 </script>

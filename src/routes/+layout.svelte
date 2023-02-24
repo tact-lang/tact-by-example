@@ -16,12 +16,15 @@
   let markdownHtml = "";
   let tactHtml = "";
   let terminalContent = "";
+  let next: { name: string; id: string }, prev: { name: string; id: string };
 
   store.subscribe(async (s) => {
     if (!s.tactCode) return;
     markdownHtml = marked(s.markdown);
     tactHtml = `<pre>${s.tactCode}</pre>`;
     tactHtml = await highlightTactCode(s.tactCode);
+    next = s.next;
+    prev = s.prev;
   });
 
   onMount(() => {
@@ -121,6 +124,29 @@
 <Split initialPrimarySize="47%">
   <div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;">
     {@html markdownHtml}<slot />
+    <div class="navMarkdown">
+      {#if prev}
+        <a style="position: absolute; left: 50px;" href={prev.id}>
+          <svg
+            style="transform: rotate(180deg);"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            class="nx-inline nx-h-5 nx-shrink-0 ltr:nx-rotate-180"
+            ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg
+          >
+          {prev.name}
+        </a>
+      {/if}
+      {#if next}
+        <a style="position: absolute; right: 50px;" href={next.id}>
+          {next.name}
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="nx-inline nx-h-5 nx-shrink-0 rtl:nx-rotate-180"
+            ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg
+          >
+        </a>
+      {/if}
+    </div>
   </div>
   <svelte:fragment slot="splitter">
     <DefaultSplitter color="rgb(17, 17, 17)" hoverColor="#444" dragColor="#444" />

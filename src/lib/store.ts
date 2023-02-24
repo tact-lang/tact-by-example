@@ -7,6 +7,14 @@ interface Store {
   deploy: () => Promise<SendMessageResult[]>;
   messages: { [message: string]: () => Promise<SendMessageResult[]> };
   getters: { [getter: string]: () => Promise<any> };
+  prev?: {
+    name: string;
+    id: string;
+  };
+  next?: {
+    name: string;
+    id: string;
+  };
 }
 
 export default writable({
