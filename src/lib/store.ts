@@ -1,11 +1,12 @@
+import type { SendMessageResult } from "@ton-community/sandbox";
 import { writable } from "svelte/store";
 
 interface Store {
   markdown: string;
   tactCode: string;
-  deploy: () => Promise<void>;
-  messages: { [message: string]: () => Promise<void> };
-  getters: { [getter: string]: () => Promise<void> };
+  deploy: () => Promise<SendMessageResult[]>;
+  messages: { [message: string]: () => Promise<SendMessageResult[]> };
+  getters: { [getter: string]: () => Promise<any> };
 }
 
 export default writable({

@@ -18,6 +18,6 @@ Still cool with a [link](https://ton.org) somewhere.
 
 We can have items:
 
-* first
-* second
-* third
+- first
+- second
+- third

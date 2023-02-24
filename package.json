@@ -39,7 +39,7 @@
     "@geoffcox/svelte-splitter": "^1.0.1",
     "@svelteuidev/composables": "^0.10.0",
     "@svelteuidev/core": "^0.10.0",
-    "@ton-community/sandbox": "^0.4.0",
+    "@ton-community/sandbox": "^0.5.0",
     "buffer": "^6.0.3",
     "marked": "^4.2.12",
     "shiki": "^0.14.1",

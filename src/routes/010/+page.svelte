@@ -14,24 +14,20 @@
     markdown,
     tactCode,
     deploy: async () => {
-      console.log(`deploy - start`);
       const blockchain = await Blockchain.create();
       const owner = await blockchain.treasury("owner");
       sender = owner.getSender();
       counter = blockchain.openContract(await Counter.fromInit(owner.address));
-      await counter.send(owner.getSender(), { value: toNano(1) }, { $$type: "Deploy", queryId: 0n });
-      console.log(`deploy - end`);
+      return [await counter.send(owner.getSender(), { value: toNano(1) }, { $$type: "Deploy", queryId: 0n })];
     },
     messages: {
       Increment: async () => {
-        console.log(`Increment - start`);
-        await counter.send(sender, { value: toNano(1) }, "increment");
-        console.log(`Increment - end`);
+        return [await counter.send(sender, { value: toNano(1) }, "increment")];
       },
     },
     getters: {
       Counter: async () => {
-        console.log(await counter.getCounter());
+        return await counter.getCounter();
       },
     },
   };

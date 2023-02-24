@@ -1,1 +1,0 @@
-import{C as e}from"./index-a89a8bfe.js";var s=typeof globalThis<"u"?globalThis:typeof window<"u"?window:typeof global<"u"?global:typeof self<"u"?self:{};const l=e({markdown:"",tactCode:"",deploy:()=>{},messages:{},getters:{}});export{s as c,l as s};

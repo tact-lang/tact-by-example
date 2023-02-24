@@ -130,12 +130,7 @@
       }
     },
     {
-      "scope": [
-        "punctuation.definition.arguments",
-        "punctuation.definition.dict",
-        "punctuation.separator",
-        "meta.function-call.arguments"
-      ],
+      "scope": ["punctuation.definition.arguments", "punctuation.definition.dict", "punctuation.separator", "meta.function-call.arguments"],
       "settings": {
         "foreground": "#000011"
       }
