@@ -3,6 +3,8 @@ html {
     Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
   font-size: 14px;
   background-color: rgb(17, 17, 17);
+  font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1, "ss06" 1;
+  -webkit-tap-highlight-color: transparent;
 }
 :root {
   --app-height: 100%;
@@ -98,6 +100,9 @@ input::-webkit-inner-spin-button {
   border-radius: 10px;
   margin: 20px 20px 5px 5px;
   padding: 10px 10px 5px 25px;
+  font-size: 13px;
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
 }
 
 .panelBottom {
