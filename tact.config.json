@@ -4,7 +4,7 @@
       "name": "000",
       "path": "./src/routes/000/contract.tact",
       "output": "./tact-output",
-      "experimental": {
+      "parameters": {
         "debug": true
       }
     },
@@ -12,7 +12,7 @@
       "name": "010",
       "path": "./src/routes/010/contract.tact",
       "output": "./tact-output",
-      "experimental": {
+      "parameters": {
         "debug": true
       }
     }

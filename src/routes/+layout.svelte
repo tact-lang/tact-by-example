@@ -16,7 +16,7 @@
   let markdownHtml = "";
   let tactHtml = "";
   let terminalContent = "";
-  let next: { name: string; id: string }, prev: { name: string; id: string };
+  let next: { name: string; id: string } | undefined, prev: { name: string; id: string } | undefined;
 
   store.subscribe(async (s) => {
     if (!s.tactCode) return;
