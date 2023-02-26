@@ -1,16 +1,24 @@
 {
   "projects": [
     {
-      "name": "000",
-      "path": "./src/routes/000/contract.tact",
+      "name": "01-hello-world",
+      "path": "./src/routes/01-hello-world/contract.tact",
       "output": "./tact-output",
       "parameters": {
         "debug": true
       }
     },
     {
-      "name": "010",
-      "path": "./src/routes/010/contract.tact",
+      "name": "01-a-simple-counter",
+      "path": "./src/routes/01-a-simple-counter/contract.tact",
+      "output": "./tact-output",
+      "parameters": {
+        "debug": true
+      }
+    },
+    {
+      "name": "01-the-deployable-trait",
+      "path": "./src/routes/01-the-deployable-trait/contract.tact",
       "output": "./tact-output",
       "parameters": {
         "debug": true

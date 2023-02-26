@@ -40,15 +40,21 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store-04c80bb0.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/000/_page.svelte-b579372b.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/01-the-deployable-trait/_page.svelte-64af49b7.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-e79fdc6e.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-07666f35.js">
   </head>
   <body>
     <div style="display: contents">
 
 
 
-<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><!-- HTML_TAG_END -->
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="hello-world">Hello World</h1>
+<p>This is probably the simplest possible Tact program. It will provide callers with the classic output &quot;hello world&quot;.</p>
+<p>Tact lets you write smart contracts. This code defines a single contract named <code>HelloWorld</code>. Smart contracts must be deployed on-chain to be usable, try to deploy this contract by pressing the <span class="mdButton blue">Deploy</span> button.</p>
+<h2 id="a-simple-interaction">A simple interaction</h2>
+<p>Contracts can have <em>getters</em> like <code>greeting()</code>. These are special functions that allow users to query information from the contract. Try to call the getter by pressing the <span class="mdButton teal">Get greeting</span> button.</p>
+<!-- HTML_TAG_END -->
     <div class="navMarkdown">
       </div></div></div>
   <div class="splitter svelte-9dft0e">
@@ -56,47 +62,26 @@
 </div>
   </div>
   <div class="secondary svelte-9dft0e">
-<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
- 
-message Add {
-    amount: Int as uint32;
-}
- 
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>// this trait has to be imported
+import "@stdlib/deploy";
+
+// the Deployable trait adds a default receiver for the "Deploy" message
 contract Counter with Deployable {
  
-    owner: Address;
-    counter: Int as uint32;
+    val: Int as uint32;
  
-    init(owner: Address) {
-        self.owner = owner;
-        self.counter = 0;
-    }
- 
-    fun add(v: Int) {
-        
-        // Check sender
-        let ctx: Context = context();
-        require(ctx.sender == self.owner, "Invalid sender");
-        
-        // Update counter
-        self.counter = (self.counter + v);
-    }
- 
-    receive(msg: Add) {
-        self.add(msg.amount);
+    init() {
+        self.val = 0;
     }
  
     receive("increment") {
-        dump("hello from debug world");
-        self.add(1);
-        dump(self.counter);
+        self.val = self.val + 1;
     }
  
-    get fun counter(): Int {
-        return self.counter;
+    get fun value(): Int {
+        return self.val;
     }
-}
-</pre></div></div></div></div>
+}</pre></div></div></div></div>
   <div class="splitter svelte-9dft0e">
 <div class="splitter horizontal svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
 </div>
@@ -112,6 +97,13 @@ contract Counter with Deployable {
 
           
 
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get greeting
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
           </div>
         <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
 </div>
@@ -119,16 +111,16 @@ contract Counter with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="cu1fq1">
+		<script type="module" data-sveltekit-hydrate="ia206l">
 			import { start } from "./_app/immutable/start-53bd0a8f.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="cu1fq1"]').parentNode,
+				target: document.querySelector('[data-sveltekit-hydrate="ia206l"]').parentNode,
 				version: "1677452163676",
 				hydrate: {
-					node_ids: [0, 3],
+					node_ids: [0, 6],
 					data: [null,null],
 					form: null,
 					error: null

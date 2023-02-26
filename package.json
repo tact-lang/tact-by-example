@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite dev --host",
-    "tact-build": "rimraf ./tact-output && tact --config ./tact.config.json && node post-tact-build.js",
+    "tact-build": "node pre-tact-build.js && rimraf ./tact-output && tact --config ./tact.config.json && node post-tact-build.js",
     "build": "vite build",
     "preview": "vite preview --host",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",

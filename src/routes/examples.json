@@ -1,0 +1,14 @@
+[
+  {
+    "id": "01-hello-world",
+    "name": "Hello World"
+  },
+  {
+    "id": "01-a-simple-counter",
+    "name": "A Simple Counter"
+  },
+  {
+    "id": "01-the-deployable-trait",
+    "name": "The Deployable Trait"
+  }
+]

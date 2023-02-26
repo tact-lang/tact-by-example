@@ -124,6 +124,28 @@ input::-webkit-inner-spin-button {
   font-size: 12px;
   margin-bottom: 5px;
 }
+
+.mdButton {
+  opacity: 0.9;
+  border-radius: 3px;
+  font-size: 12px;
+  padding: 3px 7px;
+  margin: 0 2px;
+  cursor: text;
+  white-space: nowrap;
+}
+
+.mdButton.blue {
+  background-color: rgb(34, 139, 230, 0.7);
+}
+
+.mdButton.teal {
+  background-color: rgb(18, 184, 134, 0.7);
+}
+
+.mdButton.grape {
+  background-color: rgb(190, 75, 219, 0.7);
+}
 :root {
   --shiki-color-text: #414141;
   --shiki-color-background: transparent;

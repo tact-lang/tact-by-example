@@ -40,15 +40,31 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store-04c80bb0.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/000/_page.svelte-b579372b.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/01-a-simple-counter/_page.svelte-88a46eda.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-e79fdc6e.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-07666f35.js">
   </head>
   <body>
     <div style="display: contents">
 
 
 
-<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><!-- HTML_TAG_END -->
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="this-is-a-title">This is a title</h1>
+<p>This contract has two state variables that persisted between contract calls: owner and counter. The state variables are declared in the contract header and initialized in the init function. The init function is called before contract is deployed.</p>
+<h2 id="another-second-title">Another second title</h2>
+<p>And more text with <code>some code</code> inside.</p>
+<p>We can also have a full code block:</p>
+<pre><code>this is a code block
+</code></pre>
+<h3 id="third-and-final-title">Third and final title</h3>
+<p>Still cool with a <a href="https://ton.org">link</a> somewhere.</p>
+<p>We can have items:</p>
+<ul>
+<li>first</li>
+<li>second</li>
+<li>third</li>
+</ul>
+<!-- HTML_TAG_END -->
     <div class="navMarkdown">
       </div></div></div>
   <div class="splitter svelte-9dft0e">
@@ -56,47 +72,26 @@
 </div>
   </div>
   <div class="secondary svelte-9dft0e">
-<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>contract Counter {
  
-message Add {
-    amount: Int as uint32;
-}
+    // persistent state variable of type Int to hold the counter value
+    val: Int as uint32;
  
-contract Counter with Deployable {
- 
-    owner: Address;
-    counter: Int as uint32;
- 
-    init(owner: Address) {
-        self.owner = owner;
-        self.counter = 0;
+    // initialize the state variable when contract is deployed
+    init() {
+        self.val = 0;
     }
  
-    fun add(v: Int) {
-        
-        // Check sender
-        let ctx: Context = context();
-        require(ctx.sender == self.owner, "Invalid sender");
-        
-        // Update counter
-        self.counter = (self.counter + v);
-    }
- 
-    receive(msg: Add) {
-        self.add(msg.amount);
-    }
- 
+    // handler for incoming increment messages that change the state
     receive("increment") {
-        dump("hello from debug world");
-        self.add(1);
-        dump(self.counter);
+        self.val = self.val + 1;
     }
  
-    get fun counter(): Int {
-        return self.counter;
+    // read only getter for querying the counter value
+    get fun value(): Int {
+        return self.val;
     }
-}
-</pre></div></div></div></div>
+}</pre></div></div></div></div>
   <div class="splitter svelte-9dft0e">
 <div class="splitter horizontal svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
 </div>
@@ -112,23 +107,37 @@ contract Counter with Deployable {
 
           
 
-          </div>
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get counter
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+          
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send increment
+		<div class="ripple svelte-1dillie"></div>
+		</button></div>
         <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
 </div>
   </div>
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="cu1fq1">
+		<script type="module" data-sveltekit-hydrate="mmqnk3">
 			import { start } from "./_app/immutable/start-53bd0a8f.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="cu1fq1"]').parentNode,
+				target: document.querySelector('[data-sveltekit-hydrate="mmqnk3"]').parentNode,
 				version: "1677452163676",
 				hydrate: {
-					node_ids: [0, 3],
+					node_ids: [0, 4],
 					data: [null,null],
 					form: null,
 					error: null
