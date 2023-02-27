@@ -1,6 +1,6 @@
 # A Simple Counter
 
-This contract has a state variable that persists between contract calls, the counter value. In runtime it's an `Int` but when persisted it's encoded as a `uint32` - a 32-bit unsigned integer. Contracts pay rent in proportion to the amount of persistent space they consume, so compact representations are encouraged.
+This contract has a state variable that persists between contract calls, the counter value. When persisted, it's encoded as a `uint32` - a 32-bit unsigned integer. Contracts pay rent in proportion to the amount of persistent space they consume, so compact representations are encouraged.
 
 State variables should be initialized in `init()` that runs on deployment of the contract.
 

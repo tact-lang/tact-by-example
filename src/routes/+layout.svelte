@@ -25,6 +25,7 @@
     tactHtml = await highlightTactCode(s.tactCode);
     next = s.next;
     prev = s.prev;
+    terminalContent = "";
   });
 
   onMount(() => {

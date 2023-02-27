@@ -1,6 +1,6 @@
 import{S as A,i as m,s as f,J as p,ad as w}from"../../../chunks/index-a89a8bfe.js";import{d as s,s as d}from"../../../chunks/store-04c80bb0.js";import{d as h}from"../../../chunks/index-e79fdc6e.js";import{g}from"../../../chunks/helpers-07666f35.js";const v=`# A Simple Counter
 
-This contract has a state variable that persists between contract calls, the counter value. In runtime it's an \`Int\` but when persisted it's encoded as a \`uint32\` - a 32-bit unsigned integer. Contracts pay rent in proportion to the amount of persistent space they consume, so compact representations are encouraged.
+This contract has a state variable that persists between contract calls, the counter value. When persisted, it's encoded as a \`uint32\` - a 32-bit unsigned integer. Contracts pay rent in proportion to the amount of persistent space they consume, so compact representations are encouraged.
 
 State variables should be initialized in \`init()\` that runs on deployment of the contract.
 
