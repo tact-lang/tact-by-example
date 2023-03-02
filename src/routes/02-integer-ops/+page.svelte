@@ -22,8 +22,8 @@
       return [await contract.send(deployer.getSender(), { value: toNano(1) }, { $$type: "Deploy", queryId: 0n })];
     },
     messages: {
-      "show all": async () => {
-        return [await contract.send(sender, { value: toNano(1) }, "show all")];
+      "show ops": async () => {
+        return [await contract.send(sender, { value: toNano(1) }, "show ops")];
       },
     },
     getters: {},

@@ -25,7 +25,7 @@ contract Integers with Deployable {
         self.i6 = ton("1.23");  // easy to read coin balances (like cents, just with 9 decimals)
     }
 
-    receive("integer dump") {
+    receive("show all") {
         dump(self.i1);
         dump(self.i2);
         dump(self.i3);
@@ -34,23 +34,5 @@ contract Integers with Deployable {
         dump(self.i6);
         dump(self.i7);
         dump(self.i8);
-    }
-
-    receive("integer ops") {
-        // temporary variable, runtime Int type is always int257 (range -2^256 to 2^256 - 1)
-        let i: Int = -12;                       dump(i);
-
-        i = self.i4 * 3 + self.i1 - self.i8;    dump(i);
-        i = self.i1 % 10;                       dump(i);
-        i = self.i1 / 1000;                     dump(i);
-        i = self.i1 >> 3;                       dump(i);
-        i = self.i1 << 2;                       dump(i);
-        i = min(self.i3, 11);                   dump(i);
-        i = max(self.i3, 22);                   dump(i);
-        i = abs(self.i8);                       dump(i);
-
-        dump(self.i1 == 3001);
-        dump(self.i1 > 2000);
-        dump(self.i1 != 70);
     }
 }

@@ -40,7 +40,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store-04c80bb0.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/01-the-deployable-trait/_page.svelte-4f7dd471.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/02-addresses/_page.svelte-cd7966ac.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-72d1d48d.js">
   </head>
   <body>
@@ -48,11 +48,14 @@
 
 
 
-<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="hello-world">Hello World</h1>
-<p>This is probably the simplest possible Tact program. It will provide callers with the classic output &quot;hello world&quot;.</p>
-<p>Tact lets you write smart contracts. This code defines a single contract named <code>HelloWorld</code>. Smart contracts must be deployed on-chain to be usable, try to deploy this contract by pressing the <span class="mdButton blue">Deploy</span> button.</p>
-<h2 id="a-simple-interaction">A simple interaction</h2>
-<p>Contracts can have <em>getters</em> like <code>greeting()</code>. These are special functions that allow users to query information from the contract. Try to call the getter by pressing the <span class="mdButton teal">Get greeting</span> button.</p>
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="the-deployable-trait">The Deployable Trait</h1>
+<p>Tact doesn&#39;t support classical class inheritance, but contracts can implement <em>traits</em>. One of the commonly used traits is <code>Deployable</code>. It implements a simple receiver for the <code>Deploy</code> message which helps deploy contracts in a standard way.</p>
+<p>All contracts are deployed by sending them a message. This can be any message, but best practice is to designate the special <code>Deploy</code> message for this purpose.</p>
+<p>This message has a single field, <code>queryId</code>, which is provided by the deployer. If the deploy succeeds, the contract will reply with the message <code>DeployOk</code> and echo the same <code>queryId</code> in the response.</p>
+<p>If you&#39;re using TypeScript to deploy, sending the deploy message should look like:</p>
+<pre><code class="language-ts">const msg = { $$type: &quot;Deploy&quot;, queryId: 0n };
+ await contract.send(sender, { value: toNano(1) }, msg);
+</code></pre>
 <!-- HTML_TAG_END -->
     <div class="navMarkdown">
       </div></div></div>
@@ -61,24 +64,45 @@
 </div>
   </div>
   <div class="secondary svelte-9dft0e">
-<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>// this trait has to be imported
-import "@stdlib/deploy";
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
 
-// the Deployable trait adds a default receiver for the "Deploy" message
-contract Counter with Deployable {
+contract Addresses with Deployable {
  
-    val: Int as uint32;
- 
+    a1: Address;
+    a2: Address;
+    a3: Address;
+    a4: Address;
+    a5: Address;
+
     init() {
-        self.val = 0;
+        // these are three representations of the same address
+        self.a1 = address("EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N"); // bouncable (foundation wallet)
+        self.a2 = address("UQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqEBI"); // non-bounceable (same foundation wallet)
+        self.a3 = newAddress(0, 0x83dfd552e63729b472fcbcc8c45ebcc6691702558b68ec7527e1ba403a0f31a8); // raw (same foundation wallet)
+        
+        // here are a few other important addresses
+        self.a4 = newAddress(0, 0); // the zero address (nobody)
+        self.a5 = myAddress();      // address of this contract
     }
- 
-    receive("increment") {
-        self.val = self.val + 1;
+
+    receive("show all") {
+        ///dump(self.a1);
+        ///dump(self.a2);
+        ///dump(self.a3);
+        ///dump(self.a4);
+        ///dump(self.a5);
     }
- 
-    get fun value(): Int {
-        return self.val;
+
+    receive("show ops") {
+        // temporary variable
+        let a: Address = address("EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N"); // bouncable (same foundation wallet)
+
+        dump(a == self.a1);
+        dump(a == self.a2);
+        dump(a == self.a3);
+        
+        dump(a == self.a4);
+        dump(a != self.a5);
     }
 }</pre></div></div></div></div>
   <div class="splitter svelte-9dft0e">
@@ -99,27 +123,34 @@ contract Counter with Deployable {
 
 
 <button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get greeting
+		Get value
 		<div class="ripple svelte-1dillie"></div>
 		</button>
 
-          </div>
+          
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send increment
+		<div class="ripple svelte-1dillie"></div>
+		</button></div>
         <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
 </div>
   </div>
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="ia206l">
+		<script type="module" data-sveltekit-hydrate="1etny">
 			import { start } from "./_app/immutable/start-2da8a633.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="ia206l"]').parentNode,
+				target: document.querySelector('[data-sveltekit-hydrate="1etny"]').parentNode,
 				version: "1677797612532",
 				hydrate: {
-					node_ids: [0, 5],
+					node_ids: [0, 6],
 					data: [null,null],
 					form: null,
 					error: null

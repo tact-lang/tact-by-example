@@ -287,32 +287,32 @@ function dictValueParserDeployOk(): DictionaryValue<DeployOk> {
   };
 }
 
-type Integers_init_args = {
-  $$type: "Integers_init_args";
+type Addresses_init_args = {
+  $$type: "Addresses_init_args";
 };
 
-function initIntegers_init_args(src: Integers_init_args) {
+function initAddresses_init_args(src: Addresses_init_args) {
   return (builder: Builder) => {
     let b_0 = builder;
   };
 }
 
-async function Integers_init() {
+async function Addresses_init() {
   const __code = Cell.fromBase64(
-    "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",
+    "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",
   );
   const __system = Cell.fromBase64(
-    "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",
+    "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",
   );
   let builder = beginCell();
   builder.storeRef(__system);
   builder.storeUint(0, 1);
-  initIntegers_init_args({ $$type: "Integers_init_args" })(builder);
+  initAddresses_init_args({ $$type: "Addresses_init_args" })(builder);
   const __data = builder.endCell();
   return { code: __code, data: __data };
 }
 
-const Integers_errors: { [key: number]: { message: string } } = {
+const Addresses_errors: { [key: number]: { message: string } } = {
   2: { message: `Stack undeflow` },
   3: { message: `Stack overflow` },
   4: { message: `Integer overflow` },
@@ -339,25 +339,25 @@ const Integers_errors: { [key: number]: { message: string } } = {
   137: { message: `Masterchain support is not enabled for this contract` },
 };
 
-export class Integers implements Contract {
+export class Addresses implements Contract {
   static async init() {
-    return await Integers_init();
+    return await Addresses_init();
   }
 
   static async fromInit() {
-    const init = await Integers_init();
+    const init = await Addresses_init();
     const address = contractAddress(0, init);
-    return new Integers(address, init);
+    return new Addresses(address, init);
   }
 
   static fromAddress(address: Address) {
-    return new Integers(address);
+    return new Addresses(address);
   }
 
   readonly address: Address;
   readonly init?: { code: Cell; data: Cell };
   readonly abi: ContractABI = {
-    errors: Integers_errors,
+    errors: Addresses_errors,
   };
 
   private constructor(address: Address, init?: { code: Cell; data: Cell }) {
@@ -369,10 +369,13 @@ export class Integers implements Contract {
     provider: ContractProvider,
     via: Sender,
     args: { value: bigint; bounce?: boolean | null | undefined },
-    message: "show all" | Deploy,
+    message: "show all" | "show ops" | Deploy,
   ) {
     let body: Cell | null = null;
     if (message === "show all") {
+      body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
+    }
+    if (message === "show ops") {
       body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
     }
     if (message && typeof message === "object" && !(message instanceof Slice) && message.$$type === "Deploy") {

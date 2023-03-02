@@ -40,7 +40,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store-04c80bb0.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/01-the-deployable-trait/_page.svelte-4f7dd471.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/02-bools/_page.svelte-0b5aa879.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-72d1d48d.js">
   </head>
   <body>
@@ -48,11 +48,16 @@
 
 
 
-<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="hello-world">Hello World</h1>
-<p>This is probably the simplest possible Tact program. It will provide callers with the classic output &quot;hello world&quot;.</p>
-<p>Tact lets you write smart contracts. This code defines a single contract named <code>HelloWorld</code>. Smart contracts must be deployed on-chain to be usable, try to deploy this contract by pressing the <span class="mdButton blue">Deploy</span> button.</p>
-<h2 id="a-simple-interaction">A simple interaction</h2>
-<p>Contracts can have <em>getters</em> like <code>greeting()</code>. These are special functions that allow users to query information from the contract. Try to call the getter by pressing the <span class="mdButton teal">Get greeting</span> button.</p>
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="addresses">Addresses</h1>
+<p><code>Address</code> is another primitive data type. It represents standard addresses on the TON blockchain. Every smart contract on TON is identifiable by its address. Think of this as a unique id.</p>
+<p>TON is divided into multiple chains called <em>workchains</em>. One of the internal fields of the address is the workchain id:</p>
+<ul>
+<li><p><code>0</code> - The standard workchain, for regular users.</p>
+</li>
+<li><p><code>-1</code> - The masterchain, usually for validators.</p>
+</li>
+</ul>
+<p>There are multiple ways to <a href="https://ton.org/docs/learn/overviews/addresses">represent</a> the same address. Notice in the contract that the bouncable and non-bouncable representations of the same address actually generate the exact same value. It doesn&#39;t matter which representation you use.</p>
 <!-- HTML_TAG_END -->
     <div class="navMarkdown">
       </div></div></div>
@@ -61,24 +66,34 @@
 </div>
   </div>
   <div class="secondary svelte-9dft0e">
-<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>// this trait has to be imported
-import "@stdlib/deploy";
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
 
-// the Deployable trait adds a default receiver for the "Deploy" message
-contract Counter with Deployable {
+contract Bools with Deployable {
  
-    val: Int as uint32;
- 
+    b1: Bool = true;
+    b2: Bool = false;
+    b3: Bool;
+
     init() {
-        self.val = 0;
+        self.b3 = !self.b2;
     }
- 
-    receive("increment") {
-        self.val = self.val + 1;
+
+    receive("show all") {
+        dump(self.b1);
+        dump(self.b2);
+        dump(self.b3);
     }
- 
-    get fun value(): Int {
-        return self.val;
+
+    receive("show ops") {
+        let b: Bool = true; // temporary variable
+        dump(b);
+
+        b = self.b1 && self.b2 || !self.b3;
+        dump(b);
+
+        dump(self.b1 == true);
+        dump(self.b1 == self.b2);
+        dump(self.b1 != self.b2);
     }
 }</pre></div></div></div></div>
   <div class="splitter svelte-9dft0e">
@@ -96,30 +111,37 @@ contract Counter with Deployable {
 
           
 
+          
 
 
-<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get greeting
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send show all
 		<div class="ripple svelte-1dillie"></div>
 		</button>
 
-          </div>
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send show ops
+		<div class="ripple svelte-1dillie"></div>
+		</button></div>
         <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
 </div>
   </div>
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="ia206l">
+		<script type="module" data-sveltekit-hydrate="tvq9vr">
 			import { start } from "./_app/immutable/start-2da8a633.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="ia206l"]').parentNode,
+				target: document.querySelector('[data-sveltekit-hydrate="tvq9vr"]').parentNode,
 				version: "1677797612532",
 				hydrate: {
-					node_ids: [0, 5],
+					node_ids: [0, 7],
 					data: [null,null],
 					form: null,
 					error: null

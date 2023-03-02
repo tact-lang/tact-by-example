@@ -32,34 +32,26 @@
 		/>
 		-->
     <meta http-equiv="content-security-policy" content="">
-		<link href="./_app/immutable/assets/_layout-e13b1e44.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-c388d36d.js">
+		<link href="./_app/immutable/assets/_layout-df7d22a3.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/start-2da8a633.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-a89a8bfe.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-d6b47418.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-d1d84883.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-c4bfa9f9.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/store-04c80bb0.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/02-integers/_page.svelte-61901cea.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-e79fdc6e.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-7ef692a6.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/02-integers/_page.svelte-5561da78.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-72d1d48d.js">
   </head>
   <body>
     <div style="display: contents">
 
 
 
-<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="addresses-bools">Addresses, Bools</h1>
-<p>Tact supports a number of primitive data types that are tailored for smart contract use.</p>
-<p><code>Address</code> represents standard addresses on the TON blockchain. TON has multiple chains called <em>workchains</em>. The address specifies the workchain id:</p>
-<ul>
-<li><p><code>0</code> - The standard workchain, for regular users.</p>
-</li>
-<li><p><code>-1</code> - The masterchain, usually for validators.</p>
-</li>
-</ul>
-<p>Every smart contract on TON is identifiable by its address. There are usually multiple ways to represent the same address. Notice in the contract that the bouncable and non-bouncable representations of the same address generate the exact same value.</p>
-<p><code>Bool</code> is convenient for boolean and logical operations and for storing flags.</p>
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="integer-operations">Integer Operations</h1>
+<p>Since all runtime calculations with integers are done at 257-bit, overflows are quite rare.</p>
+<p>Nevertheless, if any math operation overflows, an exception will be thrown and the transaction will revert. You can say that Tact&#39;s math is safe by default.</p>
+<p>There&#39;s no problem with mixing variables of different state sizes in the same calculation. In runtime, they are all the same type - 257-bit signed.</p>
 <!-- HTML_TAG_END -->
     <div class="navMarkdown">
       </div></div></div>
@@ -95,7 +87,7 @@ contract Integers with Deployable {
         self.i6 = ton("1.23");  // easy to read coin balances (like cents, just with 9 decimals)
     }
 
-    receive("integer dump") {
+    receive("show all") {
         dump(self.i1);
         dump(self.i2);
         dump(self.i3);
@@ -104,24 +96,6 @@ contract Integers with Deployable {
         dump(self.i6);
         dump(self.i7);
         dump(self.i8);
-    }
-
-    receive("integer ops") {
-        // temporary variable, runtime Int type is always int257 (range -2^256 to 2^256 - 1)
-        let i: Int = -12;                       dump(i);
-
-        i = self.i4 * 3 + self.i1 - self.i8;    dump(i);
-        i = self.i1 % 10;                       dump(i);
-        i = self.i1 / 1000;                     dump(i);
-        i = self.i1 >> 3;                       dump(i);
-        i = self.i1 << 2;                       dump(i);
-        i = min(self.i3, 11);                   dump(i);
-        i = max(self.i3, 22);                   dump(i);
-        i = abs(self.i8);                       dump(i);
-
-        dump(self.i1 == 3001);
-        dump(self.i1 > 2000);
-        dump(self.i1 != 70);
     }
 }</pre></div></div></div></div>
   <div class="splitter svelte-9dft0e">
@@ -144,28 +118,7 @@ contract Integers with Deployable {
 
 
 <button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Send address dump
-		<div class="ripple svelte-1dillie"></div>
-		</button>
-
-
-
-<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Send address ops
-		<div class="ripple svelte-1dillie"></div>
-		</button>
-
-
-
-<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Send bool dump
-		<div class="ripple svelte-1dillie"></div>
-		</button>
-
-
-
-<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Send bool ops
+		Send show ops
 		<div class="ripple svelte-1dillie"></div>
 		</button></div>
         <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
@@ -174,16 +127,16 @@ contract Integers with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1g5oi5u">
-			import { start } from "./_app/immutable/start-c388d36d.js";
+		<script type="module" data-sveltekit-hydrate="1uwl6cw">
+			import { start } from "./_app/immutable/start-2da8a633.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="1g5oi5u"]').parentNode,
-				version: "1677771663941",
+				target: document.querySelector('[data-sveltekit-hydrate="1uwl6cw"]').parentNode,
+				version: "1677797612532",
 				hydrate: {
-					node_ids: [0, 8],
+					node_ids: [0, 9],
 					data: [null,null],
 					form: null,
 					error: null

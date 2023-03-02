@@ -57,6 +57,7 @@ input::-webkit-inner-spin-button {
 
 .panelMarkdown a {
   color: rgb(0, 138, 230);
+  text-decoration: none;
 }
 
 .panelMarkdown code {

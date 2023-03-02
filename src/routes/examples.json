@@ -16,7 +16,15 @@
     "name": "Integers"
   },
   {
-    "id": "02-addresses-bools",
-    "name": "Addresses, Bools"
+    "id": "02-integer-ops",
+    "name": "Integer Operations"
+  },
+  {
+    "id": "02-bools",
+    "name": "Bools"
+  },
+  {
+    "id": "02-addresses",
+    "name": "Addresses"
   }
 ]

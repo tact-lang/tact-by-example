@@ -33,8 +33,24 @@
       }
     },
     {
-      "name": "02-addresses-bools",
-      "path": "./src/routes/02-addresses-bools/contract.tact",
+      "name": "02-integer-ops",
+      "path": "./src/routes/02-integer-ops/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "02-bools",
+      "path": "./src/routes/02-bools/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "02-addresses",
+      "path": "./src/routes/02-addresses/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true

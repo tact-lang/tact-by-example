@@ -6,10 +6,10 @@
 
   import markdown from "./content.md?raw";
   import tactCode from "./contract.tact?raw";
-  import { Integers } from "./contract";
+  import { Addresses } from "./contract";
 
   let sender: Sender;
-  let contract: SandboxContract<Integers>;
+  let contract: SandboxContract<Addresses>;
 
   $store = {
     markdown,
@@ -18,12 +18,15 @@
       const blockchain = await Blockchain.create();
       const deployer = await blockchain.treasury("deployer");
       sender = deployer.getSender();
-      contract = blockchain.openContract(await Integers.fromInit());
+      contract = blockchain.openContract(await Addresses.fromInit());
       return [await contract.send(deployer.getSender(), { value: toNano(1) }, { $$type: "Deploy", queryId: 0n })];
     },
     messages: {
       "show all": async () => {
         return [await contract.send(sender, { value: toNano(1) }, "show all")];
+      },
+      "show ops": async () => {
+        return [await contract.send(sender, { value: toNano(1) }, "show ops")];
       },
     },
     getters: {},
