@@ -10,5 +10,13 @@
   {
     "id": "01-the-deployable-trait",
     "name": "The Deployable Trait"
+  },
+  {
+    "id": "02-integers",
+    "name": "Integers"
+  },
+  {
+    "id": "02-addresses-bools",
+    "name": "Addresses, Bools"
   }
 ]

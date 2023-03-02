@@ -199,32 +199,120 @@ function dictValueParserSendParameters(): DictionaryValue<SendParameters> {
   };
 }
 
-type Counter_init_args = {
-  $$type: "Counter_init_args";
+export type Deploy = {
+  $$type: "Deploy";
+  queryId: bigint;
 };
 
-function initCounter_init_args(src: Counter_init_args) {
+export function storeDeploy(src: Deploy) {
+  return (builder: Builder) => {
+    let b_0 = builder;
+    b_0.storeUint(2490013878, 32);
+    b_0.storeUint(src.queryId, 64);
+  };
+}
+
+export function loadDeploy(slice: Slice) {
+  let sc_0 = slice;
+  if (sc_0.loadUint(32) !== 2490013878) {
+    throw Error("Invalid prefix");
+  }
+  let _queryId = sc_0.loadUintBig(64);
+  return { $$type: "Deploy" as const, queryId: _queryId };
+}
+
+function loadTupleDeploy(source: TupleReader) {
+  let _queryId = source.readBigNumber();
+  return { $$type: "Deploy" as const, queryId: _queryId };
+}
+
+function storeTupleDeploy(source: Deploy) {
+  let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
+  return builder.build();
+}
+
+function dictValueParserDeploy(): DictionaryValue<Deploy> {
+  return {
+    serialize: (src, buidler) => {
+      buidler.storeRef(beginCell().store(storeDeploy(src)).endCell());
+    },
+    parse: (src) => {
+      return loadDeploy(src.loadRef().beginParse());
+    },
+  };
+}
+
+export type DeployOk = {
+  $$type: "DeployOk";
+  queryId: bigint;
+};
+
+export function storeDeployOk(src: DeployOk) {
+  return (builder: Builder) => {
+    let b_0 = builder;
+    b_0.storeUint(2952335191, 32);
+    b_0.storeUint(src.queryId, 64);
+  };
+}
+
+export function loadDeployOk(slice: Slice) {
+  let sc_0 = slice;
+  if (sc_0.loadUint(32) !== 2952335191) {
+    throw Error("Invalid prefix");
+  }
+  let _queryId = sc_0.loadUintBig(64);
+  return { $$type: "DeployOk" as const, queryId: _queryId };
+}
+
+function loadTupleDeployOk(source: TupleReader) {
+  let _queryId = source.readBigNumber();
+  return { $$type: "DeployOk" as const, queryId: _queryId };
+}
+
+function storeTupleDeployOk(source: DeployOk) {
+  let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
+  return builder.build();
+}
+
+function dictValueParserDeployOk(): DictionaryValue<DeployOk> {
+  return {
+    serialize: (src, buidler) => {
+      buidler.storeRef(beginCell().store(storeDeployOk(src)).endCell());
+    },
+    parse: (src) => {
+      return loadDeployOk(src.loadRef().beginParse());
+    },
+  };
+}
+
+type AddressesBools_init_args = {
+  $$type: "AddressesBools_init_args";
+};
+
+function initAddressesBools_init_args(src: AddressesBools_init_args) {
   return (builder: Builder) => {
     let b_0 = builder;
   };
 }
 
-async function Counter_init() {
+async function AddressesBools_init() {
   const __code = Cell.fromBase64(
-    "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",
+    "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",
   );
   const __system = Cell.fromBase64(
-    "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",
+    "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",
   );
   let builder = beginCell();
   builder.storeRef(__system);
   builder.storeUint(0, 1);
-  initCounter_init_args({ $$type: "Counter_init_args" })(builder);
+  initAddressesBools_init_args({ $$type: "AddressesBools_init_args" })(builder);
   const __data = builder.endCell();
   return { code: __code, data: __data };
 }
 
-const Counter_errors: { [key: number]: { message: string } } = {
+const AddressesBools_errors: { [key: number]: { message: string } } = {
   2: { message: `Stack undeflow` },
   3: { message: `Stack overflow` },
   4: { message: `Integer overflow` },
@@ -251,25 +339,25 @@ const Counter_errors: { [key: number]: { message: string } } = {
   137: { message: `Masterchain support is not enabled for this contract` },
 };
 
-export class Counter implements Contract {
+export class AddressesBools implements Contract {
   static async init() {
-    return await Counter_init();
+    return await AddressesBools_init();
   }
 
   static async fromInit() {
-    const init = await Counter_init();
+    const init = await AddressesBools_init();
     const address = contractAddress(0, init);
-    return new Counter(address, init);
+    return new AddressesBools(address, init);
   }
 
   static fromAddress(address: Address) {
-    return new Counter(address);
+    return new AddressesBools(address);
   }
 
   readonly address: Address;
   readonly init?: { code: Cell; data: Cell };
   readonly abi: ContractABI = {
-    errors: Counter_errors,
+    errors: AddressesBools_errors,
   };
 
   private constructor(address: Address, init?: { code: Cell; data: Cell }) {
@@ -281,26 +369,28 @@ export class Counter implements Contract {
     provider: ContractProvider,
     via: Sender,
     args: { value: bigint; bounce?: boolean | null | undefined },
-    message: null | "increment",
+    message: "address dump" | "address ops" | "bool dump" | "bool ops" | Deploy,
   ) {
     let body: Cell | null = null;
-    if (message === null) {
-      body = new Cell();
-    }
-    if (message === "increment") {
+    if (message === "address dump") {
       body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
+    }
+    if (message === "address ops") {
+      body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
+    }
+    if (message === "bool dump") {
+      body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
+    }
+    if (message === "bool ops") {
+      body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
+    }
+    if (message && typeof message === "object" && !(message instanceof Slice) && message.$$type === "Deploy") {
+      body = beginCell().store(storeDeploy(message)).endCell();
     }
     if (body === null) {
       throw new Error("Invalid message type");
     }
 
     await provider.internal(via, { ...args, body: body });
-  }
-
-  async getValue(provider: ContractProvider) {
-    let builder = new TupleBuilder();
-    let source = (await provider.get("value", builder.build())).stack;
-    let result = source.readBigNumber();
-    return result;
   }
 }

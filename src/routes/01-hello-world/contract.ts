@@ -211,10 +211,10 @@ function initHelloWorld_init_args(src: HelloWorld_init_args) {
 
 async function HelloWorld_init() {
   const __code = Cell.fromBase64(
-    "te6ccgEBCQEA8QABFP8A9KQT9LzyyAsBAgFiAgMCdtAB0NMDAXGwwAGRf5Fw4gH6QCJQVW8E+GHtRNDUAfhi0gAwkW2Ogts84lnbPDAwyPhCAcx/AcoAye1UBwQCASAFBgA+cCHXScIflTAg1wsf3gKSW3/gAcAAAddJwSGwkX/gcAIrvY1XaiaGoA/DFpABhItsdBbZ5xbZ5AcIAJW93owTgudh6ullc9j0J2HOslQo2zQThO6xqWlbI+WZFp15b++LEcwTgQKuANwDOxymcsHVcjktlhwTgN6k73yqLLeOOp6e8CrOGTQAAm0AHDCLtIZWxsbyBXb3JsZI",
+    "te6ccgECCQEAATsAART/APSkE/S88sgLAQIBYgIDAtDQAdDTAwFxsMABkX+RcOIB+kABINdJgQELuvLgiCDXCwoggwm6IYEE/7qx8uCIgwm68uCJIkFVbwT4Ye1E0NQB+GLSADCRbY6N+CjXCwqDCbry4InbPOJZ2zwwMMj4QgHMfwHKAMntVAcEAgEgBQYAPnAh10nCH5UwINcLH94Cklt/4AHAAAHXScEhsJF/4HACQb2NV2omhqAPwxaQAYSLbHRvwUa4WFQYTdeXBE7Z5xbZ5AcIALm93owTgudh6ullc9j0J2HOslQo2zQThO6xqWlbI+WZFp15b++LEcwTgQKuANwDOxymcsHVcjktlhwTgN6k73yqLLeOOp6e8CrOGTQThOy6ctWadluZ0HSzbKM3RSQAAm0AHDCLtIZWxsbyBXb3JsZI",
   );
   const __system = Cell.fromBase64(
-    "te6cckEBCwEA+wABAcABAQWg9hUCART/APSkE/S88sgLAwIBYggEAgEgBgUAlb3ejBOC52Hq6WVz2PQnYc6yVCjbNBOE7rGpaVsj5ZkWnXlv74sRzBOBAq4A3AM7HKZywdVyOS2WHBOA3qTvfKost446np7wKs4ZNAIrvY1XaiaGoA/DFpABhItsdBbZ5xbZ5AoHABwwi7SGVsbG8gV29ybGSAJ20AHQ0wMBcbDAAZF/kXDiAfpAIlBVbwT4Ye1E0NQB+GLSADCRbY6C2zziWds8MDDI+EIBzH8BygDJ7VQKCQA+cCHXScIflTAg1wsf3gKSW3/gAcAAAddJwSGwkX/gcAACbRZYja0=",
+    "te6cckECCwEAAUUAAQHAAQEFoPYVAgEU/wD0pBP0vPLICwMCAWIIBAIBIAYFALm93owTgudh6ullc9j0J2HOslQo2zQThO6xqWlbI+WZFp15b++LEcwTgQKuANwDOxymcsHVcjktlhwTgN6k73yqLLeOOp6e8CrOGTQThOy6ctWadluZ0HSzbKM3RSQCQb2NV2omhqAPwxaQAYSLbHRvwUa4WFQYTdeXBE7Z5xbZ5AoHABwwi7SGVsbG8gV29ybGSALQ0AHQ0wMBcbDAAZF/kXDiAfpAASDXSYEBC7ry4Igg1wsKIIMJuiGBBP+6sfLgiIMJuvLgiSJBVW8E+GHtRNDUAfhi0gAwkW2Ojfgo1wsKgwm68uCJ2zziWds8MDDI+EIBzH8BygDJ7VQKCQA+cCHXScIflTAg1wsf3gKSW3/gAcAAAddJwSGwkX/gcAACbXnYlh0=",
   );
   let builder = beginCell();
   builder.storeRef(__system);
@@ -248,6 +248,7 @@ const HelloWorld_errors: { [key: number]: { message: string } } = {
   134: { message: `Invalid argument` },
   135: { message: `Code of a contract was not found` },
   136: { message: `Invalid address` },
+  137: { message: `Masterchain support is not enabled for this contract` },
 };
 
 export class HelloWorld implements Contract {

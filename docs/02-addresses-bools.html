@@ -40,7 +40,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store-04c80bb0.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/01-a-simple-counter/_page.svelte-41147f5f.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/02-addresses-bools/_page.svelte-0f773a79.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-e79fdc6e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-7ef692a6.js">
   </head>
@@ -49,21 +49,14 @@
 
 
 
-<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="this-is-a-title">This is a title</h1>
-<p>This contract has two state variables that persisted between contract calls: owner and counter. The state variables are declared in the contract header and initialized in the init function. The init function is called before contract is deployed.</p>
-<h2 id="another-second-title">Another second title</h2>
-<p>And more text with <code>some code</code> inside.</p>
-<p>We can also have a full code block:</p>
-<pre><code>this is a code block
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="the-deployable-trait">The Deployable Trait</h1>
+<p>Tact doesn&#39;t support classical class inheritance, but contracts can implement <em>traits</em>. One of the commonly used traits is <code>Deployable</code>. It implements a simple receiver for the <code>Deploy</code> message which helps deploy contracts in a standard way.</p>
+<p>All contracts are deployed by sending them a message. This can be any message, but best practice is to designate the special <code>Deploy</code> message for this purpose.</p>
+<p>This message has a single field, <code>queryId</code>, which is provided by the deployer. If the deploy succeeds, the contract will reply with the message <code>DeployOk</code> and echo the same <code>queryId</code> in the response.</p>
+<p>If you&#39;re using TypeScript to deploy, sending the deploy message should look like:</p>
+<pre><code class="language-ts">const msg = { $$type: &quot;Deploy&quot;, queryId: 0n };
+ await contract.send(sender, { value: toNano(1) }, msg);
 </code></pre>
-<h3 id="third-and-final-title">Third and final title</h3>
-<p>Still cool with a <a href="https://ton.org">link</a> somewhere.</p>
-<p>We can have items:</p>
-<ul>
-<li>first</li>
-<li>second</li>
-<li>third</li>
-</ul>
 <!-- HTML_TAG_END -->
     <div class="navMarkdown">
       </div></div></div>
@@ -72,24 +65,70 @@
 </div>
   </div>
   <div class="secondary svelte-9dft0e">
-<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>contract Counter {
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
+
+contract AddressesBools with Deployable {
  
-    // persistent state variable of type Int to hold the counter value
-    val: Int as uint32;
- 
-    // initialize the state variable when contract is deployed
+    // addresses
+    a1: Address;
+    a2: Address;
+    a3: Address;
+    a4: Address;
+    a5: Address;
+
+    // bools
+    b1: Bool = true;
+    b2: Bool = false;
+    b3: Bool;
+
     init() {
-        self.val = 0;
+        // addressses
+        self.a1 = address("EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N"); // bouncable (foundation wallet)
+        self.a2 = address("UQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqEBI"); // non-bounceable (same foundation wallet)
+        self.a3 = newAddress(0, 0x83dfd552e63729b472fcbcc8c45ebcc6691702558b68ec7527e1ba403a0f31a8); // raw (same foundation wallet)
+        self.a4 = newAddress(0, 0); // the zero address
+        self.a5 = myAddress();      // address of this contract
+
+        // bools
+        self.b3 = !self.b2;
     }
- 
-    // handler for incoming increment messages that change the state
-    receive("increment") {
-        self.val = self.val + 1;
+
+    receive("address dump") {
+        ///dump(self.a1);
+        ///dump(self.a2);
+        ///dump(self.a3);
+        ///dump(self.a4);
+        ///dump(self.a5);
     }
- 
-    // read only getter for querying the counter value
-    get fun value(): Int {
-        return self.val;
+
+    receive("address ops") {
+        // temporary variable
+        let a: Address = address("EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N"); // bouncable (same foundation wallet)
+
+        dump(a == self.a1);
+        dump(a == self.a2);
+        dump(a == self.a3);
+        dump(a == self.a4);
+        dump(a != self.a5);
+    }
+
+    receive("bool dump") {
+        dump(self.b1);
+        dump(self.b2);
+        dump(self.b3);
+    }
+
+    receive("bool ops") {
+        // temporary variable
+        let b: Bool = true;
+        dump(b);
+
+        b = self.b1 && self.b2 || self.b3;
+        dump(b);
+
+        dump(self.b1 == true);
+        dump(self.b1 == self.b2);
+        dump(self.b1 != self.b2);
     }
 }</pre></div></div></div></div>
   <div class="splitter svelte-9dft0e">
@@ -110,7 +149,7 @@
 
 
 <button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get counter
+		Get value
 		<div class="ripple svelte-1dillie"></div>
 		</button>
 
@@ -128,16 +167,16 @@
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="mmqnk3">
+		<script type="module" data-sveltekit-hydrate="aktwbw">
 			import { start } from "./_app/immutable/start-c388d36d.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="mmqnk3"]').parentNode,
+				target: document.querySelector('[data-sveltekit-hydrate="aktwbw"]').parentNode,
 				version: "1677771663941",
 				hydrate: {
-					node_ids: [0, 4],
+					node_ids: [0, 7],
 					data: [null,null],
 					form: null,
 					error: null

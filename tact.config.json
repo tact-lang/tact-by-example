@@ -4,7 +4,7 @@
       "name": "01-hello-world",
       "path": "./src/routes/01-hello-world/contract.tact",
       "output": "./tact-output",
-      "parameters": {
+      "options": {
         "debug": true
       }
     },
@@ -12,7 +12,7 @@
       "name": "01-a-simple-counter",
       "path": "./src/routes/01-a-simple-counter/contract.tact",
       "output": "./tact-output",
-      "parameters": {
+      "options": {
         "debug": true
       }
     },
@@ -20,7 +20,23 @@
       "name": "01-the-deployable-trait",
       "path": "./src/routes/01-the-deployable-trait/contract.tact",
       "output": "./tact-output",
-      "parameters": {
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "02-integers",
+      "path": "./src/routes/02-integers/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "02-addresses-bools",
+      "path": "./src/routes/02-addresses-bools/contract.tact",
+      "output": "./tact-output",
+      "options": {
         "debug": true
       }
     }

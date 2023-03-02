@@ -199,32 +199,120 @@ function dictValueParserSendParameters(): DictionaryValue<SendParameters> {
   };
 }
 
-type Counter_init_args = {
-  $$type: "Counter_init_args";
+export type Deploy = {
+  $$type: "Deploy";
+  queryId: bigint;
 };
 
-function initCounter_init_args(src: Counter_init_args) {
+export function storeDeploy(src: Deploy) {
+  return (builder: Builder) => {
+    let b_0 = builder;
+    b_0.storeUint(2490013878, 32);
+    b_0.storeUint(src.queryId, 64);
+  };
+}
+
+export function loadDeploy(slice: Slice) {
+  let sc_0 = slice;
+  if (sc_0.loadUint(32) !== 2490013878) {
+    throw Error("Invalid prefix");
+  }
+  let _queryId = sc_0.loadUintBig(64);
+  return { $$type: "Deploy" as const, queryId: _queryId };
+}
+
+function loadTupleDeploy(source: TupleReader) {
+  let _queryId = source.readBigNumber();
+  return { $$type: "Deploy" as const, queryId: _queryId };
+}
+
+function storeTupleDeploy(source: Deploy) {
+  let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
+  return builder.build();
+}
+
+function dictValueParserDeploy(): DictionaryValue<Deploy> {
+  return {
+    serialize: (src, buidler) => {
+      buidler.storeRef(beginCell().store(storeDeploy(src)).endCell());
+    },
+    parse: (src) => {
+      return loadDeploy(src.loadRef().beginParse());
+    },
+  };
+}
+
+export type DeployOk = {
+  $$type: "DeployOk";
+  queryId: bigint;
+};
+
+export function storeDeployOk(src: DeployOk) {
+  return (builder: Builder) => {
+    let b_0 = builder;
+    b_0.storeUint(2952335191, 32);
+    b_0.storeUint(src.queryId, 64);
+  };
+}
+
+export function loadDeployOk(slice: Slice) {
+  let sc_0 = slice;
+  if (sc_0.loadUint(32) !== 2952335191) {
+    throw Error("Invalid prefix");
+  }
+  let _queryId = sc_0.loadUintBig(64);
+  return { $$type: "DeployOk" as const, queryId: _queryId };
+}
+
+function loadTupleDeployOk(source: TupleReader) {
+  let _queryId = source.readBigNumber();
+  return { $$type: "DeployOk" as const, queryId: _queryId };
+}
+
+function storeTupleDeployOk(source: DeployOk) {
+  let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
+  return builder.build();
+}
+
+function dictValueParserDeployOk(): DictionaryValue<DeployOk> {
+  return {
+    serialize: (src, buidler) => {
+      buidler.storeRef(beginCell().store(storeDeployOk(src)).endCell());
+    },
+    parse: (src) => {
+      return loadDeployOk(src.loadRef().beginParse());
+    },
+  };
+}
+
+type Integers_init_args = {
+  $$type: "Integers_init_args";
+};
+
+function initIntegers_init_args(src: Integers_init_args) {
   return (builder: Builder) => {
     let b_0 = builder;
   };
 }
 
-async function Counter_init() {
+async function Integers_init() {
   const __code = Cell.fromBase64(
-    "te6ccgECCAEAAWsAART/APSkE/S88sgLAQIBYgIDAt7QAdDTAwFxsMABkX+RcOIB+kABINdJgQELuvLgiCDXCwoggwm6IYEE/7qx8uCIgwm68uCJIkFVbwT4Ye1E0NQB+GLSAAGU0x8BMY6OMPgo1wsKgwm68uCJ2zziWds8MMj4QgHMfwHKAAEByx/J7VQHBAIBWAUGAK7tou37cCHXScIflTAg1wsf3gKSW3/gIcAAIddJwSGwklt/4AHAAI4r+QGC8MT41yMS7f3vW3vseDO9uxYtFRG9eKkSrtDyY3r2VXKuupSkf9sx4JEw4nAAubu9GCcFzsPV0srnsehOw51kqFG2aCcJ3WNS0rZHyzItOvLf3xYjmCcCBVwBuAZ2OUzlg6rkclssOCcBvUne+VRZbxx1PT3gVZwyaCcJ2XTlqzTstzOg6WbZRm6KSAFFuawO1E0NQB+GLSAAGU0x8BMY6OMPgo1wsKgwm68uCJ2zzigHAAJw",
+    "te6ccgECFQEABE4AART/APSkE/S88sgLAQIBYgIDAXbQAdDTAwFxsMABkX+RcOIB+kABINdJgQELuvLgiCDXCwoggwm6IYEE/7qx8uCIgwm68uCJIkFVbwT4YQQAuaF3owTgudh6ullc9j0J2HOslQo2zQThO6xqWlbI+WZFp15b++LEcwTgQKuANwDOxymcsHVcjktlhwTgN6k73yqLLeOOp6e8CrOGTQThOy6ctWadluZ0HSzbKM3RSQOe7UTQ1AH4YtIAAY4tgQEB1wDT/9L/03/6ANQB0NM/0j/TH9If0w/SD9MH0gcwEI0QjBCLEIoQiWwdjo4w+CjXCwqDCbry4InbPOJVHNs8MAUGBwCegQu5gBGBHEqB/zVwVHAAUwCC8IPf1VLmNym0cvy8yMRevMZpFwJVi2jsdSfhukA6DzGoCYI4Ub+u5kxkTOX3UJiCEElQT4BHGEUVUEQGAwKY7aLt+3Ah10nCH5UwINcLH94Cklt/4CGCEJRqmLa6jqMx0x8BghCUapi2uvLggdM/ATHIAYIQr/kPV1jLH8s/yds8f+ABwACRMOMNcAgJAHrI+EIBzH8BygBVwFDNgQEBzwAay/8Yyv8Wy39QBPoCAsjLP8o/EssfEsofEssPEsoPEssHEsoHyQHMye1UASb4QW8kECNfA39wUAOAQgFtbds8CgK0+QEggvAMD1uC+hFA7vxvcSubd1pTQeov38zZvpRFWeoR7I5v7rqOhjDbPH/bMeCC8EJDdEcIbr2lva5/YEQ+EDAA4A7lUIzjCfBWTSlUAh+yuo6F2zx/2zHgDA0BzshxAcoBUAcBygBwAcoCUAUg10mBAQu68uCIINcLCiCDCbohgQT/urHy4IiDCbry4InPFlAD+gJwAcpoI26zJW6zsZczMwFwAcoA4w0hbrOcfwHKAAEgbvLQgAHMlTFwAcoA4skB+wALAJh/AcoAyHABygBwAcoAJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4iRus51/AcoABCBu8tCAUATMljQDcAHKAOJwAcoAAn8BygACyVjMBCYs2zz+FDAr2zz+FDAq2zz+FDApEhISDgREgPTbPP4UMCmnAy2gJ6HbPP4UMCx6qQjbPP4UMCyBA+ipBBISEhAEJNs8/hQwKNs8/hQwJ9s8/hQwJhISEg8BCts8/hQwEgQ02zz+FDAsqwLbPP4UMCyqAds8/hQwKoALtggSEhIRBDjbPP4UMCqAFrYJ2zz+FDAmtgvbPP4UMCyBC7m6EhISEwDeyCHBAJiALQHLBwGjAd4hgjgyfLJzQRnTt6mqHbmOIHAgcY4UBHqpDKYwJagSoASqBwKkIcAARTDmMDOqAs8BjitvAHCOESN6qQgSb4wBpAN6qQQgwAAU5jMipQOcUwJvgaYwWMsHAqVZ5DAx4snQAxzbPCyBB9C82zwsw0bbPBQUFAAsmYtHRydWWP4UMJqLVmYWxzZY/hQw4g==",
   );
   const __system = Cell.fromBase64(
-    "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",
+    "te6cckECFwEABFgAAQHAAQEFoB6tAgEU/wD0pBP0vPLICwMCAWIFBAC5oXejBOC52Hq6WVz2PQnYc6yVCjbNBOE7rGpaVsj5ZkWnXlv74sRzBOBAq4A3AM7HKZywdVyOS2WHBOA3qTvfKost446np7wKs4ZNBOE7Lpy1Zp2W5nQdLNsozdFJAXbQAdDTAwFxsMABkX+RcOIB+kABINdJgQELuvLgiCDXCwoggwm6IYEE/7qx8uCIgwm68uCJIkFVbwT4YQYDnu1E0NQB+GLSAAGOLYEBAdcA0//S/9N/+gDUAdDTP9I/0x/SH9MP0g/TB9IHMBCNEIwQixCKEIlsHY6OMPgo1wsKgwm68uCJ2zziVRzbPDAWCAcAesj4QgHMfwHKAFXAUM2BAQHPABrL/xjK/xbLf1AE+gICyMs/yj8Syx8Syh8Syw8Syg8SywcSygfJAczJ7VQCmO2i7ftwIddJwh+VMCDXCx/eApJbf+AhghCUapi2uo6jMdMfAYIQlGqYtrry4IHTPwExyAGCEK/5D1dYyx/LP8nbPH/gAcAAkTDjDXATCQK0+QEggvAMD1uC+hFA7vxvcSubd1pTQeov38zZvpRFWeoR7I5v7rqOhjDbPH/bMeCC8EJDdEcIbr2lva5/YEQ+EDAA4A7lUIzjCfBWTSlUAh+yuo6F2zx/2zHgDwoERID02zz+FDAppwMtoCeh2zz+FDAseqkI2zz+FDAsgQPoqQQSEhILBDTbPP4UMCyrAts8/hQwLKoB2zz+FDAqgAu2CBISEgwEONs8/hQwKoAWtgnbPP4UMCa2C9s8/hQwLIELuboSEhINAxzbPCyBB9C82zwsw0bbPA4ODgAsmYtHRydWWP4UMJqLVmYWxzZY/hQw4gQmLNs8/hQwK9s8/hQwKts8/hQwKRISEhAEJNs8/hQwKNs8/hQwJ9s8/hQwJhISEhEBCts8/hQwEgDeyCHBAJiALQHLBwGjAd4hgjgyfLJzQRnTt6mqHbmOIHAgcY4UBHqpDKYwJagSoASqBwKkIcAARTDmMDOqAs8BjitvAHCOESN6qQgSb4wBpAN6qQQgwAAU5jMipQOcUwJvgaYwWMsHAqVZ5DAx4snQASb4QW8kECNfA39wUAOAQgFtbds8FAHOyHEBygFQBwHKAHABygJQBSDXSYEBC7ry4Igg1wsKIIMJuiGBBP+6sfLgiIMJuvLgic8WUAP6AnABymgjbrMlbrOxlzMzAXABygDjDSFus5x/AcoAASBu8tCAAcyVMXABygDiyQH7ABUAmH8BygDIcAHKAHABygAkbrOdfwHKAAQgbvLQgFAEzJY0A3ABygDiJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4nABygACfwHKAALJWMwAnoELuYARgRxKgf81cFRwAFMAgvCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqAmCOFG/ruZMZEzl91CYghBJUE+ARxhFFVBEBgNel+dc",
   );
   let builder = beginCell();
   builder.storeRef(__system);
   builder.storeUint(0, 1);
-  initCounter_init_args({ $$type: "Counter_init_args" })(builder);
+  initIntegers_init_args({ $$type: "Integers_init_args" })(builder);
   const __data = builder.endCell();
   return { code: __code, data: __data };
 }
 
-const Counter_errors: { [key: number]: { message: string } } = {
+const Integers_errors: { [key: number]: { message: string } } = {
   2: { message: `Stack undeflow` },
   3: { message: `Stack overflow` },
   4: { message: `Integer overflow` },
@@ -251,25 +339,25 @@ const Counter_errors: { [key: number]: { message: string } } = {
   137: { message: `Masterchain support is not enabled for this contract` },
 };
 
-export class Counter implements Contract {
+export class Integers implements Contract {
   static async init() {
-    return await Counter_init();
+    return await Integers_init();
   }
 
   static async fromInit() {
-    const init = await Counter_init();
+    const init = await Integers_init();
     const address = contractAddress(0, init);
-    return new Counter(address, init);
+    return new Integers(address, init);
   }
 
   static fromAddress(address: Address) {
-    return new Counter(address);
+    return new Integers(address);
   }
 
   readonly address: Address;
   readonly init?: { code: Cell; data: Cell };
   readonly abi: ContractABI = {
-    errors: Counter_errors,
+    errors: Integers_errors,
   };
 
   private constructor(address: Address, init?: { code: Cell; data: Cell }) {
@@ -281,26 +369,22 @@ export class Counter implements Contract {
     provider: ContractProvider,
     via: Sender,
     args: { value: bigint; bounce?: boolean | null | undefined },
-    message: null | "increment",
+    message: "integer dump" | "integer ops" | Deploy,
   ) {
     let body: Cell | null = null;
-    if (message === null) {
-      body = new Cell();
-    }
-    if (message === "increment") {
+    if (message === "integer dump") {
       body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
+    }
+    if (message === "integer ops") {
+      body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
+    }
+    if (message && typeof message === "object" && !(message instanceof Slice) && message.$$type === "Deploy") {
+      body = beginCell().store(storeDeploy(message)).endCell();
     }
     if (body === null) {
       throw new Error("Invalid message type");
     }
 
     await provider.internal(via, { ...args, body: body });
-  }
-
-  async getValue(provider: ContractProvider) {
-    let builder = new TupleBuilder();
-    let source = (await provider.get("value", builder.build())).stack;
-    let result = source.readBigNumber();
-    return result;
   }
 }

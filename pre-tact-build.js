@@ -11,7 +11,7 @@ for (const example of examples) {
     name: example.id,
     path: `./src/routes/${example.id}/contract.tact`,
     output: "./tact-output",
-    parameters: {
+    options: {
       debug: true,
     },
   });
