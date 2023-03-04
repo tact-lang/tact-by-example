@@ -34,7 +34,7 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout-de477407.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app-c6cd5528.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-b159d6fd.js">
+		<link rel="modulepreload" href="./_app/immutable/start-4a2c8572.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
@@ -43,7 +43,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
 		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-b51fdfb6.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/store-ab11a47e.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-variables-consts/_page.svelte-14df12c8.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-variables-consts/_page.svelte-6cc6826d.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-9ce1d910.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/examples-0830bdcf.js">
   </head>
@@ -69,53 +69,38 @@
 <div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
 
 // global constants are calculated in compile-time and can't change
-const GLOBAL_CONST1: Int = 200;
-const GLOBAL_CONST2: Int = ton("2.17") + 2 * pow(10, 9);
+const GLOBAL_CONST1: Int = ton("2.17") + 2 * pow(10, 9);
 
 contract VariablesConsts with Deployable {
- 
+
     // contract constants are calculated in compile-time and can't change
-    const CONTRACT_CONST1: Int = 100;
-    const CONTRACT_CONST2: Int = ton("1.25") + pow(10, 9);
+    const CONTRACT_CONST1: Int = ton("1.25") + pow(10, 9);
 
     // contract variables are persisted in state (cost rent per their specified size) and can change
-    contractVar1: Int as int32 = 101;
-    contractVar2: Int as coins = ton("1.26") + pow(10, 9);
-    contractVar3: Int as uint64;
+    contractVar1: Int as coins = ton("1.26") + pow(10, 9);
+    contractVar2: Int as uint64;
 
     init(arg1: Int) {
         // contract variables support complex initialization that are calculated in run-time
-        self.contractVar3 = min(arg1, pow(2, 64) - 1);
+        self.contractVar2 = min(arg1, pow(2, 64) - 1);
     }
 
-    // receivers handle incoming messages
+    // receivers handle incoming messages and can change state
     receive("increment") {
         // local variables are temporary, not persisted in state and can change
-        let localVar1: Int = 102;
+        let localVar1: Int = 100;
         localVar1 = localVar1 + 1;
 
         // contract variables that are persisted in state can only change in receivers
         self.contractVar1 = self.contractVar1 + 1;
         self.contractVar2 = self.contractVar2 + 1;
-        self.contractVar3 = self.contractVar3 + 1;
-
-        dump(GLOBAL_CONST1);
-        dump(GLOBAL_CONST2);
-        dump(self.CONTRACT_CONST1);
-        dump(self.CONTRACT_CONST2);
-        dump(self.contractVar1);
-        dump(self.contractVar2);
-        dump(self.contractVar3);
-        dump(localVar1);
     }
 
-    // getters are executed by users to query data
+    // getters are executed by users to query data and can't change state
     get fun sum(arg1: Int): Int {
         // local variables are temporary, not persisted in state and can change
-        let localVar1: Int = 102;
+        let localVar1: Int = 100;
         localVar1 = localVar1 + 1;
-
-        // contract variables that are persisted in state can cannot change in getters
 
         // getters can access everything but for read-only operations only
         return arg1 + GLOBAL_CONST1 + self.CONTRACT_CONST1 + self.contractVar1 + localVar1;
@@ -150,14 +135,14 @@ contract VariablesConsts with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="gz6j13">
-			import { start } from "./_app/immutable/start-b159d6fd.js";
+		<script type="module" data-sveltekit-hydrate="1lo92e7">
+			import { start } from "./_app/immutable/start-4a2c8572.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="gz6j13"]').parentNode,
-				version: "1677967715704",
+				target: document.querySelector('[data-sveltekit-hydrate="1lo92e7"]').parentNode,
+				version: "1677968529116",
 				hydrate: {
 					node_ids: [0, 2, 12],
 					data: [null,null,null],
