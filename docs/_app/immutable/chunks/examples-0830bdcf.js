@@ -1,0 +1,1 @@
+const e=[{id:"01-hello-world",name:"Hello World"},{id:"01-a-simple-counter",name:"A Simple Counter"},{id:"01-the-deployable-trait",name:"The Deployable Trait"},{id:"02-integers",name:"Integers"},{id:"02-integer-ops",name:"Integer Operations"},{id:"02-bools",name:"Bools"},{id:"02-addresses",name:"Addresses"},{id:"02-variables-consts",name:"Variables and Constants"}];export{e};

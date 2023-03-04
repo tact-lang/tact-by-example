@@ -32,16 +32,20 @@
 		/>
 		-->
     <meta http-equiv="content-security-policy" content="">
-		<link href="./_app/immutable/assets/_layout-df7d22a3.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-2da8a633.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-a89a8bfe.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-d6b47418.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-c4bfa9f9.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store-04c80bb0.js">
+		<link href="./_app/immutable/assets/_layout-de477407.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/app-c6cd5528.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/start-b159d6fd.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
+		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/02-addresses/_page.svelte-cd7966ac.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-72d1d48d.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-b51fdfb6.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store-ab11a47e.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-addresses/_page.svelte-d6ceabee.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-9ce1d910.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-0830bdcf.js">
   </head>
   <body>
     <div style="display: contents">
@@ -58,7 +62,8 @@
 </code></pre>
 <!-- HTML_TAG_END -->
     <div class="navMarkdown">
-      </div></div></div>
+      </div>
+    <a class="allExamples" href="all">All Examples</a></div></div>
   <div class="splitter svelte-9dft0e">
 <div class="splitter vertical svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
 </div>
@@ -67,22 +72,22 @@
 <div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
 
 contract Addresses with Deployable {
- 
-    a1: Address;
-    a2: Address;
+
+    // these are three representations of the same address
+    a1: Address = address("EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N"); // bouncable (same foundation wallet)
+    a2: Address = address("UQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqEBI"); // non-bounceable (same foundation wallet)
     a3: Address;
+    
     a4: Address;
     a5: Address;
 
     init() {
-        // these are three representations of the same address
-        self.a1 = address("EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N"); // bouncable (foundation wallet)
-        self.a2 = address("UQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqEBI"); // non-bounceable (same foundation wallet)
+        // this is the third representation of the same address
         self.a3 = newAddress(0, 0x83dfd552e63729b472fcbcc8c45ebcc6691702558b68ec7527e1ba403a0f31a8); // raw (same foundation wallet)
         
         // here are a few other important addresses
         self.a4 = newAddress(0, 0); // the zero address (nobody)
-        self.a5 = myAddress();      // address of this contract
+        self.a5 = myAddress(); // address of this contract
     }
 
     receive("show all") {
@@ -141,17 +146,17 @@ contract Addresses with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1etny">
-			import { start } from "./_app/immutable/start-2da8a633.js";
+		<script type="module" data-sveltekit-hydrate="5hsedb">
+			import { start } from "./_app/immutable/start-b159d6fd.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="1etny"]').parentNode,
-				version: "1677797612532",
+				target: document.querySelector('[data-sveltekit-hydrate="5hsedb"]').parentNode,
+				version: "1677967715704",
 				hydrate: {
-					node_ids: [0, 6],
-					data: [null,null],
+					node_ids: [0, 2, 8],
+					data: [null,null,null],
 					form: null,
 					error: null
 				}

@@ -2,7 +2,7 @@
   "projects": [
     {
       "name": "01-hello-world",
-      "path": "./src/routes/01-hello-world/contract.tact",
+      "path": "./src/routes/(examples)/01-hello-world/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true
@@ -10,7 +10,7 @@
     },
     {
       "name": "01-a-simple-counter",
-      "path": "./src/routes/01-a-simple-counter/contract.tact",
+      "path": "./src/routes/(examples)/01-a-simple-counter/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true
@@ -18,7 +18,7 @@
     },
     {
       "name": "01-the-deployable-trait",
-      "path": "./src/routes/01-the-deployable-trait/contract.tact",
+      "path": "./src/routes/(examples)/01-the-deployable-trait/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true
@@ -26,7 +26,7 @@
     },
     {
       "name": "02-integers",
-      "path": "./src/routes/02-integers/contract.tact",
+      "path": "./src/routes/(examples)/02-integers/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true
@@ -34,7 +34,7 @@
     },
     {
       "name": "02-integer-ops",
-      "path": "./src/routes/02-integer-ops/contract.tact",
+      "path": "./src/routes/(examples)/02-integer-ops/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true
@@ -42,7 +42,7 @@
     },
     {
       "name": "02-bools",
-      "path": "./src/routes/02-bools/contract.tact",
+      "path": "./src/routes/(examples)/02-bools/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true
@@ -50,7 +50,15 @@
     },
     {
       "name": "02-addresses",
-      "path": "./src/routes/02-addresses/contract.tact",
+      "path": "./src/routes/(examples)/02-addresses/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "02-variables-consts",
+      "path": "./src/routes/(examples)/02-variables-consts/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true

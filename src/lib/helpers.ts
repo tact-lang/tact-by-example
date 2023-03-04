@@ -1,4 +1,4 @@
-import examples from "../routes/examples.json";
+import examples from "../routes/(examples)/examples.json";
 import path from "path";
 
 export function getExample(page: string) {
