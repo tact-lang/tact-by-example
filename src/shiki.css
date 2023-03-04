@@ -16,7 +16,7 @@
   --shiki-color-text: #d1d1d1;
   --shiki-token-constant: #79b8ff;
   --shiki-token-string: #ffab70;
-  --shiki-token-comment: #6b737c;
+  --shiki-token-comment: #6b737cc0;
   --shiki-token-keyword: #f97583;
   /*--shiki-token-parameter: #ff9800; is same as in light mode */
   --shiki-token-function: #b392f0;
