@@ -16,15 +16,12 @@ contract Addresses with Deployable {
         
         // here are a few other important addresses
         self.a4 = newAddress(0, 0); // the zero address (nobody)
-        self.a5 = myAddress(); // address of this contract
+        self.a5 = myAddress();      // address of this contract
     }
 
     receive("show all") {
-        ///dump(self.a1);
-        ///dump(self.a2);
-        ///dump(self.a3);
-        ///dump(self.a4);
-        ///dump(self.a5);
+        // addresses cannot currently be dumped
+        // TODO: dump(self.a1);
     }
 
     receive("show ops") {
@@ -37,5 +34,9 @@ contract Addresses with Deployable {
         
         dump(a == self.a4);
         dump(a != self.a5);
+    }
+
+    get fun result(): Address {
+        return self.a1;
     }
 }

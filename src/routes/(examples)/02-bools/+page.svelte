@@ -29,7 +29,11 @@
         return [await contract.send(sender, { value: toNano(1) }, "show ops")];
       },
     },
-    getters: {},
+    getters: {
+      result: async () => {
+        return await contract.getResult();
+      },
+    },
     prev: getExample(import.meta.url).prev,
     next: getExample(import.meta.url).next,
   };

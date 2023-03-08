@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index,follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tact by example</title>
+    <meta name="description" content="Learn smart contract programming using tact language" />
+    <link rel="canonical" href="https://tact-by-example.org/" />
+    <meta property="og:title" content="tact by example" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Learn smart contract programming using tact language" />
+    <meta property="og:url" content="https://tact-by-example.org/" />
+    <!--
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/favicons/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicons/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicons/favicon-16x16.png"
+		/>
+		-->
+    <meta http-equiv="content-security-policy" content="">
+		<link href="./_app/immutable/assets/_layout-5d535c94.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/app-fd9a8d0c.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/start-8e1361c8.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
+		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
+		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-32e13b37.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store-ab11a47e.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-strings/_page.svelte-c051085c.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-be3eeda0.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-3da3307b.js">
+  </head>
+  <body>
+    <div style="display: contents">
+
+
+
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="integers">Integers</h1>
+<p>Tact supports a number of primitive data types that are tailored for smart contract use.</p>
+<p><code>Int</code> is the primary number type. Math in smart contracts is always done with integers and no floating points.</p>
+<p>The runtime type <code>Int</code> is <em>always</em> 257-bit signed, so all runtime calculations are done at 257-bit. This should be enough for everything as it&#39;s large enough to hold the number of atoms in the universe.</p>
+<p>When encoding <code>Int</code> to persistent state, we will usually use smaller representations than 257-bit to reduce storage cost. The persistent state size is specified in every declaration of a state variable after the <code>as</code> keyword.</p>
+<!-- HTML_TAG_END -->
+    <div class="navMarkdown">
+      </div>
+    <a class="allExamples" href="all">All Examples</a></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter vertical svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+  </div>
+  <div class="secondary svelte-9dft0e">
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
+
+contract Strings with Deployable {
+ 
+    s1: String = "hello world";
+    s2: String = "yes unicode 😀 😅 你好 no escaping"; /// \n \t";
+    s3: String;
+    s4: String;
+    s5: String;
+    s6: String;
+
+    init() {
+        let i1: Int = -12345;
+        let i2: Int = 6780000000; // coins = ton("6.78")
+
+        self.s3 = i1.toString();
+        self.s4 = i1.toFloatString(3);
+        self.s5 = i2.toCoinsString();
+
+        // gas efficient helper to concatenate strings in run-time
+        let sb: StringBuilder = beginString();
+        sb.append(self.s1);
+        sb.append(", your balance is: ");
+        sb.append(self.s5);
+        self.s6 = sb.toString();
+    }
+
+    receive("show all") {
+        dump(self.s1);
+        dump(self.s2);
+        dump(self.s3);
+        dump(self.s4);
+        dump(self.s5);
+        dump(self.s6);
+    }
+
+    receive("show ops") {
+        let s: String = "how are you?"; // temporary variable
+        dump(s);
+
+        /// dump(self.s1 == "hello world");
+        /// dump(self.s1 != s);
+    }
+
+    get fun result(): String {
+        return self.s1;
+    }
+}</pre></div></div></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter horizontal svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+      </div>
+  <div class="secondary svelte-9dft0e"><div slot="secondary" class="panelBottom" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column;"><div style="display: flex; gap: 10px; flex-wrap: wrap; overflow: hidden;">
+
+
+
+<button class="buttonAction svelteui-c-TfGwS svelteui-c-TfGwS-hQzioB-variation-filled svelteui-c-TfGwS-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Deploy
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+          
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get result
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+          
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send show all
+		<div class="ripple svelte-1dillie"></div>
+		</button></div>
+        <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
+</div>
+  </div>
+</div>
+
+
+		<script type="module" data-sveltekit-hydrate="28p300">
+			import { start } from "./_app/immutable/start-8e1361c8.js";
+
+			start({
+				assets: "",
+				env: {},
+				target: document.querySelector('[data-sveltekit-hydrate="28p300"]').parentNode,
+				version: "1678275980900",
+				hydrate: {
+					node_ids: [0, 2, 13],
+					data: [null,null,null],
+					form: null,
+					error: null
+				}
+			});
+		</script>
+	</div>
+  </body>
+</html>

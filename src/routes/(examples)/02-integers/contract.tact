@@ -35,4 +35,8 @@ contract Integers with Deployable {
         dump(self.i7);
         dump(self.i8);
     }
+
+    get fun result(): Int {
+        return self.i1;
+    }
 }

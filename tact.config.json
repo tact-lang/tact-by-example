@@ -57,8 +57,32 @@
       }
     },
     {
-      "name": "02-variables-consts",
-      "path": "./src/routes/(examples)/02-variables-consts/contract.tact",
+      "name": "02-strings",
+      "path": "./src/routes/(examples)/02-strings/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "02-variables",
+      "path": "./src/routes/(examples)/02-variables/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "02-constants",
+      "path": "./src/routes/(examples)/02-constants/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "03-receivers-messages",
+      "path": "./src/routes/(examples)/03-receivers-messages/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true

@@ -27,4 +27,8 @@ contract Bools with Deployable {
         dump(self.b1 == self.b2);
         dump(self.b1 != self.b2);
     }
+
+    get fun result(): Bool {
+        return self.b1;
+    }
 }

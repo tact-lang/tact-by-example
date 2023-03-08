@@ -28,7 +28,19 @@
     "name": "Addresses"
   },
   {
-    "id": "02-variables-consts",
-    "name": "Variables and Constants"
+    "id": "02-strings",
+    "name": "Strings"
+  },
+  {
+    "id": "02-variables",
+    "name": "Variables"
+  },
+  {
+    "id": "02-constants",
+    "name": "Constants"
+  },
+  {
+    "id": "03-receivers-messages",
+    "name": "Receivers and Messages"
   }
 ]
