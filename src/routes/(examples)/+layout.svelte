@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { SendMessageResult } from "@ton-community/sandbox";
-  import { Address, fromNano } from "ton-core";
+  import { Address, fromNano, type Contract } from "ton-core";
   import { Split, DefaultSplitter } from "@geoffcox/svelte-splitter";
   import { Button } from "@svelteuidev/core";
   import { Buffer } from "buffer";
@@ -16,6 +16,7 @@
   let markdownHtml = "";
   let tactHtml = "";
   let terminalContent = "";
+  let contractInstance: Contract;
   let next: { name: string; id: string } | undefined, prev: { name: string; id: string } | undefined;
 
   store.subscribe(async (s) => {
@@ -48,6 +49,10 @@
                 `Transaction executed: ${compute.success ? "success" : "error"}, ` +
                   `exitcode ${compute.exitCode}, gas ${shorten(compute.gasFees, "coins")}`,
               );
+              if (transaction.inMessage?.info.dest.equals(contractInstance.address)) {
+                const message = contractInstance?.abi?.errors?.[compute.exitCode]?.message;
+                if (message) terminalLog(`Error message: ${message}`);
+              }
             }
           }
           for (const event of transaction.events) {
@@ -88,10 +93,11 @@
     });
   }
 
-  async function runDeploy(deploy: () => Promise<SendMessageResult[]>) {
+  async function runDeploy(deploy: () => Promise<[Contract, SendMessageResult[]]>) {
     try {
       terminalLog(`> Deploying contract:`);
-      const results = await deploy();
+      const [contract, results] = await deploy();
+      contractInstance = contract;
       terminalLogMessages(results);
     } catch (e: any) {
       terminalError(e);

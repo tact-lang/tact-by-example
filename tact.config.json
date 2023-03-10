@@ -81,8 +81,32 @@
       }
     },
     {
+      "name": "03-getters",
+      "path": "./src/routes/(examples)/03-getters/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
       "name": "03-receivers-messages",
       "path": "./src/routes/(examples)/03-receivers-messages/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "03-rejecting",
+      "path": "./src/routes/(examples)/03-rejecting/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "03-receive-coins",
+      "path": "./src/routes/(examples)/03-receive-coins/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true

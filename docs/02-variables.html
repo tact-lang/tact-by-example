@@ -11,8 +11,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:description" content="Learn smart contract programming using tact language" />
     <meta property="og:url" content="https://tact-by-example.org/" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
     <!--
-		<link rel="shortcut icon" href="/favicon.ico" />
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
@@ -34,18 +34,18 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout-5d535c94.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app-fd9a8d0c.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-8e1361c8.js">
+		<link rel="modulepreload" href="./_app/immutable/start-b9d8dae9.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
 		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-32e13b37.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-69fbef49.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/store-ab11a47e.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-variables/_page.svelte-9ab018c3.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-be3eeda0.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples-3da3307b.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-variables/_page.svelte-8edad67f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-1ad14a18.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-3dc33383.js">
   </head>
   <body>
     <div style="display: contents">
@@ -69,9 +69,9 @@
 
 contract Variables with Deployable {
 
-    // contract variables are persisted in state and can change their value between transations
-    // as part of the contract's persistent state, they cost rent per their specified size
-    contractVar1: Int as coins = 3000 + ton("1.26") + pow(10, 9);
+    // contract variables are persisted in state and can change their value between transactions
+    // they cost rent per their specified size
+    contractVar1: Int as coins = ton("1.26");
     contractVar2: Int as uint64;
 
     init(arg1: Int) {
@@ -81,7 +81,7 @@ contract Variables with Deployable {
 
     // receivers handle incoming messages and can change state
     receive("increment") {
-        // local variables are temporary, not persisted in state and can change
+        // local variables are temporary, not persisted in state
         let localVar1: Int = 100 * 1000;
         localVar1 = localVar1 * 2;
 
@@ -92,7 +92,7 @@ contract Variables with Deployable {
 
     // getters are executed by users to query data and can't change state
     get fun sum(arg1: Int): Int {
-        // local variables are temporary, not persisted in state and can change
+        // local variables are temporary, not persisted in state
         let localVar1: Int = 100 * 1000;
         localVar1 = localVar1 * 2;
 
@@ -143,14 +143,14 @@ contract Variables with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="dm2279">
-			import { start } from "./_app/immutable/start-8e1361c8.js";
+		<script type="module" data-sveltekit-hydrate="xrcjg5">
+			import { start } from "./_app/immutable/start-b9d8dae9.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="dm2279"]').parentNode,
-				version: "1678275980900",
+				target: document.querySelector('[data-sveltekit-hydrate="xrcjg5"]').parentNode,
+				version: "1678409670085",
 				hydrate: {
 					node_ids: [0, 2, 14],
 					data: [null,null,null],

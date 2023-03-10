@@ -2,9 +2,9 @@ import "@stdlib/deploy";
 
 contract Variables with Deployable {
 
-    // contract variables are persisted in state and can change their value between transations
-    // as part of the contract's persistent state, they cost rent per their specified size
-    contractVar1: Int as coins = 3000 + ton("1.26") + pow(10, 9);
+    // contract variables are persisted in state and can change their value between transactions
+    // they cost rent per their specified size
+    contractVar1: Int as coins = ton("1.26");
     contractVar2: Int as uint64;
 
     init(arg1: Int) {
@@ -14,7 +14,7 @@ contract Variables with Deployable {
 
     // receivers handle incoming messages and can change state
     receive("increment") {
-        // local variables are temporary, not persisted in state and can change
+        // local variables are temporary, not persisted in state
         let localVar1: Int = 100 * 1000;
         localVar1 = localVar1 * 2;
 
@@ -25,7 +25,7 @@ contract Variables with Deployable {
 
     // getters are executed by users to query data and can't change state
     get fun sum(arg1: Int): Int {
-        // local variables are temporary, not persisted in state and can change
+        // local variables are temporary, not persisted in state
         let localVar1: Int = 100 * 1000;
         localVar1 = localVar1 * 2;
 

@@ -2,7 +2,7 @@ import "@stdlib/deploy";
 
 contract Addresses with Deployable {
 
-    // these are three representations of the same address
+    // we have three representations of the same address
     a1: Address = address("EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N"); // bouncable (same foundation wallet)
     a2: Address = address("UQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqEBI"); // non-bounceable (same foundation wallet)
     a3: Address;

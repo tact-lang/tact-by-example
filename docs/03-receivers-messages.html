@@ -11,8 +11,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:description" content="Learn smart contract programming using tact language" />
     <meta property="og:url" content="https://tact-by-example.org/" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
     <!--
-		<link rel="shortcut icon" href="/favicon.ico" />
 		<link
 			rel="apple-touch-icon"
 			sizes="180x180"
@@ -34,30 +34,31 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout-5d535c94.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app-fd9a8d0c.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-8e1361c8.js">
+		<link rel="modulepreload" href="./_app/immutable/start-b9d8dae9.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
 		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-32e13b37.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-69fbef49.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/store-ab11a47e.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/03-receivers-messages/_page.svelte-ee89cd8c.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-be3eeda0.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples-3da3307b.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/03-receivers-messages/_page.svelte-f4f8731d.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-1ad14a18.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-3dc33383.js">
   </head>
   <body>
     <div style="display: contents">
 
 
 
-<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="variables">Variables</h1>
-<p>The most important variables are those that are persisted in state and retain their value between contract executions. They must be defined in the scope of the contract like <code>contractVar1</code>.</p>
-<p>Persisting data in state costs gas. The contract must pay rent periodically from its balance. State storage is expensive, about <a href="https://ton.org/docs/develop/smart-contracts/fees#how-to-calculate-fees">4 TON per MB per year</a>. If the contract runs out of balance, the data will be deleted. If you need to store large amounts of data, like images, a service like <a href="https://ton.org/docs/participate/ton-storage/storage-faq">TON Storage</a> would be more suitable.</p>
-<p>Persistent state variables can only change in <em>receivers</em> by sending messages as transactions. Sending these transactions will cost gas to users.</p>
-<p>Executing <em>getters</em> is read-only, they can access all variables, but cannot change state variables. They are free to execute and don&#39;t cost any gas.</p>
-<p>Local variables like <code>localVar1</code> are temporary. They&#39;re not persisted to state. You can define them in any function and they will only exist in run-time during the execution of the function. You can change their value in <em>getters</em> too.</p>
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="receiving-ton-coins">Receiving TON Coins</h1>
+<p>Every contract has a TON coin balance. This balance is used to pay ongoing rent for storage and should not run out otherwise the contract may be deleted. You can store extra coins in the balance for any purpose.</p>
+<p>Every incoming message normally carries some TON coin value sent by the sender. This value is used to pay gas for handling this message. Unused excess will stay in the contract balance. If the value doesn&#39;t cover the gas cost, the transaction will revert.</p>
+<p>You can query the contract balance with <code>myBalance()</code> - note that the value is in nano-tons (like cents, just with 9 decimals). The balance already contains the incoming message value.</p>
+<h2 id="refunding-senders">Refunding senders</h2>
+<p>If the transaction reverts, unused excess value will be sent back to sender (unless the sender opted out of a bounced reply by clearing the <code>bounce</code> flag).</p>
+<p>You can also refund the excess if the transaction succeeds by sending it back using <code>reply()</code> in a response message. This is the best way to guarantee senders are only paying for the exact gas their message consumed.</p>
 <!-- HTML_TAG_END -->
     <div class="navMarkdown">
       </div>
@@ -86,9 +87,11 @@ message MultiMath {
 contract Receivers with Deployable {
 
     val: Int as int64;
+    lastSender: Address;
  
     init() {
         self.val = 0;
+        self.lastSender = newAddress(0, 0); // zero address
     }
  
     // a textual string message, using the comment field of a transfer (great for Ledger)
@@ -117,6 +120,14 @@ contract Receivers with Deployable {
         self.val = self.val - msg.subtract;
         self.val = self.val * msg.multiply;
     }
+
+    receive("hello") {
+        // every message is sent from a specific contract address that you can get with sender()
+        if (sender() != self.lastSender) {
+            self.lastSender = sender();
+            dump("hello new sender!");
+        }
+    }
  
     get fun value(): Int {
         return self.val;
@@ -140,7 +151,7 @@ contract Receivers with Deployable {
 
 
 <button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get sum
+		Get balance
 		<div class="ripple svelte-1dillie"></div>
 		</button>
 
@@ -149,7 +160,21 @@ contract Receivers with Deployable {
 
 
 <button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send 1 TON
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
 		Send increment
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send refunding increment
 		<div class="ripple svelte-1dillie"></div>
 		</button></div>
         <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
@@ -158,16 +183,16 @@ contract Receivers with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1hfmdmm">
-			import { start } from "./_app/immutable/start-8e1361c8.js";
+		<script type="module" data-sveltekit-hydrate="126uu8u">
+			import { start } from "./_app/immutable/start-b9d8dae9.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="1hfmdmm"]').parentNode,
-				version: "1678275980900",
+				target: document.querySelector('[data-sveltekit-hydrate="126uu8u"]').parentNode,
+				version: "1678409670085",
 				hydrate: {
-					node_ids: [0, 2, 15],
+					node_ids: [0, 2, 17],
 					data: [null,null,null],
 					form: null,
 					error: null

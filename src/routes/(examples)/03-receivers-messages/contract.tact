@@ -17,9 +17,11 @@ message MultiMath {
 contract Receivers with Deployable {
 
     val: Int as int64;
+    lastSender: Address;
  
     init() {
         self.val = 0;
+        self.lastSender = newAddress(0, 0); // zero address
     }
  
     // a textual string message, using the comment field of a transfer (great for Ledger)
@@ -47,6 +49,14 @@ contract Receivers with Deployable {
         self.val = self.val + msg.add;
         self.val = self.val - msg.subtract;
         self.val = self.val * msg.multiply;
+    }
+
+    receive("hello") {
+        // every message is sent from a specific contract address that you can get with sender()
+        if (sender() != self.lastSender) {
+            self.lastSender = sender();
+            dump("hello new sender!");
+        }
     }
  
     get fun value(): Int {

@@ -19,7 +19,7 @@
       const deployer = await blockchain.treasury("deployer");
       sender = deployer.getSender();
       contract = blockchain.openContract(await Counter.fromInit());
-      return [await contract.send(deployer.getSender(), { value: toNano(1) }, null)];
+      return [contract, [await contract.send(deployer.getSender(), { value: toNano(1) }, null)]];
     },
     messages: {
       increment: async () => {

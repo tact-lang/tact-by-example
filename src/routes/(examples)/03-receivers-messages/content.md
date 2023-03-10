@@ -8,7 +8,7 @@ Sending a message to a contract costs gas and is processed in the course of a tr
 
 ## Receivers
 
-Contract methods named `receive()` are the handlers that process each incoming message type. Tact will automatically route the correct message to the correct receiver listening for it.
+Contract methods named `receive()` are the handlers that process each incoming message type. Tact will automatically route the correct message to the correct receiver listening for it. Use `sender()` to get the message sender.
 
 ## Hardware wallets and blind signing
 

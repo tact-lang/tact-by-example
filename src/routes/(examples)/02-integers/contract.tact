@@ -22,7 +22,7 @@ contract Integers with Deployable {
         self.i2 = 0x83dfd552e63729b472fcbcc8c45ebcc6691702558b68ec7527e1ba403a0f31a8;
         self.i4 = 1507998500293440234999;
         self.i5 = pow(10, 9);   // this is 10^9 = 1,000,000,000
-        self.i6 = ton("1.23");  // easy to read coin balances (like cents, just with 9 decimals)
+        self.i6 = ton("1.23");  // easy to read coin balances (coins type is nano-tons, like cents, just with 9 decimals)
     }
 
     receive("show all") {

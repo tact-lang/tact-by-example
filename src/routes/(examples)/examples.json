@@ -40,7 +40,19 @@
     "name": "Constants"
   },
   {
+    "id": "03-getters",
+    "name": "Getters"
+  },
+  {
     "id": "03-receivers-messages",
     "name": "Receivers and Messages"
+  },
+  {
+    "id": "03-rejecting",
+    "name": "Rejecting Messages"
+  },
+  {
+    "id": "03-receive-coins",
+    "name": "Receiving TON Coins"
   }
 ]
