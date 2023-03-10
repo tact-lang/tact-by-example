@@ -9,6 +9,7 @@ contract Addresses with Deployable {
     
     a4: Address;
     a5: Address;
+    a6: Address;
 
     init() {
         // this is the third representation of the same address
@@ -17,6 +18,7 @@ contract Addresses with Deployable {
         // here are a few other important addresses
         self.a4 = newAddress(0, 0); // the zero address (nobody)
         self.a5 = myAddress();      // address of this contract
+        self.a6 = sender();         // address of the deployer (the sender during init())
     }
 
     receive("show all") {

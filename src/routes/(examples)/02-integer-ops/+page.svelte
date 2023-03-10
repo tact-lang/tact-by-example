@@ -19,7 +19,11 @@
       const deployer = await blockchain.treasury("deployer");
       sender = deployer.getSender();
       contract = blockchain.openContract(await Integers.fromInit());
-      return [contract, [await contract.send(deployer.getSender(), { value: toNano(1) }, { $$type: "Deploy", queryId: 0n })]];
+      const addresses = {
+        [deployer.address.toString()]: "deployer",
+        [contract.address.toString()]: "contract",
+      };
+      return [contract, addresses, [await contract.send(deployer.getSender(), { value: toNano(1) }, { $$type: "Deploy", queryId: 0n })]];
     },
     messages: {
       "show ops": async () => {

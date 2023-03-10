@@ -19,7 +19,11 @@
       const deployer = await blockchain.treasury("deployer");
       sender = deployer.getSender();
       contract = blockchain.openContract(await HelloWorld.fromInit());
-      return [contract, [await contract.send(deployer.getSender(), { value: toNano(1) }, null)]];
+      const addresses = {
+        [deployer.address.toString()]: "deployer",
+        [contract.address.toString()]: "contract",
+      };
+      return [contract, addresses, [await contract.send(deployer.getSender(), { value: toNano(1) }, null)]];
     },
     messages: {},
     getters: {

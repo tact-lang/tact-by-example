@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index,follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tact by example</title>
+    <meta name="description" content="Learn smart contract programming by example using Tact language" />
+    <link rel="canonical" href="https://tact-by-example.org/" />
+    <meta property="og:title" content="tact by example" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Learn smart contract programming by example using Tact language" />
+    <meta property="og:url" content="https://tact-by-example.org/" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <!--
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/favicons/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicons/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicons/favicon-16x16.png"
+		/>
+		-->
+    <meta http-equiv="content-security-policy" content="">
+		<link href="./_app/immutable/assets/_layout-5d535c94.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/app-fd9a8d0c.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/start-98864bea.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
+		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
+		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-e8307f09.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-e86371c8.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-8b8acd6b.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/03-structs/_page.svelte-d2196410.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-7e0e6ef9.js">
+  </head>
+  <body>
+    <div style="display: contents">
+
+
+
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="message-sender">Message Sender</h1>
+<p>Every incoming message is sent from some contract that has an address.</p>
+<p>You can query the address of the message sender by calling <code>sender()</code>. Alternatively, the address is also available through <code>context().sender</code>.</p>
+<p>The sender during execution of the <code>init()</code> method of the contract is the address who deployed the contract.</p>
+<h2 id="authenticating-messages">Authenticating messages</h2>
+<p>The main way to authenticate an incoming message, particularly for priviliges actions, is to verify the sender. This field is secure and impossible to fake.</p>
+<!-- HTML_TAG_END -->
+    <div class="navMarkdown">
+      </div>
+    <a class="allExamples" href="all">All Examples</a></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter vertical svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+  </div>
+  <div class="secondary svelte-9dft0e">
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
+
+struct Point {
+    x: Int;
+    y: Int;
+}
+
+struct Params {
+    name: String = "Satoshi";   // default value
+    age: Int? = null;           // optional field
+    point: Point;               // nested structs
+}
+
+message Add {
+    point: Point;               // message can hold a struct
+}
+
+contract Structs with Deployable {
+
+    s1: Point;
+    s2: Params;
+
+    init() {
+        self.s1 = Point{x: 2, y: 3};
+        self.s2 = Params{point: self.s1};
+    }
+
+    receive("show all") {
+        // structs cannot currently be dumped
+        // TODO: dump(self.s1);
+    }
+
+    receive("show ops") {
+        // temporary variable
+        let s: Point = Point{x: 4, y: 5};
+
+        self.s1 = s;
+    }
+
+    receive(msg: Add) {
+        self.s1.x = self.s1.x + msg.point.x;
+        self.s1.y = self.s1.y + msg.point.y;
+    }
+
+    get fun point(): Point {
+        return self.s1;
+    }
+
+    get fun params(): Params {
+        return self.s2;
+    }
+}</pre></div></div></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter horizontal svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+      </div>
+  <div class="secondary svelte-9dft0e"><div slot="secondary" class="panelBottom" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column;"><div style="display: flex; gap: 10px; flex-wrap: wrap; overflow: hidden;">
+
+
+
+<button class="buttonAction svelteui-c-TfGwS svelteui-c-TfGwS-hQzioB-variation-filled svelteui-c-TfGwS-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Deploy
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+          
+
+          
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send who (from deployer)
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send who (from sender 2)
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send hello (from deployer)
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send hello (from sender 2)
+		<div class="ripple svelte-1dillie"></div>
+		</button></div>
+        <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
+</div>
+  </div>
+</div>
+
+
+		<script type="module" data-sveltekit-hydrate="s1oeqb">
+			import { start } from "./_app/immutable/start-98864bea.js";
+
+			start({
+				assets: "",
+				env: {},
+				target: document.querySelector('[data-sveltekit-hydrate="s1oeqb"]').parentNode,
+				version: "1678416672417",
+				hydrate: {
+					node_ids: [0, 2, 20],
+					data: [null,null,null],
+					form: null,
+					error: null
+				}
+			});
+		</script>
+	</div>
+  </body>
+</html>

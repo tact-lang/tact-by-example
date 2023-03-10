@@ -89,8 +89,16 @@
       }
     },
     {
-      "name": "03-receivers-messages",
-      "path": "./src/routes/(examples)/03-receivers-messages/contract.tact",
+      "name": "03-receivers",
+      "path": "./src/routes/(examples)/03-receivers/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "03-sender",
+      "path": "./src/routes/(examples)/03-sender/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true
@@ -107,6 +115,14 @@
     {
       "name": "03-receive-coins",
       "path": "./src/routes/(examples)/03-receive-coins/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "03-structs",
+      "path": "./src/routes/(examples)/03-structs/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true

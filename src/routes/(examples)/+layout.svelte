@@ -11,12 +11,18 @@
 
   import "../../app.css";
   import "../../shiki.css";
+  import { convertToText } from "$lib/helpers";
+
+  BigInt.prototype.toJSON = function () {
+    return this.toString();
+  };
 
   let terminalElement: HTMLPreElement;
   let markdownHtml = "";
   let tactHtml = "";
   let terminalContent = "";
   let contractInstance: Contract;
+  let addressesNames: { [address: string]: string } = {};
   let next: { name: string; id: string } | undefined, prev: { name: string; id: string } | undefined;
 
   store.subscribe(async (s) => {
@@ -40,18 +46,20 @@
   function terminalLogMessages(results: SendMessageResult[]) {
     for (const result of results) {
       for (const transaction of result.transactions) {
-        if (transaction.inMessage?.info.type == "internal") {
-          if (transaction.debugLogs) terminalLog(transaction.debugLogs);
-          if (transaction.description.type == "generic") {
-            if (transaction.description.computePhase.type == "vm") {
-              const compute = transaction.description.computePhase;
-              terminalLog(
-                `Transaction executed: ${compute.success ? "success" : "error"}, ` +
-                  `exitcode ${compute.exitCode}, gas ${shorten(compute.gasFees, "coins")}`,
-              );
-              if (transaction.inMessage?.info.dest.equals(contractInstance.address)) {
-                const message = contractInstance?.abi?.errors?.[compute.exitCode]?.message;
-                if (message) terminalLog(`Error message: ${message}`);
+        if (transaction.inMessage?.info.type == "internal" || transaction.inMessage?.info.type == "external-in") {
+          if (transaction.inMessage?.info.type == "internal") {
+            if (transaction.debugLogs) terminalLog(transaction.debugLogs);
+            if (transaction.description.type == "generic") {
+              if (transaction.description.computePhase.type == "vm") {
+                const compute = transaction.description.computePhase;
+                terminalLog(
+                  `Transaction executed: ${compute.success ? "success" : "error"}, ` +
+                    `exitcode ${compute.exitCode}, gas ${shorten(compute.gasFees, "coins")}`,
+                );
+                if (transaction.inMessage?.info.dest.equals(contractInstance.address)) {
+                  const message = contractInstance?.abi?.errors?.[compute.exitCode]?.message;
+                  if (message) terminalLog(`Error message: ${message}`);
+                }
               }
             }
           }
@@ -70,6 +78,7 @@
 
   function shorten(long: Address | bigint, format: "default" | "coins" = "default"): string {
     if (long instanceof Address) {
+      if (addressesNames[long.toString()]) return addressesNames[long.toString()];
       return `${long.toString().slice(0, 4)}..${long.toString().slice(-4)}`;
     }
     if (typeof long == "bigint") {
@@ -93,11 +102,12 @@
     });
   }
 
-  async function runDeploy(deploy: () => Promise<[Contract, SendMessageResult[]]>) {
+  async function runDeploy(deploy: () => Promise<[Contract, { [address: string]: string }, SendMessageResult[]]>) {
     try {
       terminalLog(`> Deploying contract:`);
-      const [contract, results] = await deploy();
+      const [contract, addresses, results] = await deploy();
       contractInstance = contract;
+      addressesNames = addresses;
       terminalLogMessages(results);
     } catch (e: any) {
       terminalError(e);
@@ -109,7 +119,7 @@
     try {
       terminalLog(`> Calling getter ${name}:`);
       const result = await getter();
-      terminalLog(`Return value: ${result.toString()}`);
+      terminalLog(`Return value: ${convertToText(result)}`);
     } catch (e: any) {
       terminalError(e);
     }
