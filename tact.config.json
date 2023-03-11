@@ -97,6 +97,14 @@
       }
     },
     {
+      "name": "03-structs",
+      "path": "./src/routes/(examples)/03-structs/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
       "name": "03-sender",
       "path": "./src/routes/(examples)/03-sender/contract.tact",
       "output": "./tact-output",
@@ -105,8 +113,8 @@
       }
     },
     {
-      "name": "03-rejecting",
-      "path": "./src/routes/(examples)/03-rejecting/contract.tact",
+      "name": "03-errors",
+      "path": "./src/routes/(examples)/03-errors/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true
@@ -121,8 +129,32 @@
       }
     },
     {
-      "name": "03-structs",
-      "path": "./src/routes/(examples)/03-structs/contract.tact",
+      "name": "03-messages-between-contracts",
+      "path": "./src/routes/(examples)/03-messages-between-contracts/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "03-send-coins",
+      "path": "./src/routes/(examples)/03-send-coins/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "04-if-statements",
+      "path": "./src/routes/(examples)/04-if-statements/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "04-loops",
+      "path": "./src/routes/(examples)/04-loops/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true

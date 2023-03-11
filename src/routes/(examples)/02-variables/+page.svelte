@@ -6,7 +6,7 @@
 
   import markdown from "./content.md?raw";
   import tactCode from "./contract.tact?raw";
-  import { Variables } from "./contract";
+  import { Variables } from "./Variables";
 
   let sender: Sender;
   let contract: SandboxContract<Variables>;

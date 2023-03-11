@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index,follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tact by example</title>
+    <meta name="description" content="Learn smart contract programming by example using Tact language" />
+    <link rel="canonical" href="https://tact-by-example.org/" />
+    <meta property="og:title" content="tact by example" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Learn smart contract programming by example using Tact language" />
+    <meta property="og:url" content="https://tact-by-example.org/" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <!--
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/favicons/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicons/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicons/favicon-16x16.png"
+		/>
+		-->
+    <meta http-equiv="content-security-policy" content="">
+		<link href="./_app/immutable/assets/_layout-5d535c94.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/app-fd9a8d0c.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/start-f9cf923a.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
+		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
+		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-ac2f4def.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store-3208a846.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-77cabd49.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/03-messages-between-contracts/_page.svelte-3731bc58.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-ad3893c0.js">
+  </head>
+  <body>
+    <div style="display: contents">
+
+
+
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="getters">Getters</h1>
+<p>Getters are special contract functions that allow users to query information from the contract.</p>
+<p>Contract methods starting with the prefix <code>get fun</code> are all getters. You can define as many getters are you want.</p>
+<p>Calling getters is free and does not cost gas. The call is executed by a full node and doesn&#39;t go through consensus with all the validators nor is added to a new block.</p>
+<p>Getters are read-only, they cannot change the contract persistent state.</p>
+<h2 id="getters-between-contracts">Getters between contracts</h2>
+<p>A contract cannot execute a getter of another contract. Getters are only executable by end-users off-chain. Since contracts are running on-chain, they do not have access to each other&#39;s getters.</p>
+<p>So, if you can&#39;t call a getter, how can two contracts communicate? The only way for contracts to communicate on-chain is by sending messages to each other. Messages are handled in <em>receivers</em>.</p>
+<!-- HTML_TAG_END -->
+    <div class="navMarkdown">
+      </div>
+    <a class="allExamples" href="all">All Examples</a></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter vertical svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+  </div>
+  <div class="secondary svelte-9dft0e">
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
+
+message CounterValue {
+    value: Int as uint32;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// this is our famous Counter contract, we've seen it before
+// this contract is very annoying, it only allows to increment +1 at a time!
+contract Counter with Deployable {
+
+    val: Int as uint32;
+
+    init() {
+        self.val = 0;
+    }
+
+    // step 6: this contract allows anyone to ask it to increment by 1 (ie. the other contract)
+    receive("increment") {
+        self.val = self.val + 1;
+        reply(CounterValue{value: self.val}.toCell());
+    }
+
+    // step 3: this contract replies with its current value to anyone asking (ie. the other contract)
+    receive("query") {
+        reply(CounterValue{value: self.val}.toCell());
+    }
+
+    get fun value(): Int {
+        return self.val;
+    }
+}
+
+message Reach {
+    counter: Address;
+    target: Int as uint32;
+}
+
+////////////////////////////////////////////////////////////////////////////
+// let's write a second helper contract to make our lives a little easier
+// it will keep incrementing the previous contract as many times as we need!
+contract BulkAdder with Deployable {
+
+    target: Int as uint32;
+
+    init() {
+        self.target = 0;
+    }
+
+    // step 1: users will send this message to tell us what target value we need to reach
+    receive(msg: Reach) {
+        self.target = msg.target;
+        // step 2: this contract will query the current counter value from the other contract
+        send(SendParameters{
+            to: msg.counter,
+            value: 0, // TODO: https://github.com/tact-lang/tact/issues/31
+            mode: SendRemainingValue + SendIgnoreErrors, // TODO: issues/31
+            body: "query".asComment()
+        });
+    }
+
+    // step 4: the other contract will tell us what is its current value by sending us this message
+    receive(msg: CounterValue) {
+        if (msg.value < self.target) {
+            // step 5: if its value is too low, send it another message to increment it by +1 more
+            send(SendParameters{
+                to: sender(),
+                value: 0, // TODO: same issue 31
+                mode: SendRemainingValue + SendIgnoreErrors, // TODO: https://github.com/tact-lang/tact/issues/31
+                body: "increment".asComment()
+            });
+        }
+    }
+}</pre></div></div></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter horizontal svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+      </div>
+  <div class="secondary svelte-9dft0e"><div slot="secondary" class="panelBottom" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column;"><div style="display: flex; gap: 10px; flex-wrap: wrap; overflow: hidden;">
+
+
+
+<button class="buttonAction svelteui-c-TfGwS svelteui-c-TfGwS-hQzioB-variation-filled svelteui-c-TfGwS-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Deploy
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+          
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get counter
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get location
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get greeting
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get sum(3,4)
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get and(true,false)
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get answer(42)
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+          </div>
+        <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
+</div>
+  </div>
+</div>
+
+
+		<script type="module" data-sveltekit-hydrate="1507m4e">
+			import { start } from "./_app/immutable/start-f9cf923a.js";
+
+			start({
+				assets: "",
+				env: {},
+				target: document.querySelector('[data-sveltekit-hydrate="1507m4e"]').parentNode,
+				version: "1678493947313",
+				hydrate: {
+					node_ids: [0, 2, 17],
+					data: [null,null,null],
+					form: null,
+					error: null
+				}
+			});
+		</script>
+	</div>
+  </body>
+</html>

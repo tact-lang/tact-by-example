@@ -7,11 +7,11 @@
   import { onMount } from "svelte";
   import { highlightTactCode } from "$lib/highlight";
   import { marked } from "marked";
+  import { convertToText } from "$lib/helpers";
   import store from "$lib/store";
 
   import "../../app.css";
   import "../../shiki.css";
-  import { convertToText } from "$lib/helpers";
 
   BigInt.prototype.toJSON = function () {
     return this.toString();
@@ -52,11 +52,13 @@
             if (transaction.description.type == "generic") {
               if (transaction.description.computePhase.type == "vm") {
                 const compute = transaction.description.computePhase;
+                if (compute.exitCode == 4294967282) compute.exitCode = -14;
                 terminalLog(
                   `Transaction executed: ${compute.success ? "success" : "error"}, ` +
-                    `exitcode ${compute.exitCode}, gas ${shorten(compute.gasFees, "coins")}`,
+                    `exit code ${compute.exitCode}, gas ${shorten(compute.gasFees, "coins")}`,
                 );
                 if (transaction.inMessage?.info.dest.equals(contractInstance.address)) {
+                  if (compute.exitCode == -14) compute.exitCode = 13;
                   const message = contractInstance?.abi?.errors?.[compute.exitCode]?.message;
                   if (message) terminalLog(`Error message: ${message}`);
                 }

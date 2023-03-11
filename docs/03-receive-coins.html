@@ -34,32 +34,37 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout-5d535c94.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app-fd9a8d0c.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-98864bea.js">
+		<link rel="modulepreload" href="./_app/immutable/start-f9cf923a.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
 		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-e8307f09.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-e86371c8.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples-8b8acd6b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/03-receive-coins/_page.svelte-b252a26e.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-7e0e6ef9.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-ac2f4def.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store-3208a846.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-77cabd49.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/03-receive-coins/_page.svelte-21fece74.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-ad3893c0.js">
   </head>
   <body>
     <div style="display: contents">
 
 
 
-<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="getters">Getters</h1>
-<p>Getters are special contract functions that allow users to query information from the contract.</p>
-<p>Contract methods starting with the prefix <code>get fun</code> are all getters. You can define as many getters are you want.</p>
-<p>Calling getters is free and does not cost gas. The call is executed by a full node and doesn&#39;t go through consensus with all the validators nor is added to a new block.</p>
-<p>Getters are read-only, they cannot change the contract persistent state.</p>
-<h2 id="getters-between-contracts">Getters between contracts</h2>
-<p>A contract cannot execute a getter of another contract. Getters are only executable by end-users off-chain. Since contracts are running on-chain, they do not have access to each other&#39;s getters.</p>
-<p>So, if you can&#39;t call a getter, how can two contracts communicate? The only way for contracts to communicate on-chain is by sending messages to each other (messages are handled in <em>receivers</em>).</p>
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="messages-between-contracts">Messages Between Contracts</h1>
+<p>Different contracts can only communicate with each other by sending each other messages. This example shows two separate contracts that work together:</p>
+<ul>
+<li><p><code>Counter</code> - Our simple counter that can only increment by 1.</p>
+</li>
+<li><p><code>BulkAdder</code> - This contract will tell <code>Counter</code> to increment multiple times.</p>
+</li>
+</ul>
+<p> Press the <span class="mdButton blue">Deploy</span> button to deploy both. Then, to make the counter reach 5, send BulkAdder the <code>Reach</code> message by pressing the <span class="mdButton grape">Send Reach{5}</span> button.</p>
+<p> Notice how many messages are sent back and forth between the two contracts as a result. Each of these messages is processed as a <em>separate</em> transaction! Also notice that BulkAdder can&#39;t call a <em>getter</em> on Counter, it must send the <code>query</code> message instead.</p>
+<h2 id="whos-paying-for-gas">Who&#39;s paying for gas</h2>
+<p> The default behavior is that the original sender will pay for the entire cascade of messages that they triggered. This is funded from the original TON coin value sent on the first <code>Reach</code> message.</p>
+<p>Under the hood, this works by each message handler sending the remaining excess TON coin value it received on the next message it sends out.</p>
 <!-- HTML_TAG_END -->
     <div class="navMarkdown">
       </div>
@@ -122,62 +127,34 @@ contract ReceiveCoins with Deployable {
 
 
 <button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get counter
+		Get value
 		<div class="ripple svelte-1dillie"></div>
 		</button>
 
+          
 
 
-<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get location
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send Reach{5}
 		<div class="ripple svelte-1dillie"></div>
-		</button>
-
-
-
-<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get greeting
-		<div class="ripple svelte-1dillie"></div>
-		</button>
-
-
-
-<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get sum(3,4)
-		<div class="ripple svelte-1dillie"></div>
-		</button>
-
-
-
-<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get and(true,false)
-		<div class="ripple svelte-1dillie"></div>
-		</button>
-
-
-
-<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get answer(42)
-		<div class="ripple svelte-1dillie"></div>
-		</button>
-
-          </div>
+		</button></div>
         <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
 </div>
   </div>
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1ek9kcs">
-			import { start } from "./_app/immutable/start-98864bea.js";
+		<script type="module" data-sveltekit-hydrate="q9ae26">
+			import { start } from "./_app/immutable/start-f9cf923a.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="1ek9kcs"]').parentNode,
-				version: "1678416672417",
+				target: document.querySelector('[data-sveltekit-hydrate="q9ae26"]').parentNode,
+				version: "1678493947313",
 				hydrate: {
-					node_ids: [0, 2, 16],
+					node_ids: [0, 2, 18],
 					data: [null,null,null],
 					form: null,
 					error: null

@@ -48,19 +48,35 @@
     "name": "Receivers and Messages"
   },
   {
+    "id": "03-structs",
+    "name": "Structs"
+  },
+  {
     "id": "03-sender",
     "name": "Message Sender"
   },
   {
-    "id": "03-rejecting",
-    "name": "Rejecting Messages"
+    "id": "03-errors",
+    "name": "Throwing Errors"
   },
   {
     "id": "03-receive-coins",
     "name": "Receiving TON Coins"
   },
   {
-    "id": "03-structs",
-    "name": "Structs"
+    "id": "03-messages-between-contracts",
+    "name": "Messages Between Contracts"
+  },
+  {
+    "id": "03-send-coins",
+    "name": "Sending TON Coins"
+  },
+  {
+    "id": "04-if-statements",
+    "name": "If Statements"
+  },
+  {
+    "id": "04-loops",
+    "name": "Loops"
   }
 ]

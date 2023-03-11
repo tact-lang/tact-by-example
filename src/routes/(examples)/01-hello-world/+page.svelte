@@ -6,7 +6,7 @@
 
   import markdown from "./content.md?raw";
   import tactCode from "./clean.tact?raw";
-  import { HelloWorld } from "./contract";
+  import { HelloWorld } from "./HelloWorld";
 
   let sender: Sender;
   let contract: SandboxContract<HelloWorld>;

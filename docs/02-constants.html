@@ -34,18 +34,18 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout-5d535c94.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app-fd9a8d0c.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-98864bea.js">
+		<link rel="modulepreload" href="./_app/immutable/start-f9cf923a.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
 		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-e8307f09.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-e86371c8.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples-8b8acd6b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-constants/_page.svelte-bc936774.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-7e0e6ef9.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-ac2f4def.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store-3208a846.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-77cabd49.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-constants/_page.svelte-631e52a6.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-ad3893c0.js">
   </head>
   <body>
     <div style="display: contents">
@@ -68,24 +68,24 @@
 <div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
 
 // global constants are calculated in compile-time and can't change
-const GLOBAL_CONST1: Int = 1000 + ton("1.24") + pow(10, 9);
+const GlobalConst1: Int = 1000 + ton("1.24") + pow(10, 9);
 
 contract Constants with Deployable {
 
     // contract constants are calculated in compile-time and can't change
-    const CONTRACT_CONST1: Int = 2000 + ton("1.25") + pow(10, 9);
+    const ContractConst1: Int = 2000 + ton("1.25") + pow(10, 9);
     
     // if your contract can be in multiple states, constants are an easy alternative to enums
-    const STATE_UNPAID: Int = 0;
-    const STATE_PAID: Int = 1;
-    const STATE_DELIVERED: Int = 2;
-    const STATE_DISPUTED: Int = 3;
+    const StateUnpaid: Int = 0;
+    const StatePaid: Int = 1;
+    const StateDelivered: Int = 2;
+    const StateDisputed: Int = 3;
 
     init() {}
 
     get fun sum(): Int {
         // you can read the constants anywhere
-        return GLOBAL_CONST1 + self.CONTRACT_CONST1 + self.STATE_PAID;
+        return GlobalConst1 + self.ContractConst1 + self.StatePaid;
     }
 }</pre></div></div></div></div>
   <div class="splitter svelte-9dft0e">
@@ -131,14 +131,14 @@ contract Constants with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="4n0bv1">
-			import { start } from "./_app/immutable/start-98864bea.js";
+		<script type="module" data-sveltekit-hydrate="889evm">
+			import { start } from "./_app/immutable/start-f9cf923a.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="4n0bv1"]').parentNode,
-				version: "1678416672417",
+				target: document.querySelector('[data-sveltekit-hydrate="889evm"]').parentNode,
+				version: "1678493947313",
 				hydrate: {
 					node_ids: [0, 2, 10],
 					data: [null,null,null],

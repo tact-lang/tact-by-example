@@ -34,18 +34,18 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout-5d535c94.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app-fd9a8d0c.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-98864bea.js">
+		<link rel="modulepreload" href="./_app/immutable/start-f9cf923a.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
 		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-e8307f09.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-e86371c8.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples-8b8acd6b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/03-receivers/_page.svelte-b206f3c1.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-7e0e6ef9.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-ac2f4def.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store-3208a846.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-77cabd49.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/03-receivers/_page.svelte-0cda2009.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-ad3893c0.js">
   </head>
   <body>
     <div style="display: contents">
@@ -57,8 +57,8 @@
 <p>Every incoming message normally carries some TON coin value sent by the sender. This value is used to pay gas for handling this message. Unused excess will stay in the contract balance. If the value doesn&#39;t cover the gas cost, the transaction will revert.</p>
 <p>You can query the contract balance with <code>myBalance()</code> - note that the value is in nano-tons (like cents, just with 9 decimals). The balance already contains the incoming message value.</p>
 <h2 id="refunding-senders">Refunding senders</h2>
-<p>If the transaction reverts, unused excess value will be sent back to sender (unless the sender opted out of a bounced reply by clearing the <code>bounce</code> flag).</p>
-<p>You can also refund the excess if the transaction succeeds by sending it back using <code>reply()</code> in a response message. This is the best way to guarantee senders are only paying for the exact gas their message consumed.</p>
+<p>If the transaction reverts, unused excess value will be sent back to sender on the <em>bounced</em> message.</p>
+<p>You can also refund the excess if the transaction succeeds by sending it back using <code>reply()</code> in a response message. This is the best way to guarantee senders are only paying for the exact gas that their message consumed.</p>
 <!-- HTML_TAG_END -->
     <div class="navMarkdown">
       </div>
@@ -173,16 +173,16 @@ contract Receivers with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1o3pbv">
-			import { start } from "./_app/immutable/start-98864bea.js";
+		<script type="module" data-sveltekit-hydrate="gjwgmx">
+			import { start } from "./_app/immutable/start-f9cf923a.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="1o3pbv"]').parentNode,
-				version: "1678416672417",
+				target: document.querySelector('[data-sveltekit-hydrate="gjwgmx"]').parentNode,
+				version: "1678493947313",
 				hydrate: {
-					node_ids: [0, 2, 17],
+					node_ids: [0, 2, 19],
 					data: [null,null,null],
 					form: null,
 					error: null

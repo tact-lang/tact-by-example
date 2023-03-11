@@ -6,7 +6,7 @@
 
   import markdown from "./content.md?raw";
   import tactCode from "./contract.tact?raw";
-  import { Receivers } from "./contract";
+  import { Receivers } from "./Receivers";
 
   let sender: Sender;
   let sender2: Sender;

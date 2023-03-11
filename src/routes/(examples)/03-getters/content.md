@@ -12,4 +12,4 @@ Getters are read-only, they cannot change the contract persistent state.
 
 A contract cannot execute a getter of another contract. Getters are only executable by end-users off-chain. Since contracts are running on-chain, they do not have access to each other's getters.
 
-So, if you can't call a getter, how can two contracts communicate? The only way for contracts to communicate on-chain is by sending messages to each other (messages are handled in *receivers*).
+So, if you can't call a getter, how can two contracts communicate? The only way for contracts to communicate on-chain is by sending messages to each other. Messages are handled in *receivers*.

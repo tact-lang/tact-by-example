@@ -34,36 +34,32 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout-5d535c94.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app-fd9a8d0c.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-98864bea.js">
+		<link rel="modulepreload" href="./_app/immutable/start-f9cf923a.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
 		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-e8307f09.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/helpers-e86371c8.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples-8b8acd6b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/03-sender/_page.svelte-f79dbca7.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-7e0e6ef9.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-ac2f4def.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store-3208a846.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-77cabd49.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/03-sender/_page.svelte-f6afacbb.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-ad3893c0.js">
   </head>
   <body>
     <div style="display: contents">
 
 
 
-<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="rejecting-messages">Rejecting Messages</h1>
-<p>Processing an incoming message in a transaction isn&#39;t always successful. The contract may encounter some error and fail the transaction.</p>
-<p>This can be due to an explicit decision of the contract author, usually by writing a <code>require()</code> on a condition that isn&#39;t met, or this may happen implicitly due to some computation error in run-time, like a math overflow.</p>
-<p>The folowing things happen when a message is rejected:</p>
-<ul>
-<li><p>The transaction reverts - meaning all persistent state changes that took place during this transaction, even those that happened before the error was thrown, are all reverted and return to their original values.</p>
-</li>
-<li><p>The message will be bounced back to its sender to notify them about the failure. Senders may opt out of a bounced reply by clearing the <code>bounce</code> flag, more on this later.</p>
-</li>
-<li><p>The compute phase of the transaction will fail and a non-zero exit code returned. Numerical exit codes are a <a href="https://ton.org/docs/learn/tvm-instructions/tvm-exit-codes">low-level property</a> of TON, Tact abstracts them away with meaningful error messages that its client libraries can translate.</p>
-</li>
-</ul>
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="sending-ton-coins">Sending TON Coins</h1>
+<p>This contract allows to withdraw TON coins from its balance. Notice that only the deployer is permitted to do that, otherwise this money could be stolen.</p>
+<p>The withdrawn funds are sent as value on an outgoing message to the sender. It&#39;s a good idea to set the <code>bounce</code> flag explicitly to <code>true</code> (although this also the default), so if the outgoing message fails for any reason, the money would return to the contract.</p>
+<p>Contracts need to have a non-zero balance so they can pay storage costs occasionally, otherwise they may get deleted. This contract can make sure you always leave 0.01 TON which is <a href="https://ton.org/docs/develop/smart-contracts/fees#storage-fee">enough</a> to store 1 KB of state for 2.5 years.</p>
+<h2 id="the-intricate-math">The intricate math</h2>
+<p><code>myBalance()</code> is the contract balance including the value for gas sent on the incoming message. <code>myBalance() - context().value</code> is the balance without the value for gas sent on the incoming message.</p>
+<p>Send mode <code>SendRemainingValue</code> will add to the outgoing value any excess left from the incoming message after all gas costs are deducted from it.</p>
+<p>Send mode <code>SendRemainingBalance</code> will ignore the outgoing value and send the entire balance of the contract. Note that this will not leave any balance for storage costs so the contract may be deleted.</p>
 <!-- HTML_TAG_END -->
     <div class="navMarkdown">
       </div>
@@ -118,7 +114,7 @@ contract MessageSender with Deployable {
 
 
 <button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get value
+		Get balance
 		<div class="ripple svelte-1dillie"></div>
 		</button>
 
@@ -127,28 +123,21 @@ contract MessageSender with Deployable {
 
 
 <button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Send increment
+		Send 1 TON
 		<div class="ripple svelte-1dillie"></div>
 		</button>
 
 
 
 <button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Send Divide{2}
+		Send withdraw all
 		<div class="ripple svelte-1dillie"></div>
 		</button>
 
 
 
 <button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Send Divide{0}
-		<div class="ripple svelte-1dillie"></div>
-		</button>
-
-
-
-<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Send no access
+		Send Withdraw{1 TON}
 		<div class="ripple svelte-1dillie"></div>
 		</button></div>
         <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
@@ -157,16 +146,16 @@ contract MessageSender with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="85e9mb">
-			import { start } from "./_app/immutable/start-98864bea.js";
+		<script type="module" data-sveltekit-hydrate="uewu1y">
+			import { start } from "./_app/immutable/start-f9cf923a.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="85e9mb"]').parentNode,
-				version: "1678416672417",
+				target: document.querySelector('[data-sveltekit-hydrate="uewu1y"]').parentNode,
+				version: "1678493947313",
 				hydrate: {
-					node_ids: [0, 2, 19],
+					node_ids: [0, 2, 21],
 					data: [null,null,null],
 					form: null,
 					error: null

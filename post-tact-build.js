@@ -12,6 +12,6 @@ for (const file of files) {
     continue;
   }
   let content = fs.readFileSync(`./tact-output/${file}`).toString();
-  fs.writeFileSync(`./src/routes/(examples)/${example}/contract.ts`, content);
+  fs.writeFileSync(`./src/routes/(examples)/${example}/${contract}.ts`, content);
   console.log(`   > Moved ${file}`);
 }
