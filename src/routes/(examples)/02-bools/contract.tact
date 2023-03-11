@@ -2,6 +2,7 @@ import "@stdlib/deploy";
 
 contract Bools with Deployable {
  
+    // contract persistent state variables
     b1: Bool = true;
     b2: Bool = false;
     b3: Bool;

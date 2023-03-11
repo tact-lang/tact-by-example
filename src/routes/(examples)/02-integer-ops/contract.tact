@@ -2,6 +2,7 @@ import "@stdlib/deploy";
 
 contract Integers with Deployable {
  
+    // contract persistent state variables
     i1: Int as uint128 = 3001;
     i2: Int as int32 = 57;
 

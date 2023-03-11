@@ -17,17 +17,13 @@ message Add {
 
 contract Structs with Deployable {
 
+    // contract persistent state variables
     s1: Point;
     s2: Params;
 
     init() {
         self.s1 = Point{x: 2, y: 3};
         self.s2 = Params{point: self.s1};
-    }
-
-    receive("show all") {
-        // structs cannot currently be dumped
-        // TODO: dump(self.s1);
     }
 
     receive("show ops") {

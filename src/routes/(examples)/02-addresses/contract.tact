@@ -2,11 +2,12 @@ import "@stdlib/deploy";
 
 contract Addresses with Deployable {
 
+    // contract persistent state variables
     // we have three representations of the same address
     a1: Address = address("EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N"); // bouncable (same foundation wallet)
     a2: Address = address("UQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqEBI"); // non-bounceable (same foundation wallet)
     a3: Address;
-    
+
     a4: Address;
     a5: Address;
     a6: Address;
@@ -22,8 +23,9 @@ contract Addresses with Deployable {
     }
 
     receive("show all") {
-        // addresses cannot currently be dumped
-        // TODO: dump(self.a1);
+        /// addresses cannot currently be dumped
+        /// TODO: https://github.com/tact-lang/tact/issues/16
+        /// dump(self.a1);
     }
 
     receive("show ops") {

@@ -36,6 +36,9 @@
       "withdraw all": async () => {
         return [await contract.send(sender, { value: toNano(1) }, "withdraw all")];
       },
+      "withdraw safe": async () => {
+        return [await contract.send(sender, { value: toNano(1) }, "withdraw safe")];
+      },
       "Withdraw{1 TON}": async () => {
         return [await contract.send(sender, { value: toNano(1) }, { $$type: "Withdraw", amount: toNano(1) })];
       },

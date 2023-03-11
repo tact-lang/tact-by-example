@@ -53,8 +53,8 @@ contract BulkAdder with Deployable {
         // step 2: this contract will query the current counter value from the other contract
         send(SendParameters{
             to: msg.counter,
-            value: 0, // TODO: https://github.com/tact-lang/tact/issues/31
-            mode: SendRemainingValue + SendIgnoreErrors, // TODO: issues/31
+            value: 0, /// TODO: https://github.com/tact-lang/tact/issues/31
+            mode: SendRemainingValue + SendIgnoreErrors, /// TODO: issues/31
             body: "query".asComment()
         });
     }
@@ -65,8 +65,8 @@ contract BulkAdder with Deployable {
             // step 5: if its value is too low, send it another message to increment it by +1 more
             send(SendParameters{
                 to: sender(),
-                value: 0, // TODO: same issue 31
-                mode: SendRemainingValue + SendIgnoreErrors, // TODO: https://github.com/tact-lang/tact/issues/31
+                value: 0, /// TODO: same issue 31
+                mode: SendRemainingValue + SendIgnoreErrors, /// TODO: https://github.com/tact-lang/tact/issues/31
                 body: "increment".asComment()
             });
         }

@@ -2,6 +2,7 @@ import "@stdlib/deploy";
 
 contract Integers with Deployable {
  
+    // contract persistent state variables
     // integers can be persisted in state in various sizes
     i1: Int as int257 = 3001;   // range -2^256 to 2^256 - 1 (takes 257 bit = 32 bytes + 1 bit)
     i2: Int as uint256;         // range 0 to 2^256 - 1 (takes 256 bit = 32 bytes)

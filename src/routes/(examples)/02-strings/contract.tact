@@ -2,8 +2,9 @@ import "@stdlib/deploy";
 
 contract Strings with Deployable {
  
+    // contract persistent state variables
     s1: String = "hello world";
-    s2: String = "yes unicode 😀 😅 你好 no escaping"; /// \n \t";
+    s2: String = "yes unicode 😀 😅 你好 no escaping"; /// TODO: https://github.com/tact-lang/tact/issues/25 \n \t";
     s3: String;
     s4: String;
     s5: String;
@@ -38,6 +39,7 @@ contract Strings with Deployable {
         let s: String = "how are you?"; // temporary variable
         dump(s);
 
+        /// TODO: https://github.com/tact-lang/tact/issues/24
         /// dump(self.s1 == "hello world");
         /// dump(self.s1 != s);
     }
