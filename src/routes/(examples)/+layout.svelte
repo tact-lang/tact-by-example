@@ -10,6 +10,7 @@
   import { convertToText } from "$lib/helpers";
   import store from "$lib/store";
 
+  import "../../loader.css";
   import "../../app.css";
   import "../../shiki.css";
 
@@ -17,6 +18,7 @@
     return this.toString();
   };
 
+  let loaded = false;
   let terminalElement: HTMLPreElement;
   let markdownHtml = "";
   let tactHtml = "";
@@ -36,6 +38,7 @@
   });
 
   onMount(() => {
+    loaded = true;
     globalThis.Buffer = Buffer;
   });
 
@@ -139,6 +142,17 @@
     terminalScrollToBottom();
   }
 </script>
+
+{#if !loaded}
+  <div class="pageLoader">
+    <div class="sk-folding-cube">
+      <div class="sk-cube1 sk-cube" />
+      <div class="sk-cube2 sk-cube" />
+      <div class="sk-cube4 sk-cube" />
+      <div class="sk-cube3 sk-cube" />
+    </div>
+  </div>
+{/if}
 
 <Split initialPrimarySize="47%">
   <div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;">
