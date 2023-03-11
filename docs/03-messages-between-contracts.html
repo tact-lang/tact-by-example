@@ -34,18 +34,18 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout-e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app-fd9a8d0c.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-ec30e318.js">
+		<link rel="modulepreload" href="./_app/immutable/start-d4e6303a.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
 		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-ea089cab.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store-3208a846.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples-77cabd49.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/03-messages-between-contracts/_page.svelte-3731bc58.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-ad3893c0.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-af0b395a.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store-568ba917.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-9e2f804a.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/03-messages-between-contracts/_page.svelte-ac20b4ae.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-4450da48.js">
   </head>
   <body>
     <div style="display: contents">
@@ -129,8 +129,8 @@ contract BulkAdder with Deployable {
         // step 2: this contract will query the current counter value from the other contract
         send(SendParameters{
             to: msg.counter,
-            value: 0, // TODO: https://github.com/tact-lang/tact/issues/31
-            mode: SendRemainingValue + SendIgnoreErrors, // TODO: issues/31
+            value: 0, /// TODO: https://github.com/tact-lang/tact/issues/31
+            mode: SendRemainingValue + SendIgnoreErrors, /// TODO: issues/31
             body: "query".asComment()
         });
     }
@@ -141,8 +141,8 @@ contract BulkAdder with Deployable {
             // step 5: if its value is too low, send it another message to increment it by +1 more
             send(SendParameters{
                 to: sender(),
-                value: 0, // TODO: same issue 31
-                mode: SendRemainingValue + SendIgnoreErrors, // TODO: https://github.com/tact-lang/tact/issues/31
+                value: 0, /// TODO: same issue 31
+                mode: SendRemainingValue + SendIgnoreErrors, /// TODO: https://github.com/tact-lang/tact/issues/31
                 body: "increment".asComment()
             });
         }
@@ -212,14 +212,14 @@ contract BulkAdder with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="hb0b0a">
-			import { start } from "./_app/immutable/start-ec30e318.js";
+		<script type="module" data-sveltekit-hydrate="1kw3cd6">
+			import { start } from "./_app/immutable/start-d4e6303a.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="hb0b0a"]').parentNode,
-				version: "1678496914612",
+				target: document.querySelector('[data-sveltekit-hydrate="1kw3cd6"]').parentNode,
+				version: "1678503087707",
 				hydrate: {
 					node_ids: [0, 2, 17],
 					data: [null,null,null],

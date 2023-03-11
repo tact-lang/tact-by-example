@@ -34,18 +34,18 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout-e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app-fd9a8d0c.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-ec30e318.js">
+		<link rel="modulepreload" href="./_app/immutable/start-d4e6303a.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
 		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-ea089cab.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store-3208a846.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples-77cabd49.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-addresses/_page.svelte-9a9b860a.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-ad3893c0.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-af0b395a.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store-568ba917.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-9e2f804a.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-addresses/_page.svelte-7689aed4.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-4450da48.js">
   </head>
   <body>
     <div style="display: contents">
@@ -78,11 +78,12 @@
 
 contract Addresses with Deployable {
 
+    // contract persistent state variables
     // we have three representations of the same address
     a1: Address = address("EQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqB2N"); // bouncable (same foundation wallet)
     a2: Address = address("UQCD39VS5jcptHL8vMjEXrzGaRcCVYto7HUn4bpAOg8xqEBI"); // non-bounceable (same foundation wallet)
     a3: Address;
-    
+
     a4: Address;
     a5: Address;
     a6: Address;
@@ -98,8 +99,9 @@ contract Addresses with Deployable {
     }
 
     receive("show all") {
-        // addresses cannot currently be dumped
-        // TODO: dump(self.a1);
+        /// addresses cannot currently be dumped
+        /// TODO: https://github.com/tact-lang/tact/issues/16
+        /// dump(self.a1);
     }
 
     receive("show ops") {
@@ -154,14 +156,14 @@ contract Addresses with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="1f5b1ag">
-			import { start } from "./_app/immutable/start-ec30e318.js";
+		<script type="module" data-sveltekit-hydrate="zn6egd">
+			import { start } from "./_app/immutable/start-d4e6303a.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="1f5b1ag"]').parentNode,
-				version: "1678496914612",
+				target: document.querySelector('[data-sveltekit-hydrate="zn6egd"]').parentNode,
+				version: "1678503087707",
 				hydrate: {
 					node_ids: [0, 2, 8],
 					data: [null,null,null],

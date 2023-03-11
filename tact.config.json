@@ -159,6 +159,22 @@
       "options": {
         "debug": true
       }
+    },
+    {
+      "name": "04-functions",
+      "path": "./src/routes/(examples)/04-functions/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "04-current-time",
+      "path": "./src/routes/(examples)/04-current-time/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
     }
   ]
 }

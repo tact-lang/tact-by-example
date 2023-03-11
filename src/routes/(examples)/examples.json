@@ -78,5 +78,13 @@
   {
     "id": "04-loops",
     "name": "Loops"
+  },
+  {
+    "id": "04-functions",
+    "name": "Functions"
+  },
+  {
+    "id": "04-current-time",
+    "name": "Current Time"
   }
 ]

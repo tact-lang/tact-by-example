@@ -34,18 +34,18 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout-e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app-fd9a8d0c.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-ec30e318.js">
+		<link rel="modulepreload" href="./_app/immutable/start-d4e6303a.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
 		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
 		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-ea089cab.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store-3208a846.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples-77cabd49.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-strings/_page.svelte-c894155e.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-ad3893c0.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-af0b395a.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store-568ba917.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples-9e2f804a.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-strings/_page.svelte-299db6c2.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-4450da48.js">
   </head>
   <body>
     <div style="display: contents">
@@ -75,8 +75,9 @@
 
 contract Strings with Deployable {
  
+    // contract persistent state variables
     s1: String = "hello world";
-    s2: String = "yes unicode 😀 😅 你好 no escaping"; /// \n \t";
+    s2: String = "yes unicode 😀 😅 你好 no escaping"; /// TODO: https://github.com/tact-lang/tact/issues/25 \n \t";
     s3: String;
     s4: String;
     s5: String;
@@ -111,6 +112,7 @@ contract Strings with Deployable {
         let s: String = "how are you?"; // temporary variable
         dump(s);
 
+        /// TODO: https://github.com/tact-lang/tact/issues/24
         /// dump(self.s1 == "hello world");
         /// dump(self.s1 != s);
     }
@@ -155,14 +157,14 @@ contract Strings with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="q6wjg4">
-			import { start } from "./_app/immutable/start-ec30e318.js";
+		<script type="module" data-sveltekit-hydrate="lentjj">
+			import { start } from "./_app/immutable/start-d4e6303a.js";
 
 			start({
 				assets: "",
 				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="q6wjg4"]').parentNode,
-				version: "1678496914612",
+				target: document.querySelector('[data-sveltekit-hydrate="lentjj"]').parentNode,
+				version: "1678503087707",
 				hydrate: {
 					node_ids: [0, 2, 13],
 					data: [null,null,null],
