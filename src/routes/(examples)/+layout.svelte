@@ -8,6 +8,7 @@
   import { highlightTactCode } from "$lib/highlight";
   import { marked } from "marked";
   import { convertToText } from "$lib/helpers";
+  import { mobile } from "$lib/mobile";
   import store from "$lib/store";
 
   import "../../loader.css";
@@ -154,69 +155,125 @@
   </div>
 {/if}
 
-<Split initialPrimarySize="47%">
-  <div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;">
-    {@html markdownHtml}<slot />
-    <div class="navMarkdown">
-      {#if prev}
-        <a style="position: absolute; left: 50px;" href={prev.id}>
-          <svg
-            style="transform: rotate(180deg);"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            class="nx-inline nx-h-5 nx-shrink-0 ltr:nx-rotate-180"
-            ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg
-          >
-          {prev.name}
-        </a>
-      {/if}
-      {#if next}
-        <a style="position: absolute; right: 50px;" href={next.id}>
-          {next.name}
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="nx-inline nx-h-5 nx-shrink-0 rtl:nx-rotate-180"
-            ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg
-          >
-        </a>
-      {/if}
+{#if !mobile()}
+  <Split initialPrimarySize="47%">
+    <div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;">
+      {@html markdownHtml}<slot />
+      <div class="navMarkdown">
+        {#if prev}
+          <a style="position: absolute; left: 50px;" href={prev.id}>
+            <svg
+              style="transform: rotate(180deg);"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="nx-inline nx-h-5 nx-shrink-0 ltr:nx-rotate-180"
+              ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg
+            >
+            {prev.name}
+          </a>
+        {/if}
+        {#if next}
+          <a style="position: absolute; right: 50px;" href={next.id}>
+            {next.name}
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="nx-inline nx-h-5 nx-shrink-0 rtl:nx-rotate-180"
+              ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg
+            >
+          </a>
+        {/if}
+      </div>
+      <a class="allExamples" href="all">All Examples</a>
     </div>
-    <a class="allExamples" href="all">All Examples</a>
+    <svelte:fragment slot="splitter">
+      <DefaultSplitter color="rgb(17, 17, 17)" hoverColor="#444" dragColor="#444" />
+    </svelte:fragment>
+    <svelte:fragment slot="secondary">
+      <Split horizontal initialPrimarySize="80%">
+        <div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+          <div style="height: 100%; overflow: scroll;">
+            <div contenteditable="false" bind:innerHTML={tactHtml} class="dark" />
+          </div>
+        </div>
+        <svelte:fragment slot="splitter">
+          <DefaultSplitter color="rgb(17, 17, 17)" hoverColor="#444" dragColor="#444" />
+        </svelte:fragment>
+        <div
+          slot="secondary"
+          class="panelBottom"
+          style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column;"
+        >
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; overflow: hidden;">
+            <Button class="buttonAction" size="xs" ripple on:click={() => runDeploy($store.deploy)}>Deploy</Button>
+
+            {#each Object.keys($store.getters) as getter}
+              <Button class="buttonAction" size="xs" ripple color="teal" on:click={() => runGetter(getter, $store.getters[getter])}
+                >Get {getter}</Button
+              >
+            {/each}
+
+            {#each Object.keys($store.messages) as message}
+              <Button class="buttonAction" size="xs" ripple color="grape" on:click={() => runMessage(message, $store.messages[message])}
+                >Send {message}</Button
+              >
+            {/each}
+          </div>
+          <pre bind:this={terminalElement} style="flex: 1; color: #666; overflow: scroll;">{terminalContent}</pre>
+        </div>
+      </Split>
+    </svelte:fragment>
+  </Split>
+{:else}
+  <div class="panelMarkdown" style="position: block;">
+    {@html markdownHtml}<slot />
   </div>
-  <svelte:fragment slot="splitter">
-    <DefaultSplitter color="rgb(17, 17, 17)" hoverColor="#444" dragColor="#444" />
-  </svelte:fragment>
-  <svelte:fragment slot="secondary">
-    <Split horizontal initialPrimarySize="80%">
-      <div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
-        <div style="height: 100%; overflow: scroll;">
-          <div contenteditable="false" bind:innerHTML={tactHtml} class="dark" />
-        </div>
-      </div>
-      <svelte:fragment slot="splitter">
-        <DefaultSplitter color="rgb(17, 17, 17)" hoverColor="#444" dragColor="#444" />
-      </svelte:fragment>
-      <div
-        slot="secondary"
-        class="panelBottom"
-        style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column;"
-      >
-        <div style="display: flex; gap: 10px; flex-wrap: wrap; overflow: hidden;">
-          <Button class="buttonAction" size="xs" ripple on:click={() => runDeploy($store.deploy)}>Deploy</Button>
 
-          {#each Object.keys($store.getters) as getter}
-            <Button class="buttonAction" size="xs" ripple color="teal" on:click={() => runGetter(getter, $store.getters[getter])}
-              >Get {getter}</Button
-            >
-          {/each}
+  <div class="panelCode" style="margin: 20px;">
+    <div style="height: 100%; overflow: scroll;">
+      <div contenteditable="false" bind:innerHTML={tactHtml} class="dark" />
+    </div>
+  </div>
 
-          {#each Object.keys($store.messages) as message}
-            <Button class="buttonAction" size="xs" ripple color="grape" on:click={() => runMessage(message, $store.messages[message])}
-              >Send {message}</Button
-            >
-          {/each}
-        </div>
-        <pre bind:this={terminalElement} style="flex: 1; color: #666; overflow: scroll;">{terminalContent}</pre>
-      </div>
-    </Split>
-  </svelte:fragment>
-</Split>
+  <div class="panelBottom" style="display: flex; flex-direction: column; margin: 20px;">
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; overflow: hidden;">
+      <Button class="buttonAction" size="xs" ripple on:click={() => runDeploy($store.deploy)}>Deploy</Button>
+
+      {#each Object.keys($store.getters) as getter}
+        <Button class="buttonAction" size="xs" ripple color="teal" on:click={() => runGetter(getter, $store.getters[getter])}
+          >Get {getter}</Button
+        >
+      {/each}
+
+      {#each Object.keys($store.messages) as message}
+        <Button class="buttonAction" size="xs" ripple color="grape" on:click={() => runMessage(message, $store.messages[message])}
+          >Send {message}</Button
+        >
+      {/each}
+    </div>
+    <pre bind:this={terminalElement} style="color: #666; overflow: scroll; height: 120px;">{terminalContent}</pre>
+  </div>
+
+  <div class="navMarkdown" style="padding: 40px;">
+    {#if prev}
+      <a style="float: left; margin-bottom: 15px;" href={prev.id}>
+        <svg
+          style="transform: rotate(180deg);"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          class="nx-inline nx-h-5 nx-shrink-0 ltr:nx-rotate-180"
+          ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg
+        >
+        {prev.name}
+      </a>
+    {/if}
+    {#if next}
+      <a style="float: right; margin-bottom: 15px;" href={next.id}>
+        {next.name}
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="nx-inline nx-h-5 nx-shrink-0 rtl:nx-rotate-180"
+          ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg
+        >
+      </a>
+    {/if}
+  </div>
+  <a class="allExamples" style="margin-bottom: 30px;" href="all">All Examples</a>
+{/if}

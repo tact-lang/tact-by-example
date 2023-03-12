@@ -86,5 +86,21 @@
   {
     "id": "04-current-time",
     "name": "Current Time"
+  },
+  {
+    "id": "05-the-ownable-trait",
+    "name": "The Ownable Trait"
+  },
+  {
+    "id": "05-the-ownable-transferable-trait",
+    "name": "The Ownable-Transferable Trait"
+  },
+  {
+    "id": "05-the-stoppable-trait",
+    "name": "The Stoppable Trait"
+  },
+  {
+    "id": "05-the-resumable-trait",
+    "name": "The Resumable Trait"
   }
 ]

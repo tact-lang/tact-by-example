@@ -175,6 +175,38 @@
       "options": {
         "debug": true
       }
+    },
+    {
+      "name": "05-the-ownable-trait",
+      "path": "./src/routes/(examples)/05-the-ownable-trait/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "05-the-ownable-transferable-trait",
+      "path": "./src/routes/(examples)/05-the-ownable-transferable-trait/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "05-the-stoppable-trait",
+      "path": "./src/routes/(examples)/05-the-stoppable-trait/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "05-the-resumable-trait",
+      "path": "./src/routes/(examples)/05-the-resumable-trait/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
     }
   ]
 }

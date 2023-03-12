@@ -1,3 +1,4 @@
+import { Address, Slice, Cell } from "ton-core";
 import examples from "../routes/(examples)/examples.json";
 import path from "path";
 
@@ -27,6 +28,10 @@ export function convertToText(obj: any): string {
   if (obj == undefined) {
     return String(obj);
   } else if (typeof obj == "object" && obj.join == undefined) {
+    if (obj instanceof Address) return obj.toString();
+    if (obj instanceof Slice) return obj.toString();
+    if (obj instanceof Cell) return obj.toString();
+
     for (const prop in obj) {
       if (obj.hasOwnProperty(prop)) string.push(prop + ": " + convertToText(obj[prop]));
     }
