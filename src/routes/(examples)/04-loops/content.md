@@ -1,6 +1,6 @@
 # Loops
 
-Tact does not support traditional `for` loops, but its loop statements are equivalent and can easily implement the same things.
+Tact does not support traditional `for` loops, but its loop statements are equivalent and can easily implement the same things. Also note that Tact does not support `break` and `continue` statements in loops like some languages.
 
 The `repeat` loop statement input number must fit within an `int32`, otherwise an exception will be thrown.
 

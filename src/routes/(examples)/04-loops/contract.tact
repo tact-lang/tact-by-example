@@ -7,7 +7,7 @@ contract Loops with Deployable {
     receive("loop1") {
         let sum: Int = 0;
         let i: Int = 0;
-        repeat (10) {
+        repeat (10) {               // repeat exactly 10 times
             i = i + 1;
             sum = sum + i;
         }
@@ -17,7 +17,7 @@ contract Loops with Deployable {
     receive("loop2") {
         let sum: Int = 0;
         let i: Int = 0;
-        while (i < 10) {
+        while (i < 10) {            // loop while a condition is true
             i = i + 1;
             sum = sum + i;
         }
@@ -27,7 +27,7 @@ contract Loops with Deployable {
     receive("loop3") {
         let sum: Int = 0;
         let i: Int = 0;
-        do {
+        do {                        // loop until a condition is true
             i = i + 1;
             sum = sum + i;
         } until (i >= 10);
@@ -36,7 +36,7 @@ contract Loops with Deployable {
 
     receive("out of gas") {
         let i: Int = 0;
-        while (i < pow(10, 6)) {
+        while (i < pow(10, 6)) {    // 1 million iterations is too much
             i = i + 1;
         }
         dump(i);
