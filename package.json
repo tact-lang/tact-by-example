@@ -27,24 +27,25 @@
     "prettier": "^2.6.2",
     "prettier-plugin-svelte": "^2.7.0",
     "sass": "^1.55.0",
-    "svelte": "^3.54.0",
+    "svelte": "^3.56.0",
     "svelte-check": "3.0.0",
     "svelte-preprocess": "^4.10.7",
     "tslib": "^2.3.1",
     "typescript": "^4.9.3",
-    "vite": "^4.0.0"
+    "vite": "^4.1.4"
   },
   "type": "module",
   "dependencies": {
     "@geoffcox/svelte-splitter": "^1.0.1",
     "@svelteuidev/composables": "^0.10.0",
     "@svelteuidev/core": "^0.10.0",
-    "@ton-community/sandbox": "^0.5.0",
+    "@ton-community/sandbox": "^0.6.0",
     "buffer": "^6.0.3",
     "marked": "^4.2.12",
+    "postcss-load-config": "^4.0.1",
     "shiki": "^0.14.1",
-    "ton": "^13.3.0",
-    "ton-core": "^0.47.1",
+    "ton": "^13.4.1",
+    "ton-core": "^0.48.0",
     "ton-crypto": "^3.2.0",
     "vite-plugin-node-polyfills": "^0.7.0"
   }

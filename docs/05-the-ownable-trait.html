@@ -32,21 +32,22 @@
 		/>
 		-->
     <meta http-equiv="content-security-policy" content="">
-		<link href="./_app/immutable/assets/_layout-e2caa7e1.css" rel="stylesheet">
-		<link href="./_app/immutable/assets/app-643df88b.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-a148bc72.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
-		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
-		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-2a8b55a4.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store-457686a0.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples-6813294a.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/app-69717a69.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/05-the-ownable-trait/_page.svelte-4d2d7a78.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-5faf5019.js">
+		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/app.643df88b.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.af0a09a9.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.309e3253.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.bd5fee24.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.71816a30.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.3c4e3faa.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.6813294a.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/app.ecb9aaff.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-05-the-ownable-trait-page.svelte.8fa01db6.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.47089f7b.js">
   </head>
   <body>
     <div style="display: contents">
@@ -59,7 +60,7 @@
 
 
 <div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="loops">Loops</h1>
-<p>Tact does not support traditional <code>for</code> loops, but its loop statements are equivalent and can easily implement the same things.</p>
+<p>Tact does not support traditional <code>for</code> loops, but its loop statements are equivalent and can easily implement the same things. Also note that Tact does not support <code>break</code> and <code>continue</code> statements in loops like some languages.</p>
 <p>The <code>repeat</code> loop statement input number must fit within an <code>int32</code>, otherwise an exception will be thrown.</p>
 <p>The condition of the <code>while</code> and <code>until</code> loop statements can be any boolean expression.</p>
 <p>Smart contracts consume gas for execution. The amount of gas is proportional to the number of iterations. The last example iterates too many times and reverts due to an out of gas exception.</p>
@@ -154,22 +155,30 @@ contract Counter with Deployable, Ownable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="ivg4ks">
-			import { start } from "./_app/immutable/start-a148bc72.js";
+			
+			<script>
+				{
+					__sveltekit_gx8q2i = {
+						env: {},
+						base: new URL(".", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
 
-			start({
-				assets: "",
-				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="ivg4ks"]').parentNode,
-				version: "1678587897621",
-				hydrate: {
-					node_ids: [0, 2, 27],
-					data: [null,null,null],
-					form: null,
-					error: null
+					const data = [null,null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.af0a09a9.js"),
+						import("./_app/immutable/entry/app.bd5fee24.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_gx8q2i.element, {
+							node_ids: [0, 2, 27],
+							data,
+							form: null,
+							error: null
+						});
+					});
 				}
-			});
-		</script>
-	</div>
+			</script>
+		</div>
   </body>
 </html>

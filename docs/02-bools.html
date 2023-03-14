@@ -32,21 +32,22 @@
 		/>
 		-->
     <meta http-equiv="content-security-policy" content="">
-		<link href="./_app/immutable/assets/_layout-e2caa7e1.css" rel="stylesheet">
-		<link href="./_app/immutable/assets/app-643df88b.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/start-a148bc72.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-1d4083c1.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-644a2fdc.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-2985fbf4.js">
-		<link rel="modulepreload" href="./_app/immutable/components/layout.svelte-4be16cb6.js">
-		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.ts-9cbb603b.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/_layout.svelte-2a8b55a4.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store-457686a0.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples-6813294a.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/app-69717a69.js">
-		<link rel="modulepreload" href="./_app/immutable/components/pages/(examples)/02-bools/_page.svelte-bae55fb1.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index-5faf5019.js">
+		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/app.643df88b.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.af0a09a9.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.309e3253.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.bd5fee24.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.71816a30.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.3c4e3faa.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.6813294a.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/app.ecb9aaff.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-02-bools-page.svelte.085d5b24.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.47089f7b.js">
   </head>
   <body>
     <div style="display: contents">
@@ -155,22 +156,30 @@ contract Bools with Deployable {
 </div>
 
 
-		<script type="module" data-sveltekit-hydrate="x9a3xw">
-			import { start } from "./_app/immutable/start-a148bc72.js";
+			
+			<script>
+				{
+					__sveltekit_gx8q2i = {
+						env: {},
+						base: new URL(".", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
 
-			start({
-				assets: "",
-				env: {},
-				target: document.querySelector('[data-sveltekit-hydrate="x9a3xw"]').parentNode,
-				version: "1678587897621",
-				hydrate: {
-					node_ids: [0, 2, 9],
-					data: [null,null,null],
-					form: null,
-					error: null
+					const data = [null,null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.af0a09a9.js"),
+						import("./_app/immutable/entry/app.bd5fee24.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_gx8q2i.element, {
+							node_ids: [0, 2, 9],
+							data,
+							form: null,
+							error: null
+						});
+					});
 				}
-			});
-		</script>
-	</div>
+			</script>
+		</div>
   </body>
 </html>

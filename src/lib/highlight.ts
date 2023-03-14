@@ -1,7 +1,7 @@
 import { getHighlighter, setCDN } from "shiki";
 import grammar from "./grammar-tact.json";
 
-setCDN("/shiki/");
+setCDN("/shiki");
 
 export async function highlightTactCode(code: string) {
   const highlighter = await getHighlighter({
