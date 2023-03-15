@@ -1,12 +1,10 @@
 import { Address, Slice, Cell } from "ton-core";
 import examples from "../routes/(examples)/examples.json";
-import path from "path";
 
 export function getExample(page: string) {
-  const id = path.basename(path.dirname(page));
   let i;
   for (i = 0; i < examples.length; i++) {
-    if (examples[i].id == id) break;
+    if (page.includes(examples[i].id)) break;
   }
   return {
     self: examples[i],
