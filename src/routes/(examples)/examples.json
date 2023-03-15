@@ -102,5 +102,9 @@
   {
     "id": "05-the-resumable-trait",
     "name": "The Resumable Trait"
+  },
+  {
+    "id": "05-your-own-trait",
+    "name": "Writing Your Own Trait"
   }
 ]

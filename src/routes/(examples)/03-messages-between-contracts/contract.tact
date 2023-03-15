@@ -7,6 +7,7 @@ message CounterValue {
 ////////////////////////////////////////////////////////////////////////////
 // this is our famous Counter contract, we've seen it before
 // this contract is very annoying, it only allows to increment +1 at a time!
+
 contract Counter with Deployable {
 
     val: Int as uint32;
@@ -39,6 +40,7 @@ message Reach {
 ////////////////////////////////////////////////////////////////////////////
 // let's write a second helper contract to make our lives a little easier
 // it will keep incrementing the previous contract as many times as we need!
+
 contract BulkAdder with Deployable {
 
     target: Int as uint32;

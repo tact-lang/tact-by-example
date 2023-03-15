@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index,follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Tact by example</title>
+    <meta name="description" content="Learn smart contract programming by example using Tact language" />
+    <link rel="canonical" href="https://tact-by-example.org/" />
+    <meta property="og:title" content="tact by example" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Learn smart contract programming by example using Tact language" />
+    <meta property="og:url" content="https://tact-by-example.org/" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <!--
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/favicons/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicons/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicons/favicon-16x16.png"
+		/>
+		-->
+    <meta http-equiv="content-security-policy" content="">
+		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/app.643df88b.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.cabf9855.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.6267fdc4.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.dfe5d26a.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.4220906b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.512f938c.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.963926c2.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/app.ecb9aaff.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-05-your-own-trait-page.svelte.056273e5.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.ab579dfb.js">
+  </head>
+  <body>
+    <div style="display: contents">
+
+
+<div class="pageLoader"><div class="sk-folding-cube"><div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div></div></div>
+
+
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="the-stoppable-trait">The Stoppable Trait</h1>
+<p>Tact allows you to add common boilerplate behaviors to your contract by using traits.</p>
+<p>The Stoppable trait allows the contract to allow an <code>owner</code> role to stop the contract.</p>
+<p>Consider for example a protocol where users can deposit funds, like a staking service or a compounding vault. If somebody discovers a security issue, we may want to stop the contract from accepting funds from new users.</p>
+<p>Note that this trait doesn&#39;t allow to resume the contract after it has been stopped.</p>
+<p>This trait implicitly adds the Ownable trait. Note that the Ownable trait doesn&#39;t allow the owner to transfer ownership to a different owner. To allow changing ownership, also add the <code>OwnableTransferable</code> trait.</p>
+<h2 id="how-to-use-stoppable">How to use Stoppable</h2>
+<p>Define state variables named <code>owner: Address</code> and <code>stopped: Bool</code> and call <code>self.requireNotStopped()</code> on actions that should be stopped.</p>
+<!-- HTML_TAG_END -->
+      <div class="navMarkdown">
+        </div>
+      <a class="allExamples" href="all">All Examples</a></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter vertical svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+    </div>
+  <div class="secondary svelte-9dft0e">
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
+import "@stdlib/ownable";
+
+/////////////////////////////////////////////////////////////////////////////
+// this trait adds basic analytics to any contract to track how popular it is
+
+trait Trackable with Ownable {          // your new trait may rely on other traits
+
+    // Storage
+
+    owner: Address;
+    numMessagesReceived: Int;           // your new trait may add state variables but should not specify their size
+
+    // Receivers
+
+    receive("reset stats") {            // your new trait may handle specific messages
+        self.requireOwner();
+        self.numMessagesReceived = 0;
+        reply("reset done".asComment());
+    }
+
+    // Getters
+
+    get fun stats(): Int {              // your new trait may add getters
+        return self.numMessagesReceived;
+    }
+
+    // Methods
+
+    fun receivedNewMessage() {          // your new trait may define new contract methods
+        if (self.filterMessage()) {
+            self.numMessagesReceived = self.numMessagesReceived + 1;
+        }
+    }
+
+    virtual fun filterMessage(): Bool { // virtual functions can be overridden by users of this trait
+        // the default filtering behavior is to ignore messages sent by the owner
+        if (sender() == self.owner) {
+            return false;
+        }
+        return true;
+    }
+}
+
+/////////////////////////////////////////////////////////////////////////////
+// this Counter contract is going to use our new trait to add analytics to it
+
+contract Counter with Deployable, Trackable {
+
+    owner: Address;                     // The Trackable trait requires this exact state variable
+    numMessagesReceived: Int as uint64; // The Trackable trait requires this exact state variable
+    val: Int as uint32;
+ 
+    init() {
+        self.owner = sender(); // we can initialize owner to any value we want, the deployer in this case
+        self.numMessagesReceived = 0;
+        self.val = 0;
+    }
+ 
+    receive("increment") {
+        self.receivedNewMessage(); // here we are using our trait
+        self.val = self.val + 1;
+    }
+ 
+    get fun value(): Int {
+        return self.val;
+    }
+
+    // the trait allows us to override the default filtering behavior
+    overrides fun filterMessage(): Bool {
+        // our contract's custom filtering behavior is to remove all filters and count all messages
+        return true;
+    }
+
+    // receive("reset stats") is added automatically to allow owner to reset the stats
+    // get fun stats(): Int is added automatically to query the stats
+    // get fun owner(): Address is added automatically to query who the owner is
+}</pre></div></div></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter horizontal svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+        </div>
+  <div class="secondary svelte-9dft0e"><div slot="secondary" class="panelBottom" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column;"><div style="display: flex; gap: 10px; flex-wrap: wrap; overflow: hidden;">
+
+
+
+<button class="buttonAction svelteui-c-TfGwS svelteui-c-TfGwS-hQzioB-variation-filled svelteui-c-TfGwS-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Deploy
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+            
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get stopped
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get value
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+            
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send increment
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send Stop
+		<div class="ripple svelte-1dillie"></div>
+		</button></div>
+          <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
+</div>
+    </div>
+</div>
+
+
+			
+			<script>
+				{
+					__sveltekit_696658 = {
+						env: {},
+						base: new URL(".", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.cabf9855.js"),
+						import("./_app/immutable/entry/app.dfe5d26a.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_696658.element, {
+							node_ids: [0, 2, 31],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>

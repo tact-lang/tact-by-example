@@ -207,6 +207,14 @@
       "options": {
         "debug": true
       }
+    },
+    {
+      "name": "05-your-own-trait",
+      "path": "./src/routes/(examples)/05-your-own-trait/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
     }
   ]
 }
