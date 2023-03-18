@@ -450,6 +450,15 @@ export class Counter implements Contract {
   readonly address: Address;
   readonly init?: { code: Cell; data: Cell };
   readonly abi: ContractABI = {
+    types: [
+      { name: "StateInit", header: null, fields: [] },
+      { name: "Context", header: null, fields: [] },
+      { name: "SendParameters", header: null, fields: [] },
+      { name: "Deploy", header: 2490013878, fields: [] },
+      { name: "DeployOk", header: 2952335191, fields: [] },
+      { name: "CounterValue", header: 1315244728, fields: [] },
+      { name: "Reach", header: 2577471031, fields: [] },
+    ],
     errors: Counter_errors,
   };
 

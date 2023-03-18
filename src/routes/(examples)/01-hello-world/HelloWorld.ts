@@ -269,6 +269,11 @@ export class HelloWorld implements Contract {
   readonly address: Address;
   readonly init?: { code: Cell; data: Cell };
   readonly abi: ContractABI = {
+    types: [
+      { name: "StateInit", header: null, fields: [] },
+      { name: "Context", header: null, fields: [] },
+      { name: "SendParameters", header: null, fields: [] },
+    ],
     errors: HelloWorld_errors,
   };
 

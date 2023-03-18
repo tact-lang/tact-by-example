@@ -499,6 +499,16 @@ export class Receivers implements Contract {
   readonly address: Address;
   readonly init?: { code: Cell; data: Cell };
   readonly abi: ContractABI = {
+    types: [
+      { name: "StateInit", header: null, fields: [] },
+      { name: "Context", header: null, fields: [] },
+      { name: "SendParameters", header: null, fields: [] },
+      { name: "Deploy", header: 2490013878, fields: [] },
+      { name: "DeployOk", header: 2952335191, fields: [] },
+      { name: "Add", header: 2278832834, fields: [] },
+      { name: "Subtract", header: 1552846265, fields: [] },
+      { name: "MultiMath", header: 2221071617, fields: [] },
+    ],
     errors: Receivers_errors,
   };
 

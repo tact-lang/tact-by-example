@@ -34,19 +34,19 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.643df88b.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.c3ae1fad.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.c2425ebb.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.346b7e6d.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.801b6ae2.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.3d924114.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.84914b12.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.f6245b44.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.e930d547.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/store.cab86f52.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/examples.963926c2.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.ecb9aaff.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-receive-coins-page.svelte.6f09f994.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-receive-coins-page.svelte.05ae51a8.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.f166c76f.js">
   </head>
   <body>
@@ -67,11 +67,12 @@
 <li><p><code>BulkAdder</code> - This contract will tell <code>Counter</code> to increment multiple times.</p>
 </li>
 </ul>
-<p> Press the <span class="mdButton blue">Deploy</span> button to deploy both. Then, to make the counter reach 5, send BulkAdder the <code>Reach</code> message by pressing the <span class="mdButton grape">Send Reach{5}</span> button.</p>
-<p> Notice how many messages are sent back and forth between the two contracts as a result. Each of these messages is processed as a <em>separate</em> transaction! Also notice that BulkAdder can&#39;t call a <em>getter</em> on Counter, it must send the <code>query</code> message instead.</p>
+<p>Press the <span class="mdButton blue">Deploy</span> button to deploy both. Then, to make the counter reach 5, send BulkAdder the <code>Reach</code> message by pressing the <span class="mdButton grape">Send Reach{5}</span> button.</p>
+<p>Notice how many messages are sent back and forth between the two contracts as a result. Each of these messages is processed as a <em>separate</em> transaction! Also notice that BulkAdder can&#39;t call a <em>getter</em> on Counter, it must send the <code>query</code> message instead.</p>
 <h2 id="whos-paying-for-gas">Who&#39;s paying for gas</h2>
-<p> The default behavior is that the original sender will pay for the entire cascade of messages that they triggered. This is funded from the original TON coin value sent on the first <code>Reach</code> message.</p>
+<p>The default behavior is that the original sender will pay for the entire cascade of messages that they triggered. This is funded from the original TON coin value sent on the first <code>Reach</code> message.</p>
 <p>Under the hood, this works by each message handler sending the remaining excess TON coin value it received on the next message it sends out.</p>
+<p><strong>Challenge:</strong> modify the code to refund the original sender any unused excess gas.</p>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -155,7 +156,7 @@ contract ReceiveCoins with Deployable {
 			
 			<script>
 				{
-					__sveltekit_7f6s1i = {
+					__sveltekit_1pqugmw = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -164,10 +165,10 @@ contract ReceiveCoins with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.c3ae1fad.js"),
-						import("./_app/immutable/entry/app.3d924114.js")
+						import("./_app/immutable/entry/start.c2425ebb.js"),
+						import("./_app/immutable/entry/app.84914b12.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_7f6s1i.element, {
+						kit.start(app, __sveltekit_1pqugmw.element, {
 							node_ids: [0, 2, 18],
 							data,
 							form: null,
