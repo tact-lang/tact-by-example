@@ -28,7 +28,7 @@
         [contract2.address.toString()]: "BulkAdder",
       };
       return [
-        contract,
+        [contract, contract2],
         addresses,
         [
           await contract.send(deployer.getSender(), { value: toNano(1) }, { $$type: "Deploy", queryId: 0n }),

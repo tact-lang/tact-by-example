@@ -24,7 +24,7 @@
         [deployer.address.toString()]: "deployer",
         [contract.address.toString()]: "contract",
       };
-      return [contract, addresses, [await contract.send(deployer.getSender(), { value: toNano(1) }, { $$type: "Deploy", queryId: 0n })]];
+      return [[contract], addresses, [await contract.send(deployer.getSender(), { value: toNano(1) }, { $$type: "Deploy", queryId: 0n })]];
     },
     messages: {
       increment: async () => {

@@ -23,7 +23,7 @@
         [deployer.address.toString()]: "deployer",
         [contract.address.toString()]: "contract",
       };
-      return [contract, addresses, [await contract.send(deployer.getSender(), { value: toNano(1) }, null)]];
+      return [[contract], addresses, [await contract.send(deployer.getSender(), { value: toNano(1) }, null)]];
     },
     messages: {
       increment: async () => {

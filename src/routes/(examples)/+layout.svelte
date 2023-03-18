@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { SendMessageResult } from "@ton-community/sandbox";
-  import { Address, fromNano, type Contract } from "ton-core";
+  import { Address, Cell, fromNano, type Contract } from "ton-core";
   import { Split, DefaultSplitter } from "@geoffcox/svelte-splitter";
   import { Button } from "@svelteuidev/core";
   import { Buffer } from "buffer";
@@ -14,6 +14,7 @@
   import "../../loader.css";
   import "../../app.css";
   import "../../shiki.css";
+  import { slide } from "svelte/transition";
 
   BigInt.prototype.toJSON = function () {
     return this.toString();
@@ -24,7 +25,7 @@
   let markdownHtml = "";
   let tactHtml = "";
   let terminalContent = "";
-  let contractInstance: Contract;
+  let contractInstances: Contract[];
   let addressesNames: { [address: string]: string } = {};
   let next: { name: string; id: string } | undefined, prev: { name: string; id: string } | undefined;
 
@@ -61,18 +62,21 @@
                   `Transaction executed: ${compute.success ? "success" : "error"}, ` +
                     `exit code ${compute.exitCode}, gas ${shorten(compute.gasFees, "coins")}`,
                 );
-                if (transaction.inMessage?.info.dest.equals(contractInstance.address)) {
-                  if (compute.exitCode == -14) compute.exitCode = 13;
-                  const message = contractInstance?.abi?.errors?.[compute.exitCode]?.message;
-                  if (message) terminalLog(`Error message: ${message}`);
+                for (const contractInstance of contractInstances) {
+                  if (transaction.inMessage?.info.dest.equals(contractInstance.address)) {
+                    if (compute.exitCode == -14) compute.exitCode = 13;
+                    const message = contractInstance?.abi?.errors?.[compute.exitCode]?.message;
+                    if (message) terminalLog(`Error message: ${message}`);
+                  }
                 }
               }
             }
           }
           for (const event of transaction.events) {
             if (event.type == "message_sent") {
+              const name = messageName(event.body);
               terminalLog(
-                `Message sent: from ${shorten(event.from)}, to ${shorten(event.to)}, ` +
+                `Message sent: ${name}, from ${shorten(event.from)}, to ${shorten(event.to)}, ` +
                   `value ${shorten(event.value, "coins")}, ${event.bounced ? "" : "not "}bounced`,
               );
             }
@@ -80,6 +84,24 @@
         }
       }
     }
+  }
+
+  function messageName(body: Cell): string {
+    try {
+      const slice = body.beginParse();
+      let op = slice.loadInt(32);
+      if (op == 0) {
+        return `"${slice.loadStringTail()}"`;
+      }
+      if (op < 0) op += 4294967296;
+      for (const contractInstance of contractInstances) {
+        for (const type of contractInstance?.abi?.types ?? []) {
+          if (op == type.header) return type.name;
+        }
+      }
+      return `unknown (0x${op.toString(16)})`;
+    } catch (e) {}
+    return "empty";
   }
 
   function shorten(long: Address | bigint, format: "default" | "coins" = "default"): string {
@@ -108,11 +130,11 @@
     });
   }
 
-  async function runDeploy(deploy: () => Promise<[Contract, { [address: string]: string }, SendMessageResult[]]>) {
+  async function runDeploy(deploy: () => Promise<[Contract[], { [address: string]: string }, SendMessageResult[]]>) {
     try {
       terminalLog(`> Deploying contract:`);
-      const [contract, addresses, results] = await deploy();
-      contractInstance = contract;
+      const [contracts, addresses, results] = await deploy();
+      contractInstances = contracts;
       addressesNames = addresses;
       terminalLogMessages(results);
     } catch (e: any) {

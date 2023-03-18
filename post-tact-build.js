@@ -11,7 +11,22 @@ for (const file of files) {
     console.log(`   > WARNING: route (examples)/${example} not found in src`);
     continue;
   }
-  let content = fs.readFileSync(`./tact-output/${file}`).toString();
+  let content = editWrapper(file, fs.readFileSync(`./tact-output/${file}`).toString());
   fs.writeFileSync(`./src/routes/(examples)/${example}/${contract}.ts`, content);
   console.log(`   > Moved ${file}`);
+}
+
+function editWrapper(file, content) {
+  // add missing abi types into the wrapper (currently contains only errors)
+  const abiFile = file.split(".")[0] + ".abi";
+  const abi = JSON.parse(fs.readFileSync(`./tact-output/${abiFile}`).toString());
+  const smallAbi = { types: [] };
+  for (const type of abi.types) {
+    smallAbi.types.push({ name: type.name, header: type.header, fields: [] });
+  }
+  const abiTypes = JSON.stringify(smallAbi.types);
+  content = content.replace(`readonly abi: ContractABI = {`, `readonly abi: ContractABI = {\n        types: ${abiTypes},`);
+
+  // return content
+  return content;
 }
