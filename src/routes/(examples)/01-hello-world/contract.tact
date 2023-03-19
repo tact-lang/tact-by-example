@@ -5,6 +5,6 @@ contract HelloWorld {
     receive() {}
 
     get fun greeting(): String {
-        return "Hello World";
+        return "hello world";
     }
 }

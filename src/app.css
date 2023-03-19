@@ -156,6 +156,7 @@ input::-webkit-inner-spin-button {
 
 .allLinks {
   padding: 80px;
+  padding-bottom: 30px;
   text-align: center;
 }
 

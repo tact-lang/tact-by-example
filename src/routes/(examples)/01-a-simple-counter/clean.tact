@@ -13,7 +13,7 @@ contract Counter {
         self.val = self.val + 1;
     }
  
-    // read only getter for querying the counter value
+    // read-only getter for querying the counter value
     get fun value(): Int {
         return self.val;
     }

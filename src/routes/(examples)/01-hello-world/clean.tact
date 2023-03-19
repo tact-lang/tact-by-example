@@ -1,7 +1,7 @@
 contract HelloWorld {
 
     get fun greeting(): String {
-        return "Hello World";
+        return "hello world";
     }
 
 }
