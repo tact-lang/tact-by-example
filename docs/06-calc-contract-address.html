@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index,follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Tact by example</title>
+    <meta name="description" content="Learn smart contract programming by example using Tact language" />
+    <link rel="canonical" href="https://tact-by-example.org/" />
+    <meta property="og:title" content="tact by example" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Learn smart contract programming by example using Tact language" />
+    <meta property="og:url" content="https://tact-by-example.org/" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <!--
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/favicons/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicons/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicons/favicon-16x16.png"
+		/>
+		-->
+    <meta http-equiv="content-security-policy" content="">
+		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.57fba29c.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.8eba159b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.40bbec70.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.ff919840.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.7ab6b232.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.698e07fa.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-06-calc-contract-address-page.svelte.3ae69332.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.639aa391.js">
+  </head>
+  <body>
+    <div style="display: contents">
+
+
+<div class="pageLoader"><div class="sk-folding-cube"><div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div></div></div>
+
+
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="authenticating-children">Authenticating Children</h1>
+<p>If you look closely at the previous example you will notice that it is somewhat dangerous.</p>
+<p>What happens if some user tries to send a <code>HiFromChild</code> message and impersonate a child? What happens if some user tries to send a <code>HiFromParent</code> message and impersonate the parent?</p>
+<p>To add authentication that messages came from where we think they came from, we simply need to add <code>require()</code> in the beginning of every protected receiver and make sure that the sender is who we expect it is.</p>
+<p>It is best practice to add this authentication to every message coming from a parent and every message coming from a child.</p>
+<h2 id="lets-try-to-hack-this-contract">Let&#39;s try to hack this contract</h2>
+<p>Try pressing the <span class="mdButton grape">Send HiFromChild{1}</span> button. This will send the parent an impersonated <code>HiFromChild</code> message, but from some user, not from a real child.</p>
+<p>Since this code is now protected, it will notice that the sender is incorrect and reject the message with an access denied error.</p>
+<!-- HTML_TAG_END -->
+      <div class="navMarkdown">
+        </div>
+      <a class="allExamples" href="all">All Examples</a></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter vertical svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+    </div>
+  <div class="secondary svelte-9dft0e">
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
+
+// first contract
+contract Todo1 with Deployable {
+
+    seqno: Int as uint64 = 1; // the code specifies the index (sequence number)
+
+    init() {}
+
+    get fun myAddress(): Address {
+        return myAddress();
+    }
+
+    get fun otherAddress(): Address {
+        let init: StateInit = initOf Todo2();
+        return contractAddress(init);
+    }
+}
+
+// second contract
+contract Todo2 with Deployable {
+
+    seqno: Int as uint64 = 2; // the code specifies the index (sequence number)
+
+    init() {}
+
+    get fun myAddress(): Address {
+        return myAddress();
+    }
+
+    get fun otherAddress(): Address {
+        let init: StateInit = initOf Todo1();
+        return contractAddress(init);
+    }
+}</pre></div></div></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter horizontal svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+        </div>
+  <div class="secondary svelte-9dft0e"><div slot="secondary" class="panelBottom" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column;"><div style="display: flex; gap: 10px; flex-wrap: wrap; overflow: hidden;">
+
+
+
+<button class="buttonAction svelteui-c-TfGwS svelteui-c-TfGwS-hQzioB-variation-filled svelteui-c-TfGwS-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Deploy
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+            
+
+            
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send greet 3
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send HiFromChild{1}
+		<div class="ripple svelte-1dillie"></div>
+		</button></div>
+          <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
+</div>
+    </div>
+</div>
+
+
+			
+			<script>
+				{
+					__sveltekit_on1xqs = {
+						env: {},
+						base: new URL(".", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.57fba29c.js"),
+						import("./_app/immutable/entry/app.40bbec70.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_on1xqs.element, {
+							node_ids: [0, 2, 33],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>

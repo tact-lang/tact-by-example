@@ -33,21 +33,21 @@
 		-->
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
-		<link href="./_app/immutable/assets/app.643df88b.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.c2425ebb.js">
+		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.57fba29c.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.801b6ae2.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.8eba159b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.84914b12.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.40bbec70.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.e930d547.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.cab86f52.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.963926c2.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/app.ecb9aaff.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-01-the-deployable-trait-page.svelte.9a028988.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.f166c76f.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.ff919840.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.7ab6b232.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.698e07fa.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-01-the-deployable-trait-page.svelte.00d09636.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.639aa391.js">
   </head>
   <body>
     <div style="display: contents">
@@ -61,9 +61,11 @@
 
 <div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="hello-world">Hello World</h1>
 <p>This is probably the simplest possible Tact program. It will provide callers with the classic output &quot;hello world&quot;.</p>
-<p>Tact lets you write smart contracts. This code defines a single contract named <code>HelloWorld</code>. Smart contracts must be deployed on-chain to be usable, try to deploy this contract by pressing the <span class="mdButton blue">Deploy</span> button.</p>
+<p>Tact lets you write smart contracts. This code defines a single contract named <code>HelloWorld</code>. Smart contracts must be deployed to the blockchain network to be usable, try to deploy this contract by pressing the <span class="mdButton blue">Deploy</span> button.</p>
+<p>Contract deployments usually cost gas. This learning tool deploys to an <a href="https://github.com/tact-lang/tact-emulator">emulator</a> of TON blockchain, so gas is emulated TON coin (which is free).</p>
 <h2 id="a-simple-interaction">A simple interaction</h2>
-<p>Contracts can have <em>getters</em> like <code>greeting()</code>. These are special functions that allow users to query information from the contract. Try to call the getter by pressing the <span class="mdButton teal">Get greeting</span> button.</p>
+<p>Contracts can have <em>getters</em> like <code>greeting()</code>. Getters are special external interface functions that allow users to query information from the contract. Try to call the getter by pressing the <span class="mdButton teal">Get greeting</span> button. Calling getters is free and does not cost gas.</p>
+<p>Getter declarations in Tact always start with the <code>get</code> prefix. The getter must also specify its return type - <code>String</code> in this case. If we were to omit the <code>get</code> from the function declaration, external users would no longer be able call this function and it would essentially become a private method.</p>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -125,7 +127,7 @@ contract Counter with Deployable {
 			
 			<script>
 				{
-					__sveltekit_1pqugmw = {
+					__sveltekit_on1xqs = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -134,10 +136,10 @@ contract Counter with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.c2425ebb.js"),
-						import("./_app/immutable/entry/app.84914b12.js")
+						import("./_app/immutable/entry/start.57fba29c.js"),
+						import("./_app/immutable/entry/app.40bbec70.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_1pqugmw.element, {
+						kit.start(app, __sveltekit_on1xqs.element, {
 							node_ids: [0, 2, 7],
 							data,
 							form: null,
