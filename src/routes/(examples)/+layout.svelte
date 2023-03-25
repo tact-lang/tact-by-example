@@ -62,11 +62,49 @@
                   `Transaction executed: ${compute.success ? "success" : "error"}, ` +
                     `exit code ${compute.exitCode}, gas ${shorten(compute.gasFees, "coins")}`,
                 );
+                let foundError = false;
                 for (const contractInstance of contractInstances) {
                   if (transaction.inMessage?.info.dest.equals(contractInstance.address)) {
                     if (compute.exitCode == -14) compute.exitCode = 13;
                     const message = contractInstance?.abi?.errors?.[compute.exitCode]?.message;
-                    if (message) terminalLog(`Error message: ${message}`);
+                    if (message) {
+                      terminalLog(`Error message: ${message}`);
+                      foundError = true;
+                    }
+                  }
+                }
+                if (!foundError) {
+                  const knownErrors: { [code: number]: { message: string } } = {
+                    [-14]: { message: `Out of gas error` },
+                    2: { message: `Stack undeflow` },
+                    3: { message: `Stack overflow` },
+                    4: { message: `Integer overflow` },
+                    5: { message: `Integer out of expected range` },
+                    6: { message: `Invalid opcode` },
+                    7: { message: `Type check error` },
+                    8: { message: `Cell overflow` },
+                    9: { message: `Cell underflow` },
+                    10: { message: `Dictionary error` },
+                    13: { message: `Out of gas error` },
+                    32: { message: `Method ID not found` },
+                    34: { message: `Action is invalid or not supported` },
+                    37: { message: `Not enough TON` },
+                    38: { message: `Not enough extra-currencies` },
+                    128: { message: `Null reference exception` },
+                    129: { message: `Invalid serialization prefix` },
+                    130: { message: `Invalid incoming message` },
+                    131: { message: `Constraints error` },
+                    132: { message: `Access denied` },
+                    133: { message: `Contract stopped` },
+                    134: { message: `Invalid argument` },
+                    135: { message: `Code of a contract was not found` },
+                    136: { message: `Invalid address` },
+                    137: { message: `Masterchain support is not enabled for this contract` },
+                  };
+                  const message = knownErrors[compute.exitCode]?.message;
+                  if (message) {
+                    terminalLog(`Error message: ${message}`);
+                    foundError = true;
                   }
                 }
               }
@@ -98,6 +136,9 @@
         for (const type of contractInstance?.abi?.types ?? []) {
           if (op == type.header) return type.name;
         }
+      }
+      if (op == 0xffffffff) {
+        return "error";
       }
       return `unknown (0x${op.toString(16)})`;
     } catch (e) {}

@@ -106,5 +106,37 @@
   {
     "id": "05-your-own-trait",
     "name": "Writing Your Own Trait"
+  },
+  {
+    "id": "06-calc-contract-address",
+    "name": "Calculate Contract Address"
+  },
+  {
+    "id": "06-multiple-contract-instances",
+    "name": "Multiple Contract Instances"
+  },
+  {
+    "id": "06-contract-deploy-another",
+    "name": "A Contract Deploying Another"
+  },
+  {
+    "id": "06-parent-child",
+    "name": "Parent-Child Relationship"
+  },
+  {
+    "id": "06-communicating-children",
+    "name": "Communicating with Children"
+  },
+  {
+    "id": "06-authenticating-children",
+    "name": "Authenticating Children"
+  },
+  {
+    "id": "06-unbounded-arrays",
+    "name": "Unbounded Arrays - Todo List"
+  },
+  {
+    "id": "06-unbounded-maps",
+    "name": "Unbounded Maps - Simplified Token"
   }
 ]

@@ -215,6 +215,70 @@
       "options": {
         "debug": true
       }
+    },
+    {
+      "name": "06-calc-contract-address",
+      "path": "./src/routes/(examples)/06-calc-contract-address/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "06-multiple-contract-instances",
+      "path": "./src/routes/(examples)/06-multiple-contract-instances/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "06-contract-deploy-another",
+      "path": "./src/routes/(examples)/06-contract-deploy-another/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "06-parent-child",
+      "path": "./src/routes/(examples)/06-parent-child/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "06-communicating-children",
+      "path": "./src/routes/(examples)/06-communicating-children/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "06-authenticating-children",
+      "path": "./src/routes/(examples)/06-authenticating-children/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "06-unbounded-arrays",
+      "path": "./src/routes/(examples)/06-unbounded-arrays/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "06-unbounded-maps",
+      "path": "./src/routes/(examples)/06-unbounded-maps/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
     }
   ]
 }

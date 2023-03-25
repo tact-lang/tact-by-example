@@ -14,5 +14,6 @@
 {/if}
 
 <div class="panelMarkdown allExamples">
-  Tact-by-Example is open-sourced on <a href="https://github.com/tact-lang/tact-by-example">GitHub</a> and was created by <a href="https://t.me/talkol">@talkol</a>
+  Tact-by-Example is open-sourced on <a href="https://github.com/tact-lang/tact-by-example">GitHub</a> and was created by
+  <a href="https://t.me/talkol">@talkol</a>
 </div>
