@@ -32,17 +32,11 @@
       decrement: async () => {
         return [await contract.send(sender, { value: toNano(1) }, "decrement")];
       },
-      "Add{3}": async () => {
-        return [await contract.send(sender, { value: toNano(1) }, { $$type: "Add", amount: 3n })];
+      "increment by 2": async () => {
+        return [await contract.send(sender, { value: toNano(1) }, "increment by 2")];
       },
-      "Subtract{2}": async () => {
-        return [await contract.send(sender, { value: toNano(1) }, { $$type: "Subtract", amount: 2n })];
-      },
-      "MultiMath{1,0,2}": async () => {
-        return [await contract.send(sender, { value: toNano(1) }, { $$type: "MultiMath", add: 1n, subtract: 0n, multiply: 2n })];
-      },
-      "MultiMath{0,3,3}": async () => {
-        return [await contract.send(sender, { value: toNano(1) }, { $$type: "MultiMath", add: 0n, subtract: 3n, multiply: 3n })];
+      "increment by 3": async () => {
+        return [await contract.send(sender, { value: toNano(1) }, "increment by 3")];
       },
     },
     getters: {

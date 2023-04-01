@@ -1,13 +1,16 @@
 import "@stdlib/deploy";
 
+// this message will cause our contract to add an amount to the counter
 message Add {
     amount: Int as uint32;
 }
 
+// this message will cause our contract to subtract an amount from the counter
 message Subtract {
     amount: Int as uint32;
 }
 
+// this message will cause our contract to do a complex math operation on the counter
 message MultiMath {
     add: Int as uint32;
     subtract: Int as uint32;
@@ -21,32 +24,32 @@ contract Receivers with Deployable {
     init() {
         self.val = 0;
     }
- 
-    // a textual string message, using the comment field of a transfer (great for Ledger)
-    receive("increment") {
-        self.val = self.val + 1;
-    }
 
-    // a different textual string message, you can have as many as you want
-    receive("decrement") {
-        self.val = self.val - 1;
-    }
-
-    // binary message that can carry input arguments
+    // handler for the "Add" message - this is a binary message that has an input argument (amount)
     receive(msg: Add) {
         self.val = self.val + msg.amount;
     }
 
-    // a different binary message, although its format is identical
+    // handler for the "Subtract" message - this is a different binary message although its format is identical
     receive(msg: Subtract) {
         self.val = self.val - msg.amount;
     }
 
-    // binary messages can hold multiple arguments
+    // handler for the "MultiMath" message - this is a binary message that holds multiple input arguments
     receive(msg: MultiMath) {
         self.val = self.val + msg.add;
         self.val = self.val - msg.subtract;
         self.val = self.val * msg.multiply;
+    }
+
+    // handler for "increment" textual message - this is a textual string message, these cannot carry input arguments
+    receive("increment") {
+        self.val = self.val + 1;
+    }
+
+    // handler for "decrement" textual message - this is a different textual string message, you can have as many as you want
+    receive("decrement") {
+        self.val = self.val - 1;
     }
  
     get fun value(): Int {

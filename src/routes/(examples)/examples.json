@@ -48,6 +48,10 @@
     "name": "Receivers and Messages"
   },
   {
+    "id": "03-textual-messages",
+    "name": "Textual Messages"
+  },
+  {
     "id": "03-structs",
     "name": "Structs"
   },

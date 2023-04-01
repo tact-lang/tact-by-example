@@ -8,8 +8,8 @@ Sending a message to a contract costs gas and is processed in the course of a tr
 
 ## Receivers
 
-Contract methods named `receive()` are the handlers that process each incoming message type. Tact will automatically route the correct message to the correct receiver listening for it.
+When designing your contract, make a list of every operation that your contract supports, then, define a message for each operation, and finally, implement a handler for each message containing the logic of what to do when it arrives.
 
-## Hardware wallets and blind signing
+Contract methods named `receive()` are the handlers that process each incoming message type. Tact will automatically route every incoming message to the correct receiver listening for it according to its type.
 
-When working with dangerous contracts that handle a lot of money, users are encouraged to use hardware wallets like [Ledger](https://www.ledger.com/). Hardware wallets cannot decode binary messages to confirm to the user what they're actually signing. Tact supports textual messages for this reason, since they can easily be confirmed with users, eliminating phishing risks.
+Messages are defined using the `message` keyword. They can carry input arguments. Notice that for integers, you must define the encoding size, just like in state variables. When somebody sends the message, they serialize it over the wire.

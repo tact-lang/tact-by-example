@@ -287,148 +287,6 @@ function dictValueParserDeployOk(): DictionaryValue<DeployOk> {
   };
 }
 
-export type Add = {
-  $$type: "Add";
-  amount: bigint;
-};
-
-export function storeAdd(src: Add) {
-  return (builder: Builder) => {
-    let b_0 = builder;
-    b_0.storeUint(2278832834, 32);
-    b_0.storeUint(src.amount, 32);
-  };
-}
-
-export function loadAdd(slice: Slice) {
-  let sc_0 = slice;
-  if (sc_0.loadUint(32) !== 2278832834) {
-    throw Error("Invalid prefix");
-  }
-  let _amount = sc_0.loadUintBig(32);
-  return { $$type: "Add" as const, amount: _amount };
-}
-
-function loadTupleAdd(source: TupleReader) {
-  let _amount = source.readBigNumber();
-  return { $$type: "Add" as const, amount: _amount };
-}
-
-function storeTupleAdd(source: Add) {
-  let builder = new TupleBuilder();
-  builder.writeNumber(source.amount);
-  return builder.build();
-}
-
-function dictValueParserAdd(): DictionaryValue<Add> {
-  return {
-    serialize: (src, buidler) => {
-      buidler.storeRef(beginCell().store(storeAdd(src)).endCell());
-    },
-    parse: (src) => {
-      return loadAdd(src.loadRef().beginParse());
-    },
-  };
-}
-
-export type Subtract = {
-  $$type: "Subtract";
-  amount: bigint;
-};
-
-export function storeSubtract(src: Subtract) {
-  return (builder: Builder) => {
-    let b_0 = builder;
-    b_0.storeUint(1552846265, 32);
-    b_0.storeUint(src.amount, 32);
-  };
-}
-
-export function loadSubtract(slice: Slice) {
-  let sc_0 = slice;
-  if (sc_0.loadUint(32) !== 1552846265) {
-    throw Error("Invalid prefix");
-  }
-  let _amount = sc_0.loadUintBig(32);
-  return { $$type: "Subtract" as const, amount: _amount };
-}
-
-function loadTupleSubtract(source: TupleReader) {
-  let _amount = source.readBigNumber();
-  return { $$type: "Subtract" as const, amount: _amount };
-}
-
-function storeTupleSubtract(source: Subtract) {
-  let builder = new TupleBuilder();
-  builder.writeNumber(source.amount);
-  return builder.build();
-}
-
-function dictValueParserSubtract(): DictionaryValue<Subtract> {
-  return {
-    serialize: (src, buidler) => {
-      buidler.storeRef(beginCell().store(storeSubtract(src)).endCell());
-    },
-    parse: (src) => {
-      return loadSubtract(src.loadRef().beginParse());
-    },
-  };
-}
-
-export type MultiMath = {
-  $$type: "MultiMath";
-  add: bigint;
-  subtract: bigint;
-  multiply: bigint;
-};
-
-export function storeMultiMath(src: MultiMath) {
-  return (builder: Builder) => {
-    let b_0 = builder;
-    b_0.storeUint(2221071617, 32);
-    b_0.storeUint(src.add, 32);
-    b_0.storeUint(src.subtract, 32);
-    b_0.storeUint(src.multiply, 32);
-  };
-}
-
-export function loadMultiMath(slice: Slice) {
-  let sc_0 = slice;
-  if (sc_0.loadUint(32) !== 2221071617) {
-    throw Error("Invalid prefix");
-  }
-  let _add = sc_0.loadUintBig(32);
-  let _subtract = sc_0.loadUintBig(32);
-  let _multiply = sc_0.loadUintBig(32);
-  return { $$type: "MultiMath" as const, add: _add, subtract: _subtract, multiply: _multiply };
-}
-
-function loadTupleMultiMath(source: TupleReader) {
-  let _add = source.readBigNumber();
-  let _subtract = source.readBigNumber();
-  let _multiply = source.readBigNumber();
-  return { $$type: "MultiMath" as const, add: _add, subtract: _subtract, multiply: _multiply };
-}
-
-function storeTupleMultiMath(source: MultiMath) {
-  let builder = new TupleBuilder();
-  builder.writeNumber(source.add);
-  builder.writeNumber(source.subtract);
-  builder.writeNumber(source.multiply);
-  return builder.build();
-}
-
-function dictValueParserMultiMath(): DictionaryValue<MultiMath> {
-  return {
-    serialize: (src, buidler) => {
-      buidler.storeRef(beginCell().store(storeMultiMath(src)).endCell());
-    },
-    parse: (src) => {
-      return loadMultiMath(src.loadRef().beginParse());
-    },
-  };
-}
-
 type Receivers_init_args = {
   $$type: "Receivers_init_args";
 };
@@ -441,10 +299,10 @@ function initReceivers_init_args(src: Receivers_init_args) {
 
 async function Receivers_init() {
   const __code = Cell.fromBase64(
-    "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",
+    "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",
   );
   const __system = Cell.fromBase64(
-    "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",
+    "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",
   );
   let builder = beginCell();
   builder.storeRef(__system);
@@ -505,9 +363,6 @@ export class Receivers implements Contract {
       { name: "SendParameters", header: null, fields: [] },
       { name: "Deploy", header: 2490013878, fields: [] },
       { name: "DeployOk", header: 2952335191, fields: [] },
-      { name: "Add", header: 2278832834, fields: [] },
-      { name: "Subtract", header: 1552846265, fields: [] },
-      { name: "MultiMath", header: 2221071617, fields: [] },
     ],
     errors: Receivers_errors,
   };
@@ -521,22 +376,19 @@ export class Receivers implements Contract {
     provider: ContractProvider,
     via: Sender,
     args: { value: bigint; bounce?: boolean | null | undefined },
-    message: Add | Subtract | MultiMath | "increment" | "decrement" | Deploy,
+    message: "increment" | "decrement" | "increment by 2" | string | Deploy,
   ) {
     let body: Cell | null = null;
-    if (message && typeof message === "object" && !(message instanceof Slice) && message.$$type === "Add") {
-      body = beginCell().store(storeAdd(message)).endCell();
-    }
-    if (message && typeof message === "object" && !(message instanceof Slice) && message.$$type === "Subtract") {
-      body = beginCell().store(storeSubtract(message)).endCell();
-    }
-    if (message && typeof message === "object" && !(message instanceof Slice) && message.$$type === "MultiMath") {
-      body = beginCell().store(storeMultiMath(message)).endCell();
-    }
     if (message === "increment") {
       body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
     }
     if (message === "decrement") {
+      body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
+    }
+    if (message === "increment by 2") {
+      body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
+    }
+    if (typeof message === "string") {
       body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
     }
     if (message && typeof message === "object" && !(message instanceof Slice) && message.$$type === "Deploy") {
