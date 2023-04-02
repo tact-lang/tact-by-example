@@ -7,3 +7,5 @@ Constant initializations must be relatively simple and only rely on values known
 You can read constants both in *receivers* and in *getters*.
 
 Unlike contract variables, constants don't consume space in persistent state. Their values are stored directly in the code cell.
+
+There isn't much difference between constants defined outside of a contract and inside the contract. Those defined outside can be used by other contracts in your project.

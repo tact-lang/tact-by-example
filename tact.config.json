@@ -185,6 +185,14 @@
       }
     },
     {
+      "name": "04-decimal-point",
+      "path": "./src/routes/(examples)/04-decimal-point/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
       "name": "05-the-ownable-trait",
       "path": "./src/routes/(examples)/05-the-ownable-trait/contract.tact",
       "output": "./tact-output",

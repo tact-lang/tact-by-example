@@ -20,8 +20,8 @@ contract Integers with Deployable {
     i14: Int as int8 = 0;       // range -128 to 127 (takes 8 bit = 1 byte)
 
     init() {
-        self.i2 = 0x83dfd552e63729b472fcbcc8c45ebcc6691702558b68ec7527e1ba403a0f31a8;
-        self.i4 = 1507998500293440234999;
+        self.i2 = 0x83dfd552e63729b472fcbcc8c45ebcc6691702558b68ec7527e1ba403a0f31a8; // we can define numbers in hex (base 16)
+        self.i4 = 1507998500293440234999; // we can define numbers in decimal (base 10)
         self.i5 = pow(10, 9);   // this is 10^9 = 1,000,000,000
         self.i6 = ton("1.23");  // easy to read coin balances (coins type is nano-tons, like cents, just with 9 decimals)
     }

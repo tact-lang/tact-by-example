@@ -15,10 +15,10 @@ contract Integers with Deployable {
         i = self.i1 * 3 + (self.i2 - i);    // basic math expressions
         dump(i);
 
-        i = self.i1 % 10;                   // modulo (remainder after division)
+        i = self.i1 % 10;                   // modulo (remainder after division), 3001 % 10 = 1
         dump(i);
         
-        i = self.i1 / 1000;                 // integer division (truncation toward zero)
+        i = self.i1 / 1000;                 // integer division (truncation toward zero), 3001 / 1000 = 3
         dump(i);
         
         i = self.i1 >> 3;                   // shift right (multiply by 2^n)

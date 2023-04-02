@@ -92,6 +92,10 @@
     "name": "Current Time"
   },
   {
+    "id": "04-decimal-point",
+    "name": "Decimal Point"
+  },
+  {
     "id": "05-the-ownable-trait",
     "name": "The Ownable Trait"
   },
