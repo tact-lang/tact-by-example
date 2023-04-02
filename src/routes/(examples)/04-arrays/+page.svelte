@@ -26,10 +26,10 @@
       return [[contract], addresses, [await contract.send(deployer.getSender(), { value: toNano(1) }, { $$type: "Deploy", queryId: 0n })]];
     },
     messages: {
-      "timer": async () => {
+      timer: async () => {
         return [await contract.send(sender, { value: toNano(1) }, "timer")];
       },
-      "dump": async () => {
+      dump: async () => {
         return [await contract.send(sender, { value: toNano(1) }, "dump")];
       },
     },

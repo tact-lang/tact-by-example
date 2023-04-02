@@ -32,7 +32,7 @@
       "delete keys": async () => {
         return [await contract.send(sender, { value: toNano(1) }, "delete keys")];
       },
-      "clear": async () => {
+      clear: async () => {
         return [await contract.send(sender, { value: toNano(1) }, "clear")];
       },
       "Replace{{-900:my}}": async () => {
