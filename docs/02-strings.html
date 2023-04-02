@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.57fba29c.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.3bc5e522.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.8eba159b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b8bd0a18.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.40bbec70.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.eb37a970.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.ff919840.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.7ab6b232.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.698e07fa.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.0b8adaff.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.380869d4.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.586a823f.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-02-strings-page.svelte.1a9912fe.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.639aa391.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-02-strings-page.svelte.ffcc6713.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.b268dd33.js">
   </head>
   <body>
     <div style="display: contents">
@@ -61,9 +61,12 @@
 
 <div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="integers">Integers</h1>
 <p>Tact supports a number of primitive data types that are tailored for smart contract use.</p>
-<p><code>Int</code> is the primary number type. Math in smart contracts is always done with integers and no floating points.</p>
-<p>The runtime type <code>Int</code> is <em>always</em> 257-bit signed, so all runtime calculations are done at 257-bit. This should be enough for everything as it&#39;s large enough to hold the number of atoms in the universe.</p>
+<p><code>Int</code> is the primary number type. Math in smart contracts is always done with integers and never with floating points since floats are <a href="https://learn.microsoft.com/en-us/cpp/build/why-floating-point-numbers-may-lose-precision">unpredictable</a>.</p>
+<p>The runtime type <code>Int</code> is <em>always</em> 257-bit signed, so all runtime calculations are done at 257-bit. This should be large enough for pretty much anything you need as it&#39;s large enough to hold the number of atoms in the universe.</p>
+<p>Persistent state variables can be initialized inline or inside <code>init()</code>. If you forget to initialize a state variable, the code will not compile.</p>
+<h2 id="state-costs">State costs</h2>
 <p>When encoding <code>Int</code> to persistent state, we will usually use smaller representations than 257-bit to reduce storage cost. The persistent state size is specified in every declaration of a state variable after the <code>as</code> keyword.</p>
+<p>Storing 1000 257-bit integers in state <a href="https://ton.org/docs/develop/smart-contracts/fees#how-to-calculate-fees">costs</a> about 0.184 TON per year. Storing 1000 32-bit integers only costs 0.023 TON per year by comparison.</p>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -162,7 +165,7 @@ contract Strings with Deployable {
 			
 			<script>
 				{
-					__sveltekit_on1xqs = {
+					__sveltekit_1vzu2s7 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -171,10 +174,10 @@ contract Strings with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.57fba29c.js"),
-						import("./_app/immutable/entry/app.40bbec70.js")
+						import("./_app/immutable/entry/start.3bc5e522.js"),
+						import("./_app/immutable/entry/app.eb37a970.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_on1xqs.element, {
+						kit.start(app, __sveltekit_1vzu2s7.element, {
 							node_ids: [0, 2, 13],
 							data,
 							form: null,

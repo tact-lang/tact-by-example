@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.57fba29c.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.3bc5e522.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.8eba159b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b8bd0a18.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.40bbec70.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.eb37a970.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.ff919840.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.7ab6b232.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.698e07fa.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.0b8adaff.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.380869d4.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.586a823f.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-02-integer-ops-page.svelte.c013dc0a.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.639aa391.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-02-integer-ops-page.svelte.48983104.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.b268dd33.js">
   </head>
   <body>
     <div style="display: contents">
@@ -64,6 +64,7 @@
 <p>Constant initializations must be relatively simple and only rely on values known during compilation. If you add two numbers for example, the compiler will calculate the result during build and put the result in your compiled code.</p>
 <p>You can read constants both in <em>receivers</em> and in <em>getters</em>.</p>
 <p>Unlike contract variables, constants don&#39;t consume space in persistent state. Their values are stored directly in the code cell.</p>
+<p>There isn&#39;t much difference between constants defined outside of a contract and inside the contract. Those defined outside can be used by other contracts in your project.</p>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -90,10 +91,10 @@ contract Integers with Deployable {
         i = self.i1 * 3 + (self.i2 - i);    // basic math expressions
         dump(i);
 
-        i = self.i1 % 10;                   // modulo (remainder after division)
+        i = self.i1 % 10;                   // modulo (remainder after division), 3001 % 10 = 1
         dump(i);
         
-        i = self.i1 / 1000;                 // integer division (truncation toward zero)
+        i = self.i1 / 1000;                 // integer division (truncation toward zero), 3001 / 1000 = 3
         dump(i);
         
         i = self.i1 >> 3;                   // shift right (multiply by 2^n)
@@ -149,7 +150,7 @@ contract Integers with Deployable {
 			
 			<script>
 				{
-					__sveltekit_on1xqs = {
+					__sveltekit_1vzu2s7 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -158,10 +159,10 @@ contract Integers with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.57fba29c.js"),
-						import("./_app/immutable/entry/app.40bbec70.js")
+						import("./_app/immutable/entry/start.3bc5e522.js"),
+						import("./_app/immutable/entry/app.eb37a970.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_on1xqs.element, {
+						kit.start(app, __sveltekit_1vzu2s7.element, {
 							node_ids: [0, 2, 11],
 							data,
 							form: null,

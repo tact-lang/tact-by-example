@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index,follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Tact by example</title>
+    <meta name="description" content="Learn smart contract programming by example using Tact language" />
+    <link rel="canonical" href="https://tact-by-example.org/" />
+    <meta property="og:title" content="tact by example" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Learn smart contract programming by example using Tact language" />
+    <meta property="og:url" content="https://tact-by-example.org/" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <!--
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/favicons/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicons/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicons/favicon-16x16.png"
+		/>
+		-->
+    <meta http-equiv="content-security-policy" content="">
+		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.3bc5e522.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b8bd0a18.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.eb37a970.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.0b8adaff.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.380869d4.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.586a823f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-04-decimal-point-page.svelte.003589e5.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.b268dd33.js">
+  </head>
+  <body>
+    <div style="display: contents">
+
+
+<div class="pageLoader"><div class="sk-folding-cube"><div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div></div></div>
+
+
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="current-time">Current Time</h1>
+<p>Many blockchains rely on the current <em>block number</em> to give a sense of progress to contracts. This approach isn&#39;t well suited for TON because contracts on TON can run on multiple workchains and those may have different block seqnos. </p>
+<p>In TON, the best practice is to rely on the current time instead, which is available by calling <code>now()</code>. Standard <a href="https://en.wikipedia.org/wiki/Unix_time">unix time</a> is returned, meaning the number of seconds since 1 January 1970. </p>
+<p>Transactions are not executed until validators add them to a new block. The current time will therefore be the timestamp of the new block when called in the context of a <em>receiver</em>.</p>
+<p>If you need to store the time in state or encode it in a message, use <code>Int as uint32</code>.</p>
+<p>If you need to compare two points in time simply subtract the earlier from the later. This will give you the number of seconds between the two. Divide by 60 to get the difference in minutes, by 60 * 60 to get the difference in hours and by 24 * 60 * 60 to get the difference in days.</p>
+<!-- HTML_TAG_END -->
+      <div class="navMarkdown">
+        </div>
+      <a class="allExamples" href="all">All Examples</a></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter vertical svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+    </div>
+  <div class="secondary svelte-9dft0e">
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
+
+message Deposit {
+    amount: Int as coins; // nano-tons
+}
+
+message Withdraw {
+    amount: Int as coins; // nano-tons
+}
+
+const SecondsPerYear: Int = 365 * 24 * 60 * 60;
+
+contract Interest with Deployable {
+ 
+    interestPercent: Int as int32;
+    depositTime: Int as uint32 = 0;  // seconds since the epoch
+    depositAmount: Int as coins = 0; // nano-tons
+    totalEarned: Int as coins = 0;   // nano-tons
+
+    init() {
+        self.interestPercent = 3250; // 3.25% yearly interest rate in percent-mille
+    }
+
+    receive(msg: Deposit) {
+        require(self.depositAmount == 0, "No multiple deposits");
+        self.depositTime = now();
+        self.depositAmount = msg.amount;
+    }
+
+    receive(msg: Withdraw) {
+        require(msg.amount >= self.depositAmount, "Cannot withdraw more than deposit");
+        self.depositAmount = self.depositAmount - msg.amount;
+        let durationSeconds: Int = now() - self.depositTime;
+        let earned: Int = msg.amount * durationSeconds * self.interestPercent / SecondsPerYear / 100000;
+        dump(earned);
+        self.totalEarned = self.totalEarned + earned;
+    }
+
+    get fun total(): Int {
+        return self.totalEarned; // in nano-tons
+    }
+}</pre></div></div></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter horizontal svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+        </div>
+  <div class="secondary svelte-9dft0e"><div slot="secondary" class="panelBottom" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column;"><div style="display: flex; gap: 10px; flex-wrap: wrap; overflow: hidden;">
+
+
+
+<button class="buttonAction svelteui-c-TfGwS svelteui-c-TfGwS-hQzioB-variation-filled svelteui-c-TfGwS-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Deploy
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+            
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get unixTime
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get stringTime
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+            
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send wait 10s
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send wait 10d
+		<div class="ripple svelte-1dillie"></div>
+		</button></div>
+          <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
+</div>
+    </div>
+</div>
+
+
+			
+			<script>
+				{
+					__sveltekit_1vzu2s7 = {
+						env: {},
+						base: new URL(".", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.3bc5e522.js"),
+						import("./_app/immutable/entry/app.eb37a970.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_1vzu2s7.element, {
+							node_ids: [0, 2, 25],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>

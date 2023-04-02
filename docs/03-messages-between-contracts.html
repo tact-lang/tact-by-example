@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.57fba29c.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.3bc5e522.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.8eba159b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b8bd0a18.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.40bbec70.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.eb37a970.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.ff919840.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.7ab6b232.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.698e07fa.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.0b8adaff.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.380869d4.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.586a823f.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-messages-between-contracts-page.svelte.6f03582d.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.639aa391.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-messages-between-contracts-page.svelte.daa0966a.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.b268dd33.js">
   </head>
   <body>
     <div style="display: contents">
@@ -61,9 +61,10 @@
 
 <div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="getters">Getters</h1>
 <p>Getters are special contract functions that allow users to query information from the contract.</p>
-<p>Contract methods starting with the prefix <code>get fun</code> are all getters. You can define as many getters are you want.</p>
+<p>Contract methods starting with the prefix <code>get fun</code> are all getters. You can define as many getters are you want. Each getter must also specify its return type - <code>counter()</code> for example returns an <code>Int</code>. </p>
 <p>Calling getters is free and does not cost gas. The call is executed by a full node and doesn&#39;t go through consensus with all the validators nor is added to a new block.</p>
 <p>Getters are read-only, they cannot change the contract persistent state.</p>
+<p>If we were to omit the <code>get</code> keyword from the function declaration of a getter, it will stop being a getter. External users would no longer be able call this function and it would essentially become a private method of the contract.</p>
 <h2 id="getters-between-contracts">Getters between contracts</h2>
 <p>A contract cannot execute a getter of another contract. Getters are only executable by end-users off-chain. Since contracts are running on-chain, they do not have access to each other&#39;s getters.</p>
 <p>So, if you can&#39;t call a getter, how can two contracts communicate? The only way for contracts to communicate on-chain is by sending messages to each other. Messages are handled in <em>receivers</em>.</p>
@@ -219,7 +220,7 @@ contract BulkAdder with Deployable {
 			
 			<script>
 				{
-					__sveltekit_on1xqs = {
+					__sveltekit_1vzu2s7 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -228,10 +229,10 @@ contract BulkAdder with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.57fba29c.js"),
-						import("./_app/immutable/entry/app.40bbec70.js")
+						import("./_app/immutable/entry/start.3bc5e522.js"),
+						import("./_app/immutable/entry/app.eb37a970.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_on1xqs.element, {
+						kit.start(app, __sveltekit_1vzu2s7.element, {
 							node_ids: [0, 2, 17],
 							data,
 							form: null,

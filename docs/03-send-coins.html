@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.57fba29c.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.3bc5e522.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.8eba159b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b8bd0a18.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.40bbec70.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.eb37a970.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.ff919840.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.7ab6b232.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.698e07fa.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.0b8adaff.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.380869d4.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.586a823f.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-send-coins-page.svelte.aa2371d1.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.639aa391.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-send-coins-page.svelte.eae6a37c.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.b268dd33.js">
   </head>
   <body>
     <div style="display: contents">
@@ -62,11 +62,11 @@
 <div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="receivers-and-messages">Receivers and Messages</h1>
 <p>In TON, users interact with contracts by sending them messages. Different contracts can only communicate with each other by sending each other messages.</p>
 <p>Since users actually use wallet contracts, messages from users are actually messages coming from just another contract.</p>
-<p>Sending a message to a contract costs gas and is processed in the course of a transaction. The transaction executes when validators add the transaction to a new block. This can take a few seconds. Messages are also able to change the contract persistent state.</p>
+<p>Sending a message to a contract costs gas and is processed in the course of a transaction. The transaction executes when validators add the transaction to a new block. This can take a few seconds. Messages are also able to change the contract&#39;s persistent state.</p>
 <h2 id="receivers">Receivers</h2>
-<p>Contract methods named <code>receive()</code> are the handlers that process each incoming message type. Tact will automatically route the correct message to the correct receiver listening for it.</p>
-<h2 id="hardware-wallets-and-blind-signing">Hardware wallets and blind signing</h2>
-<p>When working with dangerous contracts that handle a lot of money, users are encouraged to use hardware wallets like <a href="https://www.ledger.com/">Ledger</a>. Hardware wallets cannot decode binary messages to confirm to the user what they&#39;re actually signing. Tact supports textual messages for this reason, since they can easily be confirmed with users, eliminating phishing risks.</p>
+<p>When designing your contract, make a list of every operation that your contract supports, then, define a message for each operation, and finally, implement a handler for each message containing the logic of what to do when it arrives.</p>
+<p>Contract methods named <code>receive()</code> are the handlers that process each incoming message type. Tact will automatically route every incoming message to the correct receiver listening for it according to its type. A message is only handled by one receiver.</p>
+<p>Messages are defined using the <code>message</code> keyword. They can carry input arguments. Notice that for integers, you must define the encoding size, just like in state variables. When somebody sends the message, they serialize it over the wire.</p>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -209,7 +209,7 @@ contract SendCoins with Deployable {
 			
 			<script>
 				{
-					__sveltekit_on1xqs = {
+					__sveltekit_1vzu2s7 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -218,10 +218,10 @@ contract SendCoins with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.57fba29c.js"),
-						import("./_app/immutable/entry/app.40bbec70.js")
+						import("./_app/immutable/entry/start.3bc5e522.js"),
+						import("./_app/immutable/entry/app.eb37a970.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_on1xqs.element, {
+						kit.start(app, __sveltekit_1vzu2s7.element, {
 							node_ids: [0, 2, 20],
 							data,
 							form: null,

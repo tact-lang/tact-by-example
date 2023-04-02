@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.57fba29c.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.3bc5e522.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.8eba159b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b8bd0a18.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.40bbec70.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.eb37a970.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.ff919840.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.7ab6b232.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.698e07fa.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.0b8adaff.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.380869d4.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.586a823f.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-receivers-page.svelte.14fc5473.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.639aa391.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-receivers-page.svelte.9bcc45fc.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.b268dd33.js">
   </head>
   <body>
     <div style="display: contents">
@@ -77,14 +77,17 @@
   <div class="secondary svelte-9dft0e">
 <div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
 
+// this message will cause our contract to add an amount to the counter
 message Add {
     amount: Int as uint32;
 }
 
+// this message will cause our contract to subtract an amount from the counter
 message Subtract {
     amount: Int as uint32;
 }
 
+// this message will cause our contract to do a complex math operation on the counter
 message MultiMath {
     add: Int as uint32;
     subtract: Int as uint32;
@@ -98,32 +101,32 @@ contract Receivers with Deployable {
     init() {
         self.val = 0;
     }
- 
-    // a textual string message, using the comment field of a transfer (great for Ledger)
-    receive("increment") {
-        self.val = self.val + 1;
-    }
 
-    // a different textual string message, you can have as many as you want
-    receive("decrement") {
-        self.val = self.val - 1;
-    }
-
-    // binary message that can carry input arguments
+    // handler for the "Add" message - this is a binary message that has an input argument (amount)
     receive(msg: Add) {
         self.val = self.val + msg.amount;
     }
 
-    // a different binary message, although its format is identical
+    // handler for the "Subtract" message - this is a different binary message although its format is identical
     receive(msg: Subtract) {
         self.val = self.val - msg.amount;
     }
 
-    // binary messages can hold multiple arguments
+    // handler for the "MultiMath" message - this is a binary message that holds multiple input arguments
     receive(msg: MultiMath) {
         self.val = self.val + msg.add;
         self.val = self.val - msg.subtract;
         self.val = self.val * msg.multiply;
+    }
+
+    // handler for "increment" textual message - this is a textual string message, these cannot carry input arguments
+    receive("increment") {
+        self.val = self.val + 1;
+    }
+
+    // handler for "decrement" textual message - this is a different textual string message, you can have as many as you want
+    receive("decrement") {
+        self.val = self.val - 1;
     }
  
     get fun value(): Int {
@@ -183,7 +186,7 @@ contract Receivers with Deployable {
 			
 			<script>
 				{
-					__sveltekit_on1xqs = {
+					__sveltekit_1vzu2s7 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -192,10 +195,10 @@ contract Receivers with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.57fba29c.js"),
-						import("./_app/immutable/entry/app.40bbec70.js")
+						import("./_app/immutable/entry/start.3bc5e522.js"),
+						import("./_app/immutable/entry/app.eb37a970.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_on1xqs.element, {
+						kit.start(app, __sveltekit_1vzu2s7.element, {
 							node_ids: [0, 2, 19],
 							data,
 							form: null,
