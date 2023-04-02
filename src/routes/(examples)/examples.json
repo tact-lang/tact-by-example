@@ -88,6 +88,14 @@
     "name": "Functions"
   },
   {
+    "id": "04-maps",
+    "name": "Maps"
+  },
+  {
+    "id": "04-arrays",
+    "name": "Arrays"
+  },
+  {
     "id": "04-current-time",
     "name": "Current Time"
   },

@@ -177,6 +177,22 @@
       }
     },
     {
+      "name": "04-maps",
+      "path": "./src/routes/(examples)/04-maps/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
+      "name": "04-arrays",
+      "path": "./src/routes/(examples)/04-arrays/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
       "name": "04-current-time",
       "path": "./src/routes/(examples)/04-current-time/contract.tact",
       "output": "./tact-output",

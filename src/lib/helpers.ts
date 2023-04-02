@@ -1,4 +1,4 @@
-import { Address, Slice, Cell } from "ton-core";
+import { Address, Slice, Cell, Dictionary } from "ton-core";
 import examples from "../routes/(examples)/examples.json";
 
 export function getExample(page: string) {
@@ -29,6 +29,12 @@ export function convertToText(obj: any): string {
     if (obj instanceof Address) return obj.toString();
     if (obj instanceof Slice) return obj.toString();
     if (obj instanceof Cell) return obj.toString();
+    if (obj instanceof Dictionary) {
+      const items = [];
+      for (const key of obj.keys()) items.push(`${convertToText(key)}: ${convertToText(obj.get(key))}`);
+      const itemsStr = items.join(", ");
+      return itemsStr ? `{ ${itemsStr} }` : `{}`;
+    }
 
     for (const prop in obj) {
       if (obj.hasOwnProperty(prop)) string.push(prop + ": " + convertToText(obj[prop]));
