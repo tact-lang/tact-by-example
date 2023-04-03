@@ -80,7 +80,7 @@ contract Maps with Deployable {
         if (self.mi1.get(17) == null) {
             return "not found";
         }
-        let item: TokenInfo = self.mi1.get(17)!!; // the !! will tell the compiler it's not null
+        let item: TokenInfo = self.mi1.get(17)!!; // !! tells the compiler this can't be null
         return item.ticker;
     }
 

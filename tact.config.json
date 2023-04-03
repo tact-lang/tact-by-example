@@ -177,6 +177,14 @@
       }
     },
     {
+      "name": "04-optionals",
+      "path": "./src/routes/(examples)/04-optionals/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
       "name": "04-maps",
       "path": "./src/routes/(examples)/04-maps/contract.tact",
       "output": "./tact-output",

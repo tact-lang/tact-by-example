@@ -88,6 +88,10 @@
     "name": "Functions"
   },
   {
+    "id": "04-optionals",
+    "name": "Optionals"
+  },
+  {
     "id": "04-maps",
     "name": "Maps"
   },
