@@ -2,7 +2,7 @@ import "@stdlib/deploy";
 
 struct TokenInfo {
     ticker: String;
-    decimals: Int;
+    decimals: Int as uint8;
 }
 
 // this is a global static function that can be called from anywhere

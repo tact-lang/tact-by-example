@@ -296,15 +296,15 @@ export type Point = {
 export function storePoint(src: Point) {
   return (builder: Builder) => {
     let b_0 = builder;
-    b_0.storeInt(src.x, 257);
-    b_0.storeInt(src.y, 257);
+    b_0.storeInt(src.x, 64);
+    b_0.storeInt(src.y, 64);
   };
 }
 
 export function loadPoint(slice: Slice) {
   let sc_0 = slice;
-  let _x = sc_0.loadIntBig(257);
-  let _y = sc_0.loadIntBig(257);
+  let _x = sc_0.loadIntBig(64);
+  let _y = sc_0.loadIntBig(64);
   return { $$type: "Point" as const, x: _x, y: _y };
 }
 
@@ -394,14 +394,14 @@ export type Add = {
 export function storeAdd(src: Add) {
   return (builder: Builder) => {
     let b_0 = builder;
-    b_0.storeUint(3699268221, 32);
+    b_0.storeUint(4279624855, 32);
     b_0.store(storePoint(src.point));
   };
 }
 
 export function loadAdd(slice: Slice) {
   let sc_0 = slice;
-  if (sc_0.loadUint(32) !== 3699268221) {
+  if (sc_0.loadUint(32) !== 4279624855) {
     throw Error("Invalid prefix");
   }
   let _point = loadPoint(sc_0);
@@ -442,10 +442,10 @@ function initStructs_init_args(src: Structs_init_args) {
 
 async function Structs_init() {
   const __code = Cell.fromBase64(
-    "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",
+    "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",
   );
   const __system = Cell.fromBase64(
-    "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",
+    "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",
   );
   let builder = beginCell();
   builder.storeRef(__system);
@@ -508,7 +508,7 @@ export class Structs implements Contract {
       { name: "DeployOk", header: 2952335191, fields: [] },
       { name: "Point", header: null, fields: [] },
       { name: "Params", header: null, fields: [] },
-      { name: "Add", header: 3699268221, fields: [] },
+      { name: "Add", header: 4279624855, fields: [] },
     ],
     errors: Structs_errors,
   };

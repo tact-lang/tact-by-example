@@ -12,6 +12,4 @@ The order of fields does not matter. Unlike other languages, Tact does not have 
 
 ## Structs vs. messages
 
-Structs and messages are actually very similar with the only difference that messages are designed to be serialized and structs aren't.
-
-Messages have a header containing their unique numeric id and therefore can be used with receivers (the contract can tell messages apart based on this id). Unlike messages, struct definitions do not specify field sizes like `as uint32`.
+Structs and messages are almost identical with the only difference that messages have a 32-bit header containing their unique numeric id. This allows messages to be used with receivers since the contract can tell different types of messages apart based on this id.
