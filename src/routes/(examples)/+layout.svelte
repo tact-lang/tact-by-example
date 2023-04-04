@@ -110,6 +110,15 @@
               }
             }
           }
+          for (let i = 0; i < transaction.outMessagesCount; i++) {
+            const outMessage = transaction.outMessages.get(i);
+            if (outMessage?.info.type == "external-out") {
+              if (outMessage.info.dest == null) {
+                const name = messageName(outMessage.body);
+                terminalLog(`Log emitted: ${name}, from ${shorten(outMessage.info.src)}`);
+              }
+            }
+          }
           for (const event of transaction.events) {
             if (event.type == "message_sent") {
               const name = messageName(event.body);

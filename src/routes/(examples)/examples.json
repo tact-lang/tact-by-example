@@ -76,6 +76,10 @@
     "name": "Sending TON Coins"
   },
   {
+    "id": "03-emit",
+    "name": "Emitting Logs"
+  },
+  {
     "id": "04-if-statements",
     "name": "If Statements"
   },

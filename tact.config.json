@@ -153,6 +153,14 @@
       }
     },
     {
+      "name": "03-emit",
+      "path": "./src/routes/(examples)/03-emit/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
+    },
+    {
       "name": "04-if-statements",
       "path": "./src/routes/(examples)/04-if-statements/contract.tact",
       "output": "./tact-output",
