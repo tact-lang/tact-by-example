@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.63c34766.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.932e2960.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.61f9971b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0d6f68c3.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.ca56efd9.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.92c75275.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.5b7f84ed.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.2b42c038.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.98d120de.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.322916d1.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.d3ab02ad.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.2096c2f1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-errors-page.svelte.e7f2c2cb.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe59178.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-errors-page.svelte.d4a69a6f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.78404594.js">
   </head>
   <body>
     <div style="display: contents">
@@ -59,12 +59,13 @@
       <div class="sk-cube3 sk-cube"></div></div></div>
 
 
-<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="variables">Variables</h1>
-<p>The most important variables are those that are persisted in state and retain their value between contract executions. They must be defined in the scope of the contract like <code>contractVar1</code>.</p>
-<p>Persisting data in state costs gas. The contract must pay rent periodically from its balance. State storage is expensive, about <a href="https://ton.org/docs/develop/smart-contracts/fees#how-to-calculate-fees">4 TON per MB per year</a>. If the contract runs out of balance, the data will be deleted. If you need to store large amounts of data, like images, a service like <a href="https://ton.org/docs/participate/ton-storage/storage-faq">TON Storage</a> would be more suitable.</p>
-<p>Persistent state variables can only change in <em>receivers</em> by sending messages as transactions. Sending these transactions will cost gas to users.</p>
-<p>Executing <em>getters</em> is read-only, they can access all variables, but cannot change state variables. They are free to execute and don&#39;t cost any gas.</p>
-<p>Local variables like <code>localVar1</code> are temporary. They&#39;re not persisted to state. You can define them in any function and they will only exist in run-time during the execution of the function. You can change their value in <em>getters</em> too.</p>
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="emitting-logs">Emitting Logs</h1>
+<p>It is sometimes useful to emit events from the contract in order to indicate that certain things happened.</p>
+<p>This data can later be analyzed off-chain and indexed by using <a href="https://orbs.com/ton-access">RPC API</a> to query all transactions sent to the contract.</p>
+<p>Consider for example a staking contract that wants to indicate how much time passed before users unstaked for analytics purposes. By analyzing this data, the developer can think of improvements to the product.</p>
+<p>One way to achieve this is by sending messages back to the sender using <code>reply()</code> or by sending messages to the zero address. These two methods work, but they are not the most efficient in terms of gas.</p>
+<p>The <code>emit()</code> function will output a message (binary or textual) from the contract. This message does not actually have a recipient and is very gas-efficient because it doesn&#39;t actually need to be delivered.</p>
+<p>The messages emitted in this way are still recorded on the blockchain and can be analyzed by anyone at any later time.</p>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -125,19 +126,26 @@ contract Errors with Deployable {
 
             
 
-
-
-<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get sum
-		<div class="ripple svelte-1dillie"></div>
-		</button>
-
             
 
 
 
 <button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Send increment
+		Send action
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send transfer
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send stake
 		<div class="ripple svelte-1dillie"></div>
 		</button></div>
           <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
@@ -149,7 +157,7 @@ contract Errors with Deployable {
 			
 			<script>
 				{
-					__sveltekit_1fmsu3e = {
+					__sveltekit_102lvw5 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -158,11 +166,11 @@ contract Errors with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.63c34766.js"),
-						import("./_app/immutable/entry/app.ca56efd9.js")
+						import("./_app/immutable/entry/start.932e2960.js"),
+						import("./_app/immutable/entry/app.92c75275.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_1fmsu3e.element, {
-							node_ids: [0, 2, 15],
+						kit.start(app, __sveltekit_102lvw5.element, {
+							node_ids: [0, 2, 16],
 							data,
 							form: null,
 							error: null
