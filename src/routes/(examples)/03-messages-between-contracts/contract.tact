@@ -65,12 +65,7 @@ contract BulkAdder with Deployable {
     receive(msg: CounterValue) {
         if (msg.value < self.target) {
             // step 5: if its value is too low, send it another message to increment it by +1 more
-            send(SendParameters{
-                to: sender(),
-                value: 0, /// TODO: same issue 31
-                mode: SendRemainingValue + SendIgnoreErrors, /// TODO: https://github.com/tact-lang/tact/issues/31
-                body: "increment".asComment()
-            });
+            reply("increment".asComment());
         }
     }
 }
