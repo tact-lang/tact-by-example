@@ -12,4 +12,4 @@ There are multiple ways on TON to [represent](https://docs.ton.org/learn/overvie
 
 ## State costs
 
-Most addresses take 264-bit to store (8-bit for the workchain id and 256-bit for the account id). This means that storing 1000 addresses [costs](https://ton.org/docs/develop/smart-contracts/fees#how-to-calculate-fees) about 0.189 TON per year.
+Most addresses take 267-bit to store (3 flag bits indicating standard address, 8-bit for the workchain id and 256-bit for the account id). This means that storing 1000 addresses [costs](https://ton.org/docs/develop/smart-contracts/fees#how-to-calculate-fees) about 0.191 TON per year.
