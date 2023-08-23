@@ -5,7 +5,8 @@
       "path": "./src/routes/(examples)/01-hello-world/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -13,7 +14,8 @@
       "path": "./src/routes/(examples)/01-a-simple-counter/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -21,7 +23,8 @@
       "path": "./src/routes/(examples)/01-the-deployable-trait/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -29,7 +32,8 @@
       "path": "./src/routes/(examples)/02-integers/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -37,7 +41,8 @@
       "path": "./src/routes/(examples)/02-integer-ops/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -45,7 +50,8 @@
       "path": "./src/routes/(examples)/02-bools/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -53,7 +59,8 @@
       "path": "./src/routes/(examples)/02-addresses/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -61,7 +68,8 @@
       "path": "./src/routes/(examples)/02-strings/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -69,7 +77,8 @@
       "path": "./src/routes/(examples)/02-variables/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -77,7 +86,8 @@
       "path": "./src/routes/(examples)/02-constants/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -85,7 +95,8 @@
       "path": "./src/routes/(examples)/03-getters/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -93,7 +104,8 @@
       "path": "./src/routes/(examples)/03-receivers/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -101,7 +113,8 @@
       "path": "./src/routes/(examples)/03-textual-messages/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -109,7 +122,8 @@
       "path": "./src/routes/(examples)/03-structs/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -117,7 +131,8 @@
       "path": "./src/routes/(examples)/03-sender/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -125,7 +140,8 @@
       "path": "./src/routes/(examples)/03-errors/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -133,7 +149,8 @@
       "path": "./src/routes/(examples)/03-receive-coins/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -141,7 +158,8 @@
       "path": "./src/routes/(examples)/03-messages-between-contracts/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -149,7 +167,8 @@
       "path": "./src/routes/(examples)/03-send-coins/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -157,7 +176,8 @@
       "path": "./src/routes/(examples)/03-emit/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -165,7 +185,8 @@
       "path": "./src/routes/(examples)/04-if-statements/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -173,7 +194,8 @@
       "path": "./src/routes/(examples)/04-loops/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -181,7 +203,8 @@
       "path": "./src/routes/(examples)/04-functions/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -189,7 +212,8 @@
       "path": "./src/routes/(examples)/04-optionals/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -197,7 +221,8 @@
       "path": "./src/routes/(examples)/04-maps/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -205,7 +230,8 @@
       "path": "./src/routes/(examples)/04-arrays/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -213,7 +239,8 @@
       "path": "./src/routes/(examples)/04-current-time/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -221,7 +248,8 @@
       "path": "./src/routes/(examples)/04-decimal-point/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -229,7 +257,8 @@
       "path": "./src/routes/(examples)/05-the-ownable-trait/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -237,7 +266,8 @@
       "path": "./src/routes/(examples)/05-the-ownable-transferable-trait/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -245,7 +275,8 @@
       "path": "./src/routes/(examples)/05-the-stoppable-trait/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -253,7 +284,8 @@
       "path": "./src/routes/(examples)/05-the-resumable-trait/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -261,7 +293,8 @@
       "path": "./src/routes/(examples)/05-your-own-trait/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -269,7 +302,8 @@
       "path": "./src/routes/(examples)/06-calc-contract-address/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -277,7 +311,8 @@
       "path": "./src/routes/(examples)/06-multiple-contract-instances/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -285,7 +320,8 @@
       "path": "./src/routes/(examples)/06-contract-deploy-another/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -293,7 +329,8 @@
       "path": "./src/routes/(examples)/06-parent-child/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -301,7 +338,8 @@
       "path": "./src/routes/(examples)/06-communicating-children/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -309,7 +347,8 @@
       "path": "./src/routes/(examples)/06-authenticating-children/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -317,7 +356,8 @@
       "path": "./src/routes/(examples)/06-unbounded-arrays/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
       }
     },
     {
@@ -325,7 +365,17 @@
       "path": "./src/routes/(examples)/06-unbounded-maps/contract.tact",
       "output": "./tact-output",
       "options": {
-        "debug": true
+        "debug": true,
+        "external": true
+      }
+    },
+    {
+      "name": "07-bitwise",
+      "path": "./src/routes/(examples)/07-bitwise/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true,
+        "external": true
       }
     }
   ]

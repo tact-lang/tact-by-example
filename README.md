@@ -13,6 +13,7 @@ npm run dev -- --open
 ## Releasing
 
 1. Test the app in dev mode.
+2. Run `tact-build` to compile the Tact files under the `.src/routes/(each example)`.
 2. Make sure to update the version in `package.json`.
 3. Run `npm run build` which will build to the `docs` directory.
 4. Run `npm run preview` to test the app in production mode.

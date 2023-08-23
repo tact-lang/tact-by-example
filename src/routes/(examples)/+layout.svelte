@@ -60,7 +60,7 @@
                 if (compute.exitCode == 4294967282) compute.exitCode = -14;
                 terminalLog(
                   `Transaction executed: ${compute.success ? "success" : "error"}, ` +
-                    `exit code ${compute.exitCode}, gas ${shorten(compute.gasFees, "coins")}`,
+                    `exit code ${compute.exitCode}, gas ${shorten(compute.gasFees, "coins")}\n`,
                 );
                 let foundError = false;
                 for (const contractInstance of contractInstances) {
@@ -115,7 +115,7 @@
             if (outMessage?.info.type == "external-out") {
               if (outMessage.info.dest == null) {
                 const name = messageName(outMessage.body);
-                terminalLog(`Log emitted: ${name}, from ${shorten(outMessage.info.src)}`);
+                terminalLog(`🔺 Log emitted: ${name}, from ${shorten(outMessage.info.src)}`);
               }
             }
           }
@@ -123,8 +123,8 @@
             if (event.type == "message_sent") {
               const name = messageName(event.body);
               terminalLog(
-                `Message sent: ${name}, from ${shorten(event.from)}, to ${shorten(event.to)}, ` +
-                  `value ${shorten(event.value, "coins")}, ${event.bounced ? "" : "not "}bounced`,
+                `=== Message sent ===: ${name}, from ${shorten(event.from)}, to ${shorten(event.to)}, ` +
+                  `value ${shorten(event.value, "coins")}, ${event.bounced ? "⛔ (" : "🆗 (not "}bounced)`,
               );
             }
           }
@@ -197,7 +197,7 @@
     try {
       terminalLog(`> Calling getter ${name}:`);
       const result = await getter();
-      terminalLog(`Return value: ${convertToText(result)}`);
+      terminalLog(`🟢 Return value: ${convertToText(result)}`);
     } catch (e: any) {
       terminalError(e);
     }
@@ -206,7 +206,7 @@
 
   async function runMessage(name: string, message: () => Promise<SendMessageResult[]>) {
     try {
-      terminalLog(`> Sending message ${name}:`);
+      terminalLog(`> Sending message 🟡 ${name}:`);
       const results = await message();
       terminalLogMessages(results);
     } catch (e: any) {

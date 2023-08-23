@@ -6,6 +6,7 @@ console.log(`\nRunning tact pre build script`);
 let tactConfig = {
   projects: [],
 };
+
 for (const example of examples) {
   tactConfig.projects.push({
     name: example.id,
@@ -13,6 +14,7 @@ for (const example of examples) {
     output: "./tact-output",
     options: {
       debug: true,
+      external: true,
     },
   });
 }

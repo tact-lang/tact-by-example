@@ -40,7 +40,7 @@ contract Functions with Deployable {
 
     receive("best L1") {
         let best: TokenInfo = self.getInfo(1);
-        reply(best.ticker.asComment());
+        self.reply(best.ticker.asComment());
     }
 
     get fun result(): Int {

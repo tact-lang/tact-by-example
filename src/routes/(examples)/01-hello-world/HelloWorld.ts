@@ -13,6 +13,9 @@ import {
   Sender,
   Contract,
   ContractABI,
+  ABIType,
+  ABIGetter,
+  ABIReceiver,
   TupleBuilder,
   DictionaryValue,
 } from "ton-core";
@@ -211,10 +214,10 @@ function initHelloWorld_init_args(src: HelloWorld_init_args) {
 
 async function HelloWorld_init() {
   const __code = Cell.fromBase64(
-    "te6ccgECDgEAAW8AART/APSkE/S88sgLAQIBYgIDAo7QAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxZ2zwwMMj4QwHMfwHKAMntVAcEAgEgBQYAPnAh10nCH5UwINcLH94Cklt/4AHAAAHXScEhsJF/4HACD72NVtnm2eGMBwgCASAKCwE07UTQ1AH4Y9IAMJFt4Pgo1wsKgwm68uCJ2zwJABqLtoZWxsbyB3b3JsZIAAJtALm7vRgnBc7D1dLK57HoTsOdZKhRtmgnCd1jUtK2R8syLTry398WI5gnAgVcAbgGdjlM5YOq5HJbLDgnAb1J3vlUWW8cdT094FWcMmgnCdl05as07LczoOlm2UZuikgCAUgMDQARsK+7UTQ0gABgAHWybuNDVpcGZzOi8vUW1VcTQ3ZEpja2pYb3RQVENkdmhGNkdDeEZvcHBBNDE0QnRjS0Z5R3A0SENiR4IA==",
+    "te6ccgECDgEAAXAAART/APSkE/S88sgLAQIBYgIDApLQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxZ2zzy4IIwyPhDAcx/AcoAye1UBwQCASAFBgA8AZIwf+BwIddJwh+VMCDXCx/ewAAB10nBIbCRf+BwAg+9jVbZ5tnhjAcIAgEgCgsBNO1E0NQB+GPSADCRbeD4KNcLCoMJuvLgids8CQAai7aGVsbG8gd29ybGSAACbQC5u70YJwXOw9XSyuex6E7DnWSoUbZoJwndY1LStkfLMi068t/fFiOYJwIFXAG4BnY5TOWDquRyWyw4JwG9Sd75VFlvHHU9PeBVnDJoJwnZdOWrNOy3M6DpZtlGbopIAgFIDA0AEbCvu1E0NIAAYAB1sm7jQ1aXBmczovL1FtVXE0N2RKY2tqWG90UFRDZHZoRjZHQ3hGb3BwQTQxNEJ0Y0tGeUdwNEhDYkeCA=",
   );
   const __system = Cell.fromBase64(
-    "te6cckECEAEAAXkAAQHAAQEFoPYVAgEU/wD0pBP0vPLICwMCAWIMBAIBIAoFAgEgCQYCAUgIBwB1sm7jQ1aXBmczovL1FtVXE0N2RKY2tqWG90UFRDZHZoRjZHQ3hGb3BwQTQxNEJ0Y0tGeUdwNEhDYkeCAAEbCvu1E0NIAAYAC5u70YJwXOw9XSyuex6E7DnWSoUbZoJwndY1LStkfLMi068t/fFiOYJwIFXAG4BnY5TOWDquRyWyw4JwG9Sd75VFlvHHU9PeBVnDJoJwnZdOWrNOy3M6DpZtlGbopIAg+9jVbZ5tnhjA4LABqLtoZWxsbyB3b3JsZIAo7QAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxZ2zwwMMj4QwHMfwHKAMntVA4NAD5wIddJwh+VMCDXCx/eApJbf+ABwAAB10nBIbCRf+BwATTtRNDUAfhj0gAwkW3g+CjXCwqDCbry4InbPA8AAm17HG9k",
+    "te6cckECEAEAAXoAAQHAAQEFoPYVAgEU/wD0pBP0vPLICwMCAWIMBAIBIAoFAgEgCQYCAUgIBwB1sm7jQ1aXBmczovL1FtVXE0N2RKY2tqWG90UFRDZHZoRjZHQ3hGb3BwQTQxNEJ0Y0tGeUdwNEhDYkeCAAEbCvu1E0NIAAYAC5u70YJwXOw9XSyuex6E7DnWSoUbZoJwndY1LStkfLMi068t/fFiOYJwIFXAG4BnY5TOWDquRyWyw4JwG9Sd75VFlvHHU9PeBVnDJoJwnZdOWrNOy3M6DpZtlGbopIAg+9jVbZ5tnhjA4LABqLtoZWxsbyB3b3JsZIApLQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxZ2zzy4IIwyPhDAcx/AcoAye1UDg0APAGSMH/gcCHXScIflTAg1wsf3sAAAddJwSGwkX/gcAE07UTQ1AH4Y9IAMJFt4Pgo1wsKgwm68uCJ2zwPAAJtiiFvWw==",
   );
   let builder = beginCell();
   builder.storeRef(__system);
@@ -251,6 +254,46 @@ const HelloWorld_errors: { [key: number]: { message: string } } = {
   137: { message: `Masterchain support is not enabled for this contract` },
 };
 
+const HelloWorld_types: ABIType[] = [
+  {
+    name: "StateInit",
+    header: null,
+    fields: [
+      { name: "code", type: { kind: "simple", type: "cell", optional: false } },
+      { name: "data", type: { kind: "simple", type: "cell", optional: false } },
+    ],
+  },
+  {
+    name: "Context",
+    header: null,
+    fields: [
+      { name: "bounced", type: { kind: "simple", type: "bool", optional: false } },
+      { name: "sender", type: { kind: "simple", type: "address", optional: false } },
+      { name: "value", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "raw", type: { kind: "simple", type: "slice", optional: false } },
+    ],
+  },
+  {
+    name: "SendParameters",
+    header: null,
+    fields: [
+      { name: "bounce", type: { kind: "simple", type: "bool", optional: false } },
+      { name: "to", type: { kind: "simple", type: "address", optional: false } },
+      { name: "value", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "mode", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "body", type: { kind: "simple", type: "cell", optional: true } },
+      { name: "code", type: { kind: "simple", type: "cell", optional: true } },
+      { name: "data", type: { kind: "simple", type: "cell", optional: true } },
+    ],
+  },
+];
+
+const HelloWorld_getters: ABIGetter[] = [
+  { name: "greeting", arguments: [], returnType: { kind: "simple", type: "string", optional: false } },
+];
+
+const HelloWorld_receivers: ABIReceiver[] = [{ receiver: "internal", message: { kind: "empty" } }];
+
 export class HelloWorld implements Contract {
   static async init() {
     return await HelloWorld_init();
@@ -274,6 +317,9 @@ export class HelloWorld implements Contract {
       { name: "Context", header: null, fields: [] },
       { name: "SendParameters", header: null, fields: [] },
     ],
+    types: HelloWorld_types,
+    getters: HelloWorld_getters,
+    receivers: HelloWorld_receivers,
     errors: HelloWorld_errors,
   };
 

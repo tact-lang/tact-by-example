@@ -3,9 +3,11 @@ import * as fs from "fs";
 console.log(`\nRunning tact post build script`);
 
 const files = fs.readdirSync("./tact-output");
+
 for (const file of files) {
   if (!file.endsWith(".ts")) continue;
   if (file.endsWith(".client.ts")) continue;
+
   const [example, contract] = file.split(".")[0].split("_");
   if (!fs.existsSync(`./src/routes/(examples)/${example}`)) {
     console.log(`   > WARNING: route (examples)/${example} not found in src`);

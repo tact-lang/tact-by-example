@@ -162,5 +162,9 @@
   {
     "id": "06-unbounded-maps",
     "name": "Unbounded Maps - Simplified Token"
+  },
+  {
+    "id": "07-bitwise",
+    "name": "Bitwise Operations"
   }
 ]
