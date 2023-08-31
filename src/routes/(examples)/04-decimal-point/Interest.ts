@@ -13,6 +13,9 @@ import {
   Sender,
   Contract,
   ContractABI,
+  ABIType,
+  ABIGetter,
+  ABIReceiver,
   TupleBuilder,
   DictionaryValue,
 } from "ton-core";
@@ -287,6 +290,55 @@ function dictValueParserDeployOk(): DictionaryValue<DeployOk> {
   };
 }
 
+export type FactoryDeploy = {
+  $$type: "FactoryDeploy";
+  queryId: bigint;
+  cashback: Address;
+};
+
+export function storeFactoryDeploy(src: FactoryDeploy) {
+  return (builder: Builder) => {
+    let b_0 = builder;
+    b_0.storeUint(1829761339, 32);
+    b_0.storeUint(src.queryId, 64);
+    b_0.storeAddress(src.cashback);
+  };
+}
+
+export function loadFactoryDeploy(slice: Slice) {
+  let sc_0 = slice;
+  if (sc_0.loadUint(32) !== 1829761339) {
+    throw Error("Invalid prefix");
+  }
+  let _queryId = sc_0.loadUintBig(64);
+  let _cashback = sc_0.loadAddress();
+  return { $$type: "FactoryDeploy" as const, queryId: _queryId, cashback: _cashback };
+}
+
+function loadTupleFactoryDeploy(source: TupleReader) {
+  let _queryId = source.readBigNumber();
+  let _cashback = source.readAddress();
+  return { $$type: "FactoryDeploy" as const, queryId: _queryId, cashback: _cashback };
+}
+
+function storeTupleFactoryDeploy(source: FactoryDeploy) {
+  let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
+  builder.writeAddress(source.cashback);
+  return builder.build();
+}
+
+function dictValueParserFactoryDeploy(): DictionaryValue<FactoryDeploy> {
+  return {
+    serialize: (src, buidler) => {
+      buidler.storeRef(beginCell().store(storeFactoryDeploy(src)).endCell());
+    },
+    parse: (src) => {
+      return loadFactoryDeploy(src.loadRef().beginParse());
+    },
+  };
+}
+
 export type Deposit = {
   $$type: "Deposit";
   amount: bigint;
@@ -387,10 +439,10 @@ function initInterest_init_args(src: Interest_init_args) {
 
 async function Interest_init() {
   const __code = Cell.fromBase64(
-    "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",
+    "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",
   );
   const __system = Cell.fromBase64(
-    "te6cckECFQEAA1sAAQHAAQEFodbFAgEU/wD0pBP0vPLICwMCAWIMBAIBWAgFAgFIBwYAdbJu40NWlwZnM6Ly9RbVc2alFNN0dDWW1HR24xUVRQM3ZwOTg3bnJGWENLdHY3Vm1Cc3hRSm1YRWhnggABGwr7tRNDSAAGACASAKCQC5t3owTgudh6ullc9j0J2HOslQo2zQThO6xqWlbI+WZFp15b++LEcwTgQKuANwDOxymcsHVcjktlhwTgN6k73yqLLeOOp6e8CrOGTQThOy6ctWadluZ0HSzbKM3RSQAhG1CLtnm2eNiDATCwACIAKq0AHQ0wMBcbCjAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IhUUFMDbwT4YQL4Yts8VRPbPDDI+EMBzH8BygBVMFA0yh/LHwH6AgH6AsntVBMNAqhwIddJwh+VMCDXCx/eApJbf+AhghAh7rYHuo4hMdMfAYIQIe62B7ry4IH6AAExM4IAiTsCwAAS8vT4I1l/4CGCEAuml1G64wIBghCUapi2uuMCMHARDgFa0x8BghCUapi2uvLggdM/ATHIAYIQr/kPV1jLH8s/yX/4QnBYA4BCAW1t2zx/DwHKyHEBygFQBwHKAHABygJQBSDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlAD+gJwAcpoI26zkX+TJG6z4pczMwFwAcoA4w0hbrOcfwHKAAEgbvLQgAHMlTFwAcoA4skB+wAQAJh/AcoAyHABygBwAcoAJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4iRus51/AcoABCBu8tCAUATMljQDcAHKAOJwAcoAAn8BygACyVjMAXYx0x8BghALppdRuvLggfoAATGCAKY4UxO+8vRRIqH4IyShE6gkqIIJ4TOAqQSCAYagqQQg2zz+FDCgfxIA3sghwQCYgC0BywcBowHeIYI4Mnyyc0EZ07epqh25jiBwIHGOFAR6qQymMCWoEqAEqgcCpCHAAEUw5jAzqgLPAY4rbwBwjhEjeqkIEm+MAaQDeqkEIMAAFOYzIqUDnFMCb4GmMFjLBwKlWeQwMeLJ0AFM7UTQ1AH4Y9IAAZzSH9Mf+gD6AFUwbBTgMPgo1wsKgwm68uCJ2zwUABBwUwCBDLJVILAISnU=",
+    "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",
   );
   let builder = beginCell();
   builder.storeRef(__system);
@@ -429,6 +481,78 @@ const Interest_errors: { [key: number]: { message: string } } = {
   42552: { message: `Cannot withdraw more than deposit` },
 };
 
+const Interest_types: ABIType[] = [
+  {
+    name: "StateInit",
+    header: null,
+    fields: [
+      { name: "code", type: { kind: "simple", type: "cell", optional: false } },
+      { name: "data", type: { kind: "simple", type: "cell", optional: false } },
+    ],
+  },
+  {
+    name: "Context",
+    header: null,
+    fields: [
+      { name: "bounced", type: { kind: "simple", type: "bool", optional: false } },
+      { name: "sender", type: { kind: "simple", type: "address", optional: false } },
+      { name: "value", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "raw", type: { kind: "simple", type: "slice", optional: false } },
+    ],
+  },
+  {
+    name: "SendParameters",
+    header: null,
+    fields: [
+      { name: "bounce", type: { kind: "simple", type: "bool", optional: false } },
+      { name: "to", type: { kind: "simple", type: "address", optional: false } },
+      { name: "value", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "mode", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "body", type: { kind: "simple", type: "cell", optional: true } },
+      { name: "code", type: { kind: "simple", type: "cell", optional: true } },
+      { name: "data", type: { kind: "simple", type: "cell", optional: true } },
+    ],
+  },
+  {
+    name: "Deploy",
+    header: 2490013878,
+    fields: [{ name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } }],
+  },
+  {
+    name: "DeployOk",
+    header: 2952335191,
+    fields: [{ name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } }],
+  },
+  {
+    name: "FactoryDeploy",
+    header: 1829761339,
+    fields: [
+      { name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } },
+      { name: "cashback", type: { kind: "simple", type: "address", optional: false } },
+    ],
+  },
+  {
+    name: "Deposit",
+    header: 569292295,
+    fields: [{ name: "amount", type: { kind: "simple", type: "uint", optional: false, format: "coins" } }],
+  },
+  {
+    name: "Withdraw",
+    header: 195467089,
+    fields: [{ name: "amount", type: { kind: "simple", type: "uint", optional: false, format: "coins" } }],
+  },
+];
+
+const Interest_getters: ABIGetter[] = [
+  { name: "total", arguments: [], returnType: { kind: "simple", type: "int", optional: false, format: 257 } },
+];
+
+const Interest_receivers: ABIReceiver[] = [
+  { receiver: "internal", message: { kind: "typed", type: "Deposit" } },
+  { receiver: "internal", message: { kind: "typed", type: "Withdraw" } },
+  { receiver: "internal", message: { kind: "typed", type: "Deploy" } },
+];
+
 export class Interest implements Contract {
   static async init() {
     return await Interest_init();
@@ -453,9 +577,13 @@ export class Interest implements Contract {
       { name: "SendParameters", header: null, fields: [] },
       { name: "Deploy", header: 2490013878, fields: [] },
       { name: "DeployOk", header: 2952335191, fields: [] },
+      { name: "FactoryDeploy", header: 1829761339, fields: [] },
       { name: "Deposit", header: 569292295, fields: [] },
       { name: "Withdraw", header: 195467089, fields: [] },
     ],
+    types: Interest_types,
+    getters: Interest_getters,
+    receivers: Interest_receivers,
     errors: Interest_errors,
   };
 

@@ -34,11 +34,11 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.932e2960.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.add7d32d.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0d6f68c3.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0c455cee.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.92c75275.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.2e78edbc.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
@@ -46,7 +46,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store.d3ab02ad.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/examples.2096c2f1.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-errors-page.svelte.d4a69a6f.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-errors-page.svelte.f9ea7814.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.78404594.js">
   </head>
   <body>
@@ -63,7 +63,7 @@
 <p>It is sometimes useful to emit events from the contract in order to indicate that certain things happened.</p>
 <p>This data can later be analyzed off-chain and indexed by using <a href="https://orbs.com/ton-access">RPC API</a> to query all transactions sent to the contract.</p>
 <p>Consider for example a staking contract that wants to indicate how much time passed before users unstaked for analytics purposes. By analyzing this data, the developer can think of improvements to the product.</p>
-<p>One way to achieve this is by sending messages back to the sender using <code>reply()</code> or by sending messages to the zero address. These two methods work, but they are not the most efficient in terms of gas.</p>
+<p>One way to achieve this is by sending messages back to the sender using <code>self.reply()</code> or by sending messages to the zero address. These two methods work, but they are not the most efficient in terms of gas.</p>
 <p>The <code>emit()</code> function will output a message (binary or textual) from the contract. This message does not actually have a recipient and is very gas-efficient because it doesn&#39;t actually need to be delivered.</p>
 <p>The messages emitted in this way are still recorded on the blockchain and can be analyzed by anyone at any later time.</p>
 <!-- HTML_TAG_END -->
@@ -157,7 +157,7 @@ contract Errors with Deployable {
 			
 			<script>
 				{
-					__sveltekit_102lvw5 = {
+					__sveltekit_1r1y7un = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -166,10 +166,10 @@ contract Errors with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.932e2960.js"),
-						import("./_app/immutable/entry/app.92c75275.js")
+						import("./_app/immutable/entry/start.add7d32d.js"),
+						import("./_app/immutable/entry/app.2e78edbc.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_102lvw5.element, {
+						kit.start(app, __sveltekit_1r1y7un.element, {
 							node_ids: [0, 2, 16],
 							data,
 							form: null,

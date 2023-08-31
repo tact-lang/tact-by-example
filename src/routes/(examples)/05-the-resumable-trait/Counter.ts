@@ -13,6 +13,9 @@ import {
   Sender,
   Contract,
   ContractABI,
+  ABIType,
+  ABIGetter,
+  ABIReceiver,
   TupleBuilder,
   DictionaryValue,
 } from "ton-core";
@@ -201,33 +204,38 @@ function dictValueParserSendParameters(): DictionaryValue<SendParameters> {
 
 export type ChangeOwner = {
   $$type: "ChangeOwner";
+  queryId: bigint;
   newOwner: Address;
 };
 
 export function storeChangeOwner(src: ChangeOwner) {
   return (builder: Builder) => {
     let b_0 = builder;
-    b_0.storeUint(256331011, 32);
+    b_0.storeUint(2174598809, 32);
+    b_0.storeUint(src.queryId, 64);
     b_0.storeAddress(src.newOwner);
   };
 }
 
 export function loadChangeOwner(slice: Slice) {
   let sc_0 = slice;
-  if (sc_0.loadUint(32) !== 256331011) {
+  if (sc_0.loadUint(32) !== 2174598809) {
     throw Error("Invalid prefix");
   }
+  let _queryId = sc_0.loadUintBig(64);
   let _newOwner = sc_0.loadAddress();
-  return { $$type: "ChangeOwner" as const, newOwner: _newOwner };
+  return { $$type: "ChangeOwner" as const, queryId: _queryId, newOwner: _newOwner };
 }
 
 function loadTupleChangeOwner(source: TupleReader) {
+  let _queryId = source.readBigNumber();
   let _newOwner = source.readAddress();
-  return { $$type: "ChangeOwner" as const, newOwner: _newOwner };
+  return { $$type: "ChangeOwner" as const, queryId: _queryId, newOwner: _newOwner };
 }
 
 function storeTupleChangeOwner(source: ChangeOwner) {
   let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
   builder.writeAddress(source.newOwner);
   return builder.build();
 }
@@ -239,6 +247,55 @@ function dictValueParserChangeOwner(): DictionaryValue<ChangeOwner> {
     },
     parse: (src) => {
       return loadChangeOwner(src.loadRef().beginParse());
+    },
+  };
+}
+
+export type ChangeOwnerOk = {
+  $$type: "ChangeOwnerOk";
+  queryId: bigint;
+  newOwner: Address;
+};
+
+export function storeChangeOwnerOk(src: ChangeOwnerOk) {
+  return (builder: Builder) => {
+    let b_0 = builder;
+    b_0.storeUint(846932810, 32);
+    b_0.storeUint(src.queryId, 64);
+    b_0.storeAddress(src.newOwner);
+  };
+}
+
+export function loadChangeOwnerOk(slice: Slice) {
+  let sc_0 = slice;
+  if (sc_0.loadUint(32) !== 846932810) {
+    throw Error("Invalid prefix");
+  }
+  let _queryId = sc_0.loadUintBig(64);
+  let _newOwner = sc_0.loadAddress();
+  return { $$type: "ChangeOwnerOk" as const, queryId: _queryId, newOwner: _newOwner };
+}
+
+function loadTupleChangeOwnerOk(source: TupleReader) {
+  let _queryId = source.readBigNumber();
+  let _newOwner = source.readAddress();
+  return { $$type: "ChangeOwnerOk" as const, queryId: _queryId, newOwner: _newOwner };
+}
+
+function storeTupleChangeOwnerOk(source: ChangeOwnerOk) {
+  let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
+  builder.writeAddress(source.newOwner);
+  return builder.build();
+}
+
+function dictValueParserChangeOwnerOk(): DictionaryValue<ChangeOwnerOk> {
+  return {
+    serialize: (src, buidler) => {
+      buidler.storeRef(beginCell().store(storeChangeOwnerOk(src)).endCell());
+    },
+    parse: (src) => {
+      return loadChangeOwnerOk(src.loadRef().beginParse());
     },
   };
 }
@@ -331,6 +388,55 @@ function dictValueParserDeployOk(): DictionaryValue<DeployOk> {
   };
 }
 
+export type FactoryDeploy = {
+  $$type: "FactoryDeploy";
+  queryId: bigint;
+  cashback: Address;
+};
+
+export function storeFactoryDeploy(src: FactoryDeploy) {
+  return (builder: Builder) => {
+    let b_0 = builder;
+    b_0.storeUint(1829761339, 32);
+    b_0.storeUint(src.queryId, 64);
+    b_0.storeAddress(src.cashback);
+  };
+}
+
+export function loadFactoryDeploy(slice: Slice) {
+  let sc_0 = slice;
+  if (sc_0.loadUint(32) !== 1829761339) {
+    throw Error("Invalid prefix");
+  }
+  let _queryId = sc_0.loadUintBig(64);
+  let _cashback = sc_0.loadAddress();
+  return { $$type: "FactoryDeploy" as const, queryId: _queryId, cashback: _cashback };
+}
+
+function loadTupleFactoryDeploy(source: TupleReader) {
+  let _queryId = source.readBigNumber();
+  let _cashback = source.readAddress();
+  return { $$type: "FactoryDeploy" as const, queryId: _queryId, cashback: _cashback };
+}
+
+function storeTupleFactoryDeploy(source: FactoryDeploy) {
+  let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
+  builder.writeAddress(source.cashback);
+  return builder.build();
+}
+
+function dictValueParserFactoryDeploy(): DictionaryValue<FactoryDeploy> {
+  return {
+    serialize: (src, buidler) => {
+      buidler.storeRef(beginCell().store(storeFactoryDeploy(src)).endCell());
+    },
+    parse: (src) => {
+      return loadFactoryDeploy(src.loadRef().beginParse());
+    },
+  };
+}
+
 type Counter_init_args = {
   $$type: "Counter_init_args";
 };
@@ -343,10 +449,10 @@ function initCounter_init_args(src: Counter_init_args) {
 
 async function Counter_init() {
   const __code = Cell.fromBase64(
-    "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",
+    "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",
   );
   const __system = Cell.fromBase64(
-    "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",
+    "te6cckECJAEABBoAAQHAAQEFoendAgEU/wD0pBP0vPLICwMCAWITBAIBIA4FAgEgDAYCAUgLBwIBagoIAg+lgbZ5tnjYYyIJAAIgAHOndxoatLgzOZ0Xl6i2q6E1HCE5G6Y8sba5m6W7JzC3LCUbK5sgo6ylnDk7KLyYvDWiLLu3KbU2m6hBABGwr7tRNDSAAGAB3bu9GCcFzsPV0srnsehOw51kqFG2aCcJ3WNS0rZHyzItOvLf3xYjmCcCBVwBuAZ2OUzlg6rkclssOCcBvUne+VRZbxx1PT3gVZwyaCcJ2XTlqzTstzOg6WbZRm6KSCcKPpAvltgVQjou8Eds5r0cuA0ASIJwkTBoZqbopDZ+4Ee+BVGPiYJwQM51aecV+dJQsB1hbiZHsgIBIBEPAhG4Ud2zzbPGwxgiEAACIgIRuhe9s82zxsMYIhIAAiEC3tAB0NMDAXGwowH6QAEg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIVFBTA28E+GEC+GLbPFUS2zzy4ILI+EMBzH8BygBVIFog10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIzxYSygDLH8ntVCIUAqDtou37AZIwf+BwIddJwh+VMCDXCx/eIIIQlGqYtrqOqDDTHwGCEJRqmLa68uCB0z8BMcgBghCv+Q9XWMsfyz/J+EIBcG3bPH/gwACRMOMNcB8VA/75ASCC8MT41yMS7f3vW3vseDO9uxYtFRG9eKkSrtDyY3r2VXKuuo6HMNs8pH/bMeAggvBsj0T0X+20zf7U3o2xSqWxOtVdQw91nQZpIQt0xI/j37qOhjDbPH/bMeCC8Lz693aQfHGcyNN52PGUqqon6Moocc1ZF4FyHyFaRUUBHhkWARK6joXbPH/bMeAXBBDbPNs8MX+IEh0eGBoAFgAAAABTdG9wcGVkBBDbPNs8MXCIEh0cGxoBDvhCAX9t2zwfABYAAAAAUmVzdW1lZAAOggDQMCLy9AAS+EJSMMcF8uCEABCCAJ2wIrPy9AE6bW0ibrOZWyBu8tCAbyIBkTLiECRwAwSAQlAj2zwgAcrIcQHKAVAHAcoAcAHKAlAFINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WUAP6AnABymgjbrORf5MkbrPilzMzAXABygDjDSFus5x/AcoAASBu8tCAAcyVMXABygDiyQH7ACEAmH8BygDIcAHKAHABygAkbrOdfwHKAAQgbvLQgFAEzJY0A3ABygDiJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4nABygACfwHKAALJWMwBhu1E0NQB+GPSAAGOKPpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgB0gDTH1UgbBPgMPgo1wsKgwm68uCJ2zwjAAj4QnBw2D9aCg==",
   );
   let builder = beginCell();
   builder.storeRef(__system);
@@ -385,6 +491,87 @@ const Counter_errors: { [key: number]: { message: string } } = {
   53296: { message: `Contract not stopped` },
 };
 
+const Counter_types: ABIType[] = [
+  {
+    name: "StateInit",
+    header: null,
+    fields: [
+      { name: "code", type: { kind: "simple", type: "cell", optional: false } },
+      { name: "data", type: { kind: "simple", type: "cell", optional: false } },
+    ],
+  },
+  {
+    name: "Context",
+    header: null,
+    fields: [
+      { name: "bounced", type: { kind: "simple", type: "bool", optional: false } },
+      { name: "sender", type: { kind: "simple", type: "address", optional: false } },
+      { name: "value", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "raw", type: { kind: "simple", type: "slice", optional: false } },
+    ],
+  },
+  {
+    name: "SendParameters",
+    header: null,
+    fields: [
+      { name: "bounce", type: { kind: "simple", type: "bool", optional: false } },
+      { name: "to", type: { kind: "simple", type: "address", optional: false } },
+      { name: "value", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "mode", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "body", type: { kind: "simple", type: "cell", optional: true } },
+      { name: "code", type: { kind: "simple", type: "cell", optional: true } },
+      { name: "data", type: { kind: "simple", type: "cell", optional: true } },
+    ],
+  },
+  {
+    name: "ChangeOwner",
+    header: 2174598809,
+    fields: [
+      { name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } },
+      { name: "newOwner", type: { kind: "simple", type: "address", optional: false } },
+    ],
+  },
+  {
+    name: "ChangeOwnerOk",
+    header: 846932810,
+    fields: [
+      { name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } },
+      { name: "newOwner", type: { kind: "simple", type: "address", optional: false } },
+    ],
+  },
+  {
+    name: "Deploy",
+    header: 2490013878,
+    fields: [{ name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } }],
+  },
+  {
+    name: "DeployOk",
+    header: 2952335191,
+    fields: [{ name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } }],
+  },
+  {
+    name: "FactoryDeploy",
+    header: 1829761339,
+    fields: [
+      { name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } },
+      { name: "cashback", type: { kind: "simple", type: "address", optional: false } },
+    ],
+  },
+];
+
+const Counter_getters: ABIGetter[] = [
+  { name: "value", arguments: [], returnType: { kind: "simple", type: "int", optional: false, format: 257 } },
+  { name: "stopped", arguments: [], returnType: { kind: "simple", type: "bool", optional: false } },
+  { name: "owner", arguments: [], returnType: { kind: "simple", type: "address", optional: false } },
+];
+
+const Counter_receivers: ABIReceiver[] = [
+  { receiver: "internal", message: { kind: "text", text: "increment" } },
+  { receiver: "internal", message: { kind: "typed", type: "Deploy" } },
+  { receiver: "internal", message: { kind: "text", text: "Resume" } },
+  { receiver: "internal", message: { kind: "text", text: "Stop" } },
+];
+
 export class Counter implements Contract {
   static async init() {
     return await Counter_init();
@@ -407,10 +594,15 @@ export class Counter implements Contract {
       { name: "StateInit", header: null, fields: [] },
       { name: "Context", header: null, fields: [] },
       { name: "SendParameters", header: null, fields: [] },
-      { name: "ChangeOwner", header: 256331011, fields: [] },
+      { name: "ChangeOwner", header: 2174598809, fields: [] },
+      { name: "ChangeOwnerOk", header: 846932810, fields: [] },
       { name: "Deploy", header: 2490013878, fields: [] },
       { name: "DeployOk", header: 2952335191, fields: [] },
+      { name: "FactoryDeploy", header: 1829761339, fields: [] },
     ],
+    types: Counter_types,
+    getters: Counter_getters,
+    receivers: Counter_receivers,
     errors: Counter_errors,
   };
 

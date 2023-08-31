@@ -13,6 +13,9 @@ import {
   Sender,
   Contract,
   ContractABI,
+  ABIType,
+  ABIGetter,
+  ABIReceiver,
   TupleBuilder,
   DictionaryValue,
 } from "ton-core";
@@ -287,6 +290,55 @@ function dictValueParserDeployOk(): DictionaryValue<DeployOk> {
   };
 }
 
+export type FactoryDeploy = {
+  $$type: "FactoryDeploy";
+  queryId: bigint;
+  cashback: Address;
+};
+
+export function storeFactoryDeploy(src: FactoryDeploy) {
+  return (builder: Builder) => {
+    let b_0 = builder;
+    b_0.storeUint(1829761339, 32);
+    b_0.storeUint(src.queryId, 64);
+    b_0.storeAddress(src.cashback);
+  };
+}
+
+export function loadFactoryDeploy(slice: Slice) {
+  let sc_0 = slice;
+  if (sc_0.loadUint(32) !== 1829761339) {
+    throw Error("Invalid prefix");
+  }
+  let _queryId = sc_0.loadUintBig(64);
+  let _cashback = sc_0.loadAddress();
+  return { $$type: "FactoryDeploy" as const, queryId: _queryId, cashback: _cashback };
+}
+
+function loadTupleFactoryDeploy(source: TupleReader) {
+  let _queryId = source.readBigNumber();
+  let _cashback = source.readAddress();
+  return { $$type: "FactoryDeploy" as const, queryId: _queryId, cashback: _cashback };
+}
+
+function storeTupleFactoryDeploy(source: FactoryDeploy) {
+  let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
+  builder.writeAddress(source.cashback);
+  return builder.build();
+}
+
+function dictValueParserFactoryDeploy(): DictionaryValue<FactoryDeploy> {
+  return {
+    serialize: (src, buidler) => {
+      buidler.storeRef(beginCell().store(storeFactoryDeploy(src)).endCell());
+    },
+    parse: (src) => {
+      return loadFactoryDeploy(src.loadRef().beginParse());
+    },
+  };
+}
+
 export type Metadata = {
   $$type: "Metadata";
   symbol: string;
@@ -442,10 +494,10 @@ function initTokenParent_init_args(src: TokenParent_init_args) {
 
 async function TokenParent_init() {
   const __code = Cell.fromBase64(
-    "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",
+    "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",
   );
   const __system = Cell.fromBase64(
-    "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",
+    "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",
   );
   let builder = beginCell();
   builder.storeRef(__system);
@@ -486,6 +538,93 @@ const TokenParent_errors: { [key: number]: { message: string } } = {
   54615: { message: `Insufficient balance` },
 };
 
+const TokenParent_types: ABIType[] = [
+  {
+    name: "StateInit",
+    header: null,
+    fields: [
+      { name: "code", type: { kind: "simple", type: "cell", optional: false } },
+      { name: "data", type: { kind: "simple", type: "cell", optional: false } },
+    ],
+  },
+  {
+    name: "Context",
+    header: null,
+    fields: [
+      { name: "bounced", type: { kind: "simple", type: "bool", optional: false } },
+      { name: "sender", type: { kind: "simple", type: "address", optional: false } },
+      { name: "value", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "raw", type: { kind: "simple", type: "slice", optional: false } },
+    ],
+  },
+  {
+    name: "SendParameters",
+    header: null,
+    fields: [
+      { name: "bounce", type: { kind: "simple", type: "bool", optional: false } },
+      { name: "to", type: { kind: "simple", type: "address", optional: false } },
+      { name: "value", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "mode", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "body", type: { kind: "simple", type: "cell", optional: true } },
+      { name: "code", type: { kind: "simple", type: "cell", optional: true } },
+      { name: "data", type: { kind: "simple", type: "cell", optional: true } },
+    ],
+  },
+  {
+    name: "Deploy",
+    header: 2490013878,
+    fields: [{ name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } }],
+  },
+  {
+    name: "DeployOk",
+    header: 2952335191,
+    fields: [{ name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } }],
+  },
+  {
+    name: "FactoryDeploy",
+    header: 1829761339,
+    fields: [
+      { name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } },
+      { name: "cashback", type: { kind: "simple", type: "address", optional: false } },
+    ],
+  },
+  {
+    name: "Metadata",
+    header: null,
+    fields: [
+      { name: "symbol", type: { kind: "simple", type: "string", optional: false } },
+      { name: "totalSupply", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+    ],
+  },
+  {
+    name: "Transfer",
+    header: 1943715420,
+    fields: [
+      { name: "amount", type: { kind: "simple", type: "uint", optional: false, format: "coins" } },
+      { name: "to", type: { kind: "simple", type: "address", optional: false } },
+    ],
+  },
+  {
+    name: "InternalAddTokens",
+    header: 4162046107,
+    fields: [
+      { name: "amount", type: { kind: "simple", type: "uint", optional: false, format: "coins" } },
+      { name: "origin", type: { kind: "simple", type: "address", optional: false } },
+    ],
+  },
+];
+
+const TokenParent_getters: ABIGetter[] = [
+  { name: "metadata", arguments: [], returnType: { kind: "simple", type: "Metadata", optional: false } },
+  {
+    name: "childAddress",
+    arguments: [{ name: "owner", type: { kind: "simple", type: "address", optional: false } }],
+    returnType: { kind: "simple", type: "address", optional: false },
+  },
+];
+
+const TokenParent_receivers: ABIReceiver[] = [{ receiver: "internal", message: { kind: "typed", type: "Deploy" } }];
+
 export class TokenParent implements Contract {
   static async init() {
     return await TokenParent_init();
@@ -510,10 +649,14 @@ export class TokenParent implements Contract {
       { name: "SendParameters", header: null, fields: [] },
       { name: "Deploy", header: 2490013878, fields: [] },
       { name: "DeployOk", header: 2952335191, fields: [] },
+      { name: "FactoryDeploy", header: 1829761339, fields: [] },
       { name: "Metadata", header: null, fields: [] },
       { name: "Transfer", header: 1943715420, fields: [] },
       { name: "InternalAddTokens", header: 4162046107, fields: [] },
     ],
+    types: TokenParent_types,
+    getters: TokenParent_getters,
+    receivers: TokenParent_receivers,
     errors: TokenParent_errors,
   };
 

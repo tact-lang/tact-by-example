@@ -6,7 +6,7 @@ This data can later be analyzed off-chain and indexed by using [RPC API](https:/
 
 Consider for example a staking contract that wants to indicate how much time passed before users unstaked for analytics purposes. By analyzing this data, the developer can think of improvements to the product.
 
-One way to achieve this is by sending messages back to the sender using `reply()` or by sending messages to the zero address. These two methods work, but they are not the most efficient in terms of gas.
+One way to achieve this is by sending messages back to the sender using `self.reply()` or by sending messages to the zero address. These two methods work, but they are not the most efficient in terms of gas.
 
 The `emit()` function will output a message (binary or textual) from the contract. This message does not actually have a recipient and is very gas-efficient because it doesn't actually need to be delivered.
 

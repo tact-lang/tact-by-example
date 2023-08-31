@@ -13,6 +13,9 @@ import {
   Sender,
   Contract,
   ContractABI,
+  ABIType,
+  ABIGetter,
+  ABIReceiver,
   TupleBuilder,
   DictionaryValue,
 } from "ton-core";
@@ -201,33 +204,38 @@ function dictValueParserSendParameters(): DictionaryValue<SendParameters> {
 
 export type ChangeOwner = {
   $$type: "ChangeOwner";
+  queryId: bigint;
   newOwner: Address;
 };
 
 export function storeChangeOwner(src: ChangeOwner) {
   return (builder: Builder) => {
     let b_0 = builder;
-    b_0.storeUint(256331011, 32);
+    b_0.storeUint(2174598809, 32);
+    b_0.storeUint(src.queryId, 64);
     b_0.storeAddress(src.newOwner);
   };
 }
 
 export function loadChangeOwner(slice: Slice) {
   let sc_0 = slice;
-  if (sc_0.loadUint(32) !== 256331011) {
+  if (sc_0.loadUint(32) !== 2174598809) {
     throw Error("Invalid prefix");
   }
+  let _queryId = sc_0.loadUintBig(64);
   let _newOwner = sc_0.loadAddress();
-  return { $$type: "ChangeOwner" as const, newOwner: _newOwner };
+  return { $$type: "ChangeOwner" as const, queryId: _queryId, newOwner: _newOwner };
 }
 
 function loadTupleChangeOwner(source: TupleReader) {
+  let _queryId = source.readBigNumber();
   let _newOwner = source.readAddress();
-  return { $$type: "ChangeOwner" as const, newOwner: _newOwner };
+  return { $$type: "ChangeOwner" as const, queryId: _queryId, newOwner: _newOwner };
 }
 
 function storeTupleChangeOwner(source: ChangeOwner) {
   let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
   builder.writeAddress(source.newOwner);
   return builder.build();
 }
@@ -239,6 +247,55 @@ function dictValueParserChangeOwner(): DictionaryValue<ChangeOwner> {
     },
     parse: (src) => {
       return loadChangeOwner(src.loadRef().beginParse());
+    },
+  };
+}
+
+export type ChangeOwnerOk = {
+  $$type: "ChangeOwnerOk";
+  queryId: bigint;
+  newOwner: Address;
+};
+
+export function storeChangeOwnerOk(src: ChangeOwnerOk) {
+  return (builder: Builder) => {
+    let b_0 = builder;
+    b_0.storeUint(846932810, 32);
+    b_0.storeUint(src.queryId, 64);
+    b_0.storeAddress(src.newOwner);
+  };
+}
+
+export function loadChangeOwnerOk(slice: Slice) {
+  let sc_0 = slice;
+  if (sc_0.loadUint(32) !== 846932810) {
+    throw Error("Invalid prefix");
+  }
+  let _queryId = sc_0.loadUintBig(64);
+  let _newOwner = sc_0.loadAddress();
+  return { $$type: "ChangeOwnerOk" as const, queryId: _queryId, newOwner: _newOwner };
+}
+
+function loadTupleChangeOwnerOk(source: TupleReader) {
+  let _queryId = source.readBigNumber();
+  let _newOwner = source.readAddress();
+  return { $$type: "ChangeOwnerOk" as const, queryId: _queryId, newOwner: _newOwner };
+}
+
+function storeTupleChangeOwnerOk(source: ChangeOwnerOk) {
+  let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
+  builder.writeAddress(source.newOwner);
+  return builder.build();
+}
+
+function dictValueParserChangeOwnerOk(): DictionaryValue<ChangeOwnerOk> {
+  return {
+    serialize: (src, buidler) => {
+      buidler.storeRef(beginCell().store(storeChangeOwnerOk(src)).endCell());
+    },
+    parse: (src) => {
+      return loadChangeOwnerOk(src.loadRef().beginParse());
     },
   };
 }
@@ -331,6 +388,55 @@ function dictValueParserDeployOk(): DictionaryValue<DeployOk> {
   };
 }
 
+export type FactoryDeploy = {
+  $$type: "FactoryDeploy";
+  queryId: bigint;
+  cashback: Address;
+};
+
+export function storeFactoryDeploy(src: FactoryDeploy) {
+  return (builder: Builder) => {
+    let b_0 = builder;
+    b_0.storeUint(1829761339, 32);
+    b_0.storeUint(src.queryId, 64);
+    b_0.storeAddress(src.cashback);
+  };
+}
+
+export function loadFactoryDeploy(slice: Slice) {
+  let sc_0 = slice;
+  if (sc_0.loadUint(32) !== 1829761339) {
+    throw Error("Invalid prefix");
+  }
+  let _queryId = sc_0.loadUintBig(64);
+  let _cashback = sc_0.loadAddress();
+  return { $$type: "FactoryDeploy" as const, queryId: _queryId, cashback: _cashback };
+}
+
+function loadTupleFactoryDeploy(source: TupleReader) {
+  let _queryId = source.readBigNumber();
+  let _cashback = source.readAddress();
+  return { $$type: "FactoryDeploy" as const, queryId: _queryId, cashback: _cashback };
+}
+
+function storeTupleFactoryDeploy(source: FactoryDeploy) {
+  let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
+  builder.writeAddress(source.cashback);
+  return builder.build();
+}
+
+function dictValueParserFactoryDeploy(): DictionaryValue<FactoryDeploy> {
+  return {
+    serialize: (src, buidler) => {
+      buidler.storeRef(beginCell().store(storeFactoryDeploy(src)).endCell());
+    },
+    parse: (src) => {
+      return loadFactoryDeploy(src.loadRef().beginParse());
+    },
+  };
+}
+
 type Counter_init_args = {
   $$type: "Counter_init_args";
 };
@@ -343,10 +449,10 @@ function initCounter_init_args(src: Counter_init_args) {
 
 async function Counter_init() {
   const __code = Cell.fromBase64(
-    "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",
+    "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",
   );
   const __system = Cell.fromBase64(
-    "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",
+    "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",
   );
   let builder = beginCell();
   builder.storeRef(__system);
@@ -383,6 +489,86 @@ const Counter_errors: { [key: number]: { message: string } } = {
   137: { message: `Masterchain support is not enabled for this contract` },
 };
 
+const Counter_types: ABIType[] = [
+  {
+    name: "StateInit",
+    header: null,
+    fields: [
+      { name: "code", type: { kind: "simple", type: "cell", optional: false } },
+      { name: "data", type: { kind: "simple", type: "cell", optional: false } },
+    ],
+  },
+  {
+    name: "Context",
+    header: null,
+    fields: [
+      { name: "bounced", type: { kind: "simple", type: "bool", optional: false } },
+      { name: "sender", type: { kind: "simple", type: "address", optional: false } },
+      { name: "value", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "raw", type: { kind: "simple", type: "slice", optional: false } },
+    ],
+  },
+  {
+    name: "SendParameters",
+    header: null,
+    fields: [
+      { name: "bounce", type: { kind: "simple", type: "bool", optional: false } },
+      { name: "to", type: { kind: "simple", type: "address", optional: false } },
+      { name: "value", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "mode", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "body", type: { kind: "simple", type: "cell", optional: true } },
+      { name: "code", type: { kind: "simple", type: "cell", optional: true } },
+      { name: "data", type: { kind: "simple", type: "cell", optional: true } },
+    ],
+  },
+  {
+    name: "ChangeOwner",
+    header: 2174598809,
+    fields: [
+      { name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } },
+      { name: "newOwner", type: { kind: "simple", type: "address", optional: false } },
+    ],
+  },
+  {
+    name: "ChangeOwnerOk",
+    header: 846932810,
+    fields: [
+      { name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } },
+      { name: "newOwner", type: { kind: "simple", type: "address", optional: false } },
+    ],
+  },
+  {
+    name: "Deploy",
+    header: 2490013878,
+    fields: [{ name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } }],
+  },
+  {
+    name: "DeployOk",
+    header: 2952335191,
+    fields: [{ name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } }],
+  },
+  {
+    name: "FactoryDeploy",
+    header: 1829761339,
+    fields: [
+      { name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } },
+      { name: "cashback", type: { kind: "simple", type: "address", optional: false } },
+    ],
+  },
+];
+
+const Counter_getters: ABIGetter[] = [
+  { name: "value", arguments: [], returnType: { kind: "simple", type: "int", optional: false, format: 257 } },
+  { name: "owner", arguments: [], returnType: { kind: "simple", type: "address", optional: false } },
+];
+
+const Counter_receivers: ABIReceiver[] = [
+  { receiver: "internal", message: { kind: "text", text: "increment" } },
+  { receiver: "internal", message: { kind: "text", text: "double" } },
+  { receiver: "internal", message: { kind: "typed", type: "Deploy" } },
+  { receiver: "internal", message: { kind: "typed", type: "ChangeOwner" } },
+];
+
 export class Counter implements Contract {
   static async init() {
     return await Counter_init();
@@ -405,10 +591,15 @@ export class Counter implements Contract {
       { name: "StateInit", header: null, fields: [] },
       { name: "Context", header: null, fields: [] },
       { name: "SendParameters", header: null, fields: [] },
-      { name: "ChangeOwner", header: 256331011, fields: [] },
+      { name: "ChangeOwner", header: 2174598809, fields: [] },
+      { name: "ChangeOwnerOk", header: 846932810, fields: [] },
       { name: "Deploy", header: 2490013878, fields: [] },
       { name: "DeployOk", header: 2952335191, fields: [] },
+      { name: "FactoryDeploy", header: 1829761339, fields: [] },
     ],
+    types: Counter_types,
+    getters: Counter_getters,
+    receivers: Counter_receivers,
     errors: Counter_errors,
   };
 

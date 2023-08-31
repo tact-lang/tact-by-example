@@ -77,7 +77,7 @@ contract TokenChild {
             code: init.code,                // deploy the child if needed
             data: init.data
         });
-        reply("transferred".asComment());
+        self.reply("transferred".asComment());
     }
 
     // internal message sent by one child to another to update balances

@@ -26,7 +26,7 @@ contract TodoChild {
         // only the real parent can get here
         dump(self.seqno);
         dump("handling hi from parent");
-        reply(HiFromChild{fromSeqno: self.seqno, greeting: "sup"}.toCell());
+        self.reply(HiFromChild{fromSeqno: self.seqno, greeting: "sup"}.toCell());
     }
 }
 

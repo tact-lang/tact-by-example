@@ -16,7 +16,7 @@ trait Trackable with Ownable {          // your new trait may rely on other trai
     receive("reset stats") {            // your new trait may handle specific messages
         self.requireOwner();
         self.numMessagesReceived = 0;
-        reply("reset done".asComment());
+        self.reply("reset done".asComment());
     }
 
     // Getters

@@ -22,7 +22,7 @@ contract TodoChild {
     receive(msg: HiFromParent) {
         dump(self.seqno);
         dump("handling hi from parent");
-        reply(HiFromChild{fromSeqno: self.seqno, greeting: "sup"}.toCell());
+        self.reply(HiFromChild{fromSeqno: self.seqno, greeting: "sup"}.toCell());
     }
 }
 
