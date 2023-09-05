@@ -19,12 +19,12 @@ contract Counter with Deployable {
     // step 6: this contract allows anyone to ask it to increment by 1 (ie. the other contract)
     receive("increment") {
         self.val = self.val + 1;
-        reply(CounterValue{value: self.val}.toCell());
+        self.reply(CounterValue{value: self.val}.toCell());
     }
 
     // step 3: this contract replies with its current value to anyone asking (ie. the other contract)
     receive("query") {
-        reply(CounterValue{value: self.val}.toCell());
+        self.reply(CounterValue{value: self.val}.toCell());
     }
 
     get fun value(): Int {

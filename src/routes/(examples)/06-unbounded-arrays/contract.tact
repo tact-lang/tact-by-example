@@ -35,7 +35,7 @@ contract TodoParent with Deployable, Ownable {
             code: init.code,                // deploy the child
             data: init.data
         });
-        reply(NewTodoResponse{seqno: self.numTodos}.toCell()); // this will return excess gas to sender
+        self.reply(NewTodoResponse{seqno: self.numTodos}.toCell()); // this will return excess gas to sender
     }
 
     // only the owner can mark a todo as completed

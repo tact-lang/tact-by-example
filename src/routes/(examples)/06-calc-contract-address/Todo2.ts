@@ -13,6 +13,9 @@ import {
   Sender,
   Contract,
   ContractABI,
+  ABIType,
+  ABIGetter,
+  ABIReceiver,
   TupleBuilder,
   DictionaryValue,
 } from "ton-core";
@@ -287,6 +290,55 @@ function dictValueParserDeployOk(): DictionaryValue<DeployOk> {
   };
 }
 
+export type FactoryDeploy = {
+  $$type: "FactoryDeploy";
+  queryId: bigint;
+  cashback: Address;
+};
+
+export function storeFactoryDeploy(src: FactoryDeploy) {
+  return (builder: Builder) => {
+    let b_0 = builder;
+    b_0.storeUint(1829761339, 32);
+    b_0.storeUint(src.queryId, 64);
+    b_0.storeAddress(src.cashback);
+  };
+}
+
+export function loadFactoryDeploy(slice: Slice) {
+  let sc_0 = slice;
+  if (sc_0.loadUint(32) !== 1829761339) {
+    throw Error("Invalid prefix");
+  }
+  let _queryId = sc_0.loadUintBig(64);
+  let _cashback = sc_0.loadAddress();
+  return { $$type: "FactoryDeploy" as const, queryId: _queryId, cashback: _cashback };
+}
+
+function loadTupleFactoryDeploy(source: TupleReader) {
+  let _queryId = source.readBigNumber();
+  let _cashback = source.readAddress();
+  return { $$type: "FactoryDeploy" as const, queryId: _queryId, cashback: _cashback };
+}
+
+function storeTupleFactoryDeploy(source: FactoryDeploy) {
+  let builder = new TupleBuilder();
+  builder.writeNumber(source.queryId);
+  builder.writeAddress(source.cashback);
+  return builder.build();
+}
+
+function dictValueParserFactoryDeploy(): DictionaryValue<FactoryDeploy> {
+  return {
+    serialize: (src, buidler) => {
+      buidler.storeRef(beginCell().store(storeFactoryDeploy(src)).endCell());
+    },
+    parse: (src) => {
+      return loadFactoryDeploy(src.loadRef().beginParse());
+    },
+  };
+}
+
 type Todo2_init_args = {
   $$type: "Todo2_init_args";
 };
@@ -299,10 +351,10 @@ function initTodo2_init_args(src: Todo2_init_args) {
 
 async function Todo2_init() {
   const __code = Cell.fromBase64(
-    "te6ccgECFAEAAu4AART/APSkE/S88sgLAQIBYgIDApTQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxZ2zwwyPhDAcx/AcoAAQHLP8ntVA4EAgEgBwgBmHAh10nCH5UwINcLH94Cklt/4AGCEJRqmLa6jq3THwGCEJRqmLa68uCB0z8BMcgBghCv+Q9XWMsfyz/Jf/hCcFgDgEIBbW3bPH/gMHAFAcrIcQHKAVAHAcoAcAHKAlAFINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WUAP6AnABymgjbrORf5MkbrPilzMzAXABygDjDSFus5x/AcoAASBu8tCAAcyVMXABygDiyQH7AAYAmH8BygDIcAHKAHABygAkbrOdfwHKAAQgbvLQgFAEzJY0A3ABygDiJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4nABygACfwHKAALJWMwCD718Ltnm2eGMDgkCASAKCwAE+CgCASAMDQIBSBITAg+3a/tnm2eGMA4PALm3ejBOC52Hq6WVz2PQnYc6yVCjbNBOE7rGpaVsj5ZkWnXlv74sRzBOBAq4A3AM7HKZywdVyOS2WHBOA3qTvfKost446np7wKs4ZNBOE7Lpy1Zp2W5nQdLNsozdFJABPO1E0NQB+GPSAAGU0z8BMeAw+CjXCwqDCbry4InbPBABivhD2zxwWchwAcsBcwHLAXABywASzMzJ+QDIcgHLAXABywASygfL/8nQINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiBEAAnIAiND0BDBtIYFrxQGAEPQPb6Hy4IcBgWvFIgKAEPQXAoFbpgGAEPQPb6Hy4IcSgVumAQKAEPQXyAHI9ADJAcxwAcoAbTDJABGwr7tRNDSAAGAAdbJu40NWlwZnM6Ly9RbVRTVnNlUVlzUlFjdUxOMUozb21zblQ2Q2dQWUpnZk1WZlBGNXhXU1Y1OWY3gg",
+    "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",
   );
   const __system = Cell.fromBase64(
-    "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",
+    "te6cckECJwEABJsAAQHAAQIBZhECAQW1eLADART/APSkE/S88sgLBAIBYg4FAgEgDQYCASAJBwIBSBgIAHWybuNDVpcGZzOi8vUW1kR00zSzJDeXFNRGIybkdKenZtR1pQUXF3cHp2ZHFLdlZBWURTd1dGQW9ONYIAIBIAoaAg+3a/tnm2eGMA8LAYr4Q9s8cFnIcAHLAXMBywFwAcsAEszMyfkAyHIBywFwAcsAEsoHy//J0CDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IgMAIjQ9AQwbSGBW6YBgBD0D2+h8uCHAYFbpiICgBD0FwKBa8UBgBD0D2+h8uCHEoFrxQECgBD0F8gByPQAyQHMcAHKAG0wyQIPvXwu2ebZ4YwPHwKY0AHQ0wMBcbCjAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IhUUFMDbwT4YQL4Yts8Wds88uCCyPhDAcx/AcoAAQHLP8ntVA8hATztRNDUAfhj0gABlNM/ATHgMPgo1wsKgwm68uCJ2zwQAAJxAQW3dNASART/APSkE/S88sgLEwIBYiAUAgEgHhUCASAZFgIBSBgXAHWybuNDVpcGZzOi8vUW1iYXhodnBKd2pCMXF1bmlqY0xXN3BvRU51Umtad3NkcHZieFg2MWVROXNSZoIAARsK+7UTQ0gABgAgEgGxoAubd6ME4LnYerpZXPY9CdhzrJUKNs0E4TusalpWyPlmRadeW/vixHME4ECrgDcAzscpnLB1XI5LZYcE4DepO98qiy3jjqenvAqzhk0E4TsunLVmnZbmdB0s2yjN0UkAIPt2v7Z5tnhjAlHAGK+EPbPHBZyHABywFzAcsBcAHLABLMzMn5AMhyAcsBcAHLABLKB8v/ydAg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIHQCI0PQEMG0hgWvFAYAQ9A9vofLghwGBa8UiAoAQ9BcCgVumAYAQ9A9vofLghxKBW6YBAoAQ9BfIAcj0AMkBzHABygBtMMkCD718Ltnm2eGMJR8ABPgoApjQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxZ2zzy4ILI+EMBzH8BygABAcs/ye1UJSEBigGSMH/gcCHXScIflTAg1wsf3oIQlGqYtrqOp9MfAYIQlGqYtrry4IHTPwExyAGCEK/5D1dYyx/LP8n4QgFwbds8f+AwcCIBOm1tIm6zmVsgbvLQgG8iAZEy4hAkcAMEgEJQI9s8IwHKyHEBygFQBwHKAHABygJQBSDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlAD+gJwAcpoI26zkX+TJG6z4pczMwFwAcoA4w0hbrOcfwHKAAEgbvLQgAHMlTFwAcoA4skB+wAkAJh/AcoAyHABygBwAcoAJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4iRus51/AcoABCBu8tCAUATMljQDcAHKAOJwAcoAAn8BygACyVjMATztRNDUAfhj0gABlNM/ATHgMPgo1wsKgwm68uCJ2zwmAAJytuyp7A==",
   );
   let builder = beginCell();
   builder.storeRef(__system);
@@ -339,6 +391,65 @@ const Todo2_errors: { [key: number]: { message: string } } = {
   137: { message: `Masterchain support is not enabled for this contract` },
 };
 
+const Todo2_types: ABIType[] = [
+  {
+    name: "StateInit",
+    header: null,
+    fields: [
+      { name: "code", type: { kind: "simple", type: "cell", optional: false } },
+      { name: "data", type: { kind: "simple", type: "cell", optional: false } },
+    ],
+  },
+  {
+    name: "Context",
+    header: null,
+    fields: [
+      { name: "bounced", type: { kind: "simple", type: "bool", optional: false } },
+      { name: "sender", type: { kind: "simple", type: "address", optional: false } },
+      { name: "value", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "raw", type: { kind: "simple", type: "slice", optional: false } },
+    ],
+  },
+  {
+    name: "SendParameters",
+    header: null,
+    fields: [
+      { name: "bounce", type: { kind: "simple", type: "bool", optional: false } },
+      { name: "to", type: { kind: "simple", type: "address", optional: false } },
+      { name: "value", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "mode", type: { kind: "simple", type: "int", optional: false, format: 257 } },
+      { name: "body", type: { kind: "simple", type: "cell", optional: true } },
+      { name: "code", type: { kind: "simple", type: "cell", optional: true } },
+      { name: "data", type: { kind: "simple", type: "cell", optional: true } },
+    ],
+  },
+  {
+    name: "Deploy",
+    header: 2490013878,
+    fields: [{ name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } }],
+  },
+  {
+    name: "DeployOk",
+    header: 2952335191,
+    fields: [{ name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } }],
+  },
+  {
+    name: "FactoryDeploy",
+    header: 1829761339,
+    fields: [
+      { name: "queryId", type: { kind: "simple", type: "uint", optional: false, format: 64 } },
+      { name: "cashback", type: { kind: "simple", type: "address", optional: false } },
+    ],
+  },
+];
+
+const Todo2_getters: ABIGetter[] = [
+  { name: "myAddress", arguments: [], returnType: { kind: "simple", type: "address", optional: false } },
+  { name: "otherAddress", arguments: [], returnType: { kind: "simple", type: "address", optional: false } },
+];
+
+const Todo2_receivers: ABIReceiver[] = [{ receiver: "internal", message: { kind: "typed", type: "Deploy" } }];
+
 export class Todo2 implements Contract {
   static async init() {
     return await Todo2_init();
@@ -363,7 +474,11 @@ export class Todo2 implements Contract {
       { name: "SendParameters", header: null, fields: [] },
       { name: "Deploy", header: 2490013878, fields: [] },
       { name: "DeployOk", header: 2952335191, fields: [] },
+      { name: "FactoryDeploy", header: 1829761339, fields: [] },
     ],
+    types: Todo2_types,
+    getters: Todo2_getters,
+    receivers: Todo2_receivers,
     errors: Todo2_errors,
   };
 

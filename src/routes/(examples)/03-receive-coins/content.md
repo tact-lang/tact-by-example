@@ -10,4 +10,4 @@ You can query the contract balance with `myBalance()` - note that the value is i
 
 If the transaction reverts, unused excess value will be sent back to sender on the *bounced* message.
 
-You can also refund the excess if the transaction succeeds by sending it back using `reply()` in a response message. This is the best way to guarantee senders are only paying for the exact gas that their message consumed.
+You can also refund the excess if the transaction succeeds by sending it back using `self.reply()` in a response message. This is the best way to guarantee senders are only paying for the exact gas that their message consumed.
