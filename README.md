@@ -1,3 +1,6 @@
+- [Changelog](/CHANGELOG.md)
+- [Tact TG Group](https://t.me/tactlang)
+
 ## Developing
 
 Once you've run `npm install` start a development server:
