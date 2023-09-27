@@ -56,11 +56,12 @@
             if (transaction.debugLogs) terminalLog(transaction.debugLogs);
             if (transaction.description.type == "generic") {
               if (transaction.description.computePhase.type == "vm") {
+                // get the computational result of the transaction
                 const compute = transaction.description.computePhase;
                 if (compute.exitCode == 4294967282) compute.exitCode = -14;
                 terminalLog(
-                  `Transaction executed: ${compute.success ? "success" : "error"}, ` +
-                    `exit code ${compute.exitCode}, gas ${shorten(compute.gasFees, "coins")}`,
+                  `Transaction Executed: ${compute.success ? "success" : "error"}, ` +
+                    `Exit Code: ${compute.exitCode}, Gas: ${shorten(compute.gasFees, "coins")}\n`,
                 );
                 let foundError = false;
                 for (const contractInstance of contractInstances) {
@@ -182,7 +183,7 @@
 
   async function runDeploy(deploy: () => Promise<[Contract[], { [address: string]: string }, SendMessageResult[]]>) {
     try {
-      terminalLog(`> Deploying contract:`);
+      terminalLog(`> 📝 Deploying contract:`);
       const [contracts, addresses, results] = await deploy();
       contractInstances = contracts;
       addressesNames = addresses;
@@ -195,7 +196,7 @@
 
   async function runGetter(name: string, getter: () => Promise<any>) {
     try {
-      terminalLog(`> Calling getter ${name}:`);
+      terminalLog(`> 🔍 Calling getter ${name}:`);
       const result = await getter();
       terminalLog(`Return value: ${convertToText(result)}`);
     } catch (e: any) {
@@ -206,7 +207,7 @@
 
   async function runMessage(name: string, message: () => Promise<SendMessageResult[]>) {
     try {
-      terminalLog(`> Sending message ${name}:`);
+      terminalLog(`> 📤 Sending message ${name}:`);
       const results = await message();
       terminalLogMessages(results);
     } catch (e: any) {
