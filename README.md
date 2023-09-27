@@ -1,7 +1,12 @@
-- [Changelog](/CHANGELOG.md)
-- [Tact TG Group](https://t.me/tactlang)
+- [🔍 Changelog](/CHANGELOG.md)
+- [🫂 TG Group](https://t.me/tactlang)
 
 ## Developing
+
+### About Tact Source Code
+
+1. Tact code is under the `src` directory. The `src` directory contains the following files: `src/routes/(examples)` - The source code for the examples.
+2. The terminal output is located in `src/routes/(examples)/+layout.svelte` file.
 
 Once you've run `npm install` start a development server:
 

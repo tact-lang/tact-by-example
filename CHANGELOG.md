@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Original goal is followed [Tact Compiler Changelog](https://github.com/tact-lang/tact/tree/main), and keep this project in sync. Enjoy! ❤️❤️❤️
 
+## [0.3.0] - 2023-09-27
+
+### Added
+
+- Emoji support in terminal log. (📝, 🔍, 📤)
+
+### Changed
+
+- Optimized `src/routes/(examples)/06-unbounded-arrays/content.md` text and add the callout blocks.
+
 ## [0.2.0] - 2023-09-08
 
 ### Added
