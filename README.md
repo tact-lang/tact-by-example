@@ -1,5 +1,5 @@
 - [🔍 Changelog](/CHANGELOG.md)
-- [🫂 TG Group](https://t.me/tactlang)
+- [🫂 Telegram Group Chat](https://t.me/tactlang)
 
 ## Developing
 

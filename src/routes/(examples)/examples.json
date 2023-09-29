@@ -1,6 +1,6 @@
 [
   {
-    "id": "01-hello-world",
+    "id": "00-hello-world",
     "name": "Hello World"
   },
   {
@@ -148,8 +148,8 @@
     "name": "Parent-Child Relationship"
   },
   {
-    "id": "06-communicating-children",
-    "name": "Communicating with Children"
+    "id": "06-communicating-subcontract",
+    "name": "Communicating with Sub-Contract"
   },
   {
     "id": "06-authenticating-children",
