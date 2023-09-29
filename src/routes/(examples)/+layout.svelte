@@ -61,7 +61,7 @@
                 if (compute.exitCode == 4294967282) compute.exitCode = -14;
                 terminalLog(
                   `Transaction Executed: ${compute.success ? "success" : "error"}, ` +
-                    `Exit Code: ${compute.exitCode}, Gas: ${shorten(compute.gasFees, "coins")}\n`,
+                    `Exit Code: ${compute.exitCode}, Gas: ${shorten(compute.gasFees, "coins")}`,
                 );
                 let foundError = false;
                 for (const contractInstance of contractInstances) {
@@ -69,7 +69,7 @@
                     if (compute.exitCode == -14) compute.exitCode = 13;
                     const message = contractInstance?.abi?.errors?.[compute.exitCode]?.message;
                     if (message) {
-                      terminalLog(`Error message: ${message}`);
+                      terminalLog(`🔴 Error message: ${message}\n`);
                       foundError = true;
                     }
                   }
@@ -130,6 +130,7 @@
             }
           }
         }
+        // terminalLog(``);
       }
     }
   }

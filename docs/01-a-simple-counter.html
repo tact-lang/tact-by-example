@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.47703ae1.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.8747ea26.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b4a3f239.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.511cbfba.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.7cfde2f3.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.2e63f0e3.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.04b535d2.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.d3ab02ad.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.2096c2f1.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.3f22c1aa.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.5f445bdf.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.650ab06c.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-01-a-simple-counter-page.svelte.b9ca6dec.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.78404594.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-01-a-simple-counter-page.svelte.87481c0f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.5a025de5.js">
   </head>
   <body>
     <div style="display: contents">
@@ -59,7 +59,15 @@
       <div class="sk-cube3 sk-cube"></div></div></div>
 
 
-<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><!-- HTML_TAG_END -->
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="hello-world">Hello World</h1>
+<p>This is probably the simplest possible Tact program. It will provide callers with the classic output &quot;hello world&quot;.</p>
+<p>Tact lets you write smart contracts. This code defines a single contract named <code>HelloWorld</code>. Smart contracts must be deployed to the blockchain network to be usable, try to deploy this contract by pressing the <span class="mdButton blue">Deploy</span> button.</p>
+<p>Contract deployments usually cost gas. This website deploys to an <a href="https://github.com/tact-lang/tact-emulator">emulator</a> of TON blockchain, so gas is emulated TON coin (which is free).</p>
+<p>If you&#39;re unfamilar with terms like <em>contract</em>, <em>deployment</em> and <em>gas</em>, please <a href="https://blog.ton.org/what_is_blockchain">read this post</a> first. It&#39;s a great introduction to all blockchain terminology you will need to learn Tact.</p>
+<h2 id="a-simple-interaction">A simple interaction</h2>
+<p>Contracts can have <em>getters</em> like <code>greeting()</code>. Getters are special external interface functions that allow users to query information from the contract. Try to call the getter by pressing the <span class="mdButton teal">Get greeting</span> button. Calling getters is free and does not cost gas.</p>
+<p>Don&#39;t worry if some things aren&#39;t clear now, we will dive into getters in more detail later.</p>
+<!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
       <a class="allExamples" href="all">All Examples</a></div></div>
@@ -103,6 +111,13 @@
 
             
 
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get greeting
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
             </div>
           <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
 </div>
@@ -113,7 +128,7 @@
 			
 			<script>
 				{
-					__sveltekit_fgun5i = {
+					__sveltekit_1mddt07 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -122,11 +137,11 @@
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.47703ae1.js"),
-						import("./_app/immutable/entry/app.7cfde2f3.js")
+						import("./_app/immutable/entry/start.8747ea26.js"),
+						import("./_app/immutable/entry/app.2e63f0e3.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_fgun5i.element, {
-							node_ids: [0, 2, 5],
+						kit.start(app, __sveltekit_1mddt07.element, {
+							node_ids: [0, 2, 6],
 							data,
 							form: null,
 							error: null

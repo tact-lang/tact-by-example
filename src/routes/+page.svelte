@@ -3,6 +3,6 @@
   import { onMount } from "svelte";
 
   onMount(() => {
-    goto("/01-hello-world", { replaceState: false });
+    goto("/00-hello-world", { replaceState: false });
   });
 </script>

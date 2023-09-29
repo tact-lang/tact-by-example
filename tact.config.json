@@ -1,8 +1,8 @@
 {
   "projects": [
     {
-      "name": "01-hello-world",
-      "path": "./src/routes/(examples)/01-hello-world/contract.tact",
+      "name": "00-hello-world",
+      "path": "./src/routes/(examples)/00-hello-world/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true
@@ -297,8 +297,8 @@
       }
     },
     {
-      "name": "06-communicating-children",
-      "path": "./src/routes/(examples)/06-communicating-children/contract.tact",
+      "name": "06-communicating-subcontract",
+      "path": "./src/routes/(examples)/06-communicating-subcontract/contract.tact",
       "output": "./tact-output",
       "options": {
         "debug": true

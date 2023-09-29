@@ -13,3 +13,8 @@ It is best practice to add this authentication to every message coming from a pa
 Try pressing the <span class="mdButton grape">Send HiFromChild{1}</span> button. This will send the parent an impersonated `HiFromChild` message, but from some user, not from a real child.
 
 Since this code is now protected, it will notice that the sender is incorrect and reject the message with an access denied error.
+
+<div style="padding-left: 1em; margin: 1em 0; position: relative;">
+    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
+    <strong>Info</strong>: Having a error break in the `Send HiFromChild{1}` button is expected. Because only the message from the child can be accepted.
+</div>
