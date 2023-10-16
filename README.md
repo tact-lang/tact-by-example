@@ -7,6 +7,9 @@
 
 1. Tact code is under the `src` directory. The `src` directory contains the following files: `src/routes/(examples)` - The source code for the examples.
 2. The terminal output is located in `src/routes/(examples)/+layout.svelte` file.
+3. Run `npm run tact-build` to compile the Tact code you just added.
+
+### Running the project
 
 Once you've run `npm install` start a development server:
 

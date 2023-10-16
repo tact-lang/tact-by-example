@@ -327,6 +327,14 @@
       "options": {
         "debug": true
       }
+    },
+    {
+      "name": "07-jetton-standard",
+      "path": "./src/routes/(examples)/07-jetton-standard/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
     }
   ]
 }
