@@ -34,11 +34,11 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.ec35243e.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.31b0bf06.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0c49780f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.4a86d88e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.d3cb7c1d.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.8558dfc5.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
@@ -46,7 +46,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-02-bools-page.svelte.d829d2e7.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-02-bools-page.svelte.06b72b09.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
@@ -70,7 +70,7 @@
 </ul>
 <p>There are multiple ways on TON to <a href="https://docs.ton.org/learn/overviews/addresses#bounceable-vs-non-bounceable-addresses">represent</a> the same address. Notice in the contract that the bouncable and non-bouncable representations of the same address actually generate the exact same value. Inside the contract, it doesn&#39;t matter which representation you use.</p>
 <h2 id="state-costs">State costs</h2>
-<p>Most addresses take 264-bit to store (8-bit for the workchain id and 256-bit for the account id). This means that storing 1000 addresses <a href="https://ton.org/docs/develop/smart-contracts/fees#how-to-calculate-fees">costs</a> about 0.189 TON per year.</p>
+<p>Most addresses take 264-bit to store (8-bit for the workchain id and 256-bit for the account id). <strong>This means that storing 1000 addresses <a href="https://ton.org/docs/develop/smart-contracts/fees#how-to-calculate-fees">costs</a> about 0.189 TON per year.</strong></p>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -161,7 +161,7 @@ contract Bools with Deployable {
 			
 			<script>
 				{
-					__sveltekit_16o0bmh = {
+					__sveltekit_wfqjrz = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -170,10 +170,10 @@ contract Bools with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.ec35243e.js"),
-						import("./_app/immutable/entry/app.d3cb7c1d.js")
+						import("./_app/immutable/entry/start.31b0bf06.js"),
+						import("./_app/immutable/entry/app.8558dfc5.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_16o0bmh.element, {
+						kit.start(app, __sveltekit_wfqjrz.element, {
 							node_ids: [0, 2, 9],
 							data,
 							form: null,

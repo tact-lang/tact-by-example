@@ -34,11 +34,11 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.ec35243e.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.31b0bf06.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0c49780f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.4a86d88e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.d3cb7c1d.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.8558dfc5.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
@@ -46,7 +46,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-02-integer-ops-page.svelte.9a135b33.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-02-integer-ops-page.svelte.71d720f9.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
@@ -62,8 +62,8 @@
 <div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="constants">Constants</h1>
 <p>Unlike variables, constants cannot change. Their values are calculated in <em>compile-time</em> and cannot change during execution.</p>
 <p>Constant initializations must be relatively simple and only rely on values known during compilation. If you add two numbers for example, the compiler will calculate the result during build and put the result in your compiled code.</p>
-<p>You can read constants both in <em>receivers</em> and in <em>getters</em>.</p>
-<p>Unlike contract variables, constants don&#39;t consume space in persistent state. Their values are stored directly in the code cell.</p>
+<p>You can read constants both in <strong><em>receivers</em></strong> and in <strong><em>getters</em></strong>.</p>
+<p>Unlike contract variables, <strong>constants don&#39;t consume space in persistent state. Their values are stored directly in the code cell.</strong></p>
 <p>There isn&#39;t much difference between constants defined outside of a contract and inside the contract. Those defined outside can be used by other contracts in your project.</p>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
@@ -150,7 +150,7 @@ contract Integers with Deployable {
 			
 			<script>
 				{
-					__sveltekit_16o0bmh = {
+					__sveltekit_wfqjrz = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -159,10 +159,10 @@ contract Integers with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.ec35243e.js"),
-						import("./_app/immutable/entry/app.d3cb7c1d.js")
+						import("./_app/immutable/entry/start.31b0bf06.js"),
+						import("./_app/immutable/entry/app.8558dfc5.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_16o0bmh.element, {
+						kit.start(app, __sveltekit_wfqjrz.element, {
 							node_ids: [0, 2, 11],
 							data,
 							form: null,

@@ -34,11 +34,11 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.ec35243e.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.31b0bf06.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0c49780f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.4a86d88e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.d3cb7c1d.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.8558dfc5.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
@@ -46,7 +46,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-02-integers-page.svelte.65cc7e27.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-02-integers-page.svelte.98d16c1c.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
@@ -60,12 +60,14 @@
 
 
 <div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="integer-operations">Integer Operations</h1>
-<p>Since all runtime calculations with integers are done at 257-bit, overflows are quite rare. An overflow can happen if the result of a math operation is too big to fit. For example, multiplying 2^256 by 2^256 will not fit within 257-bit.</p>
-<p>Nevertheless, if any math operation overflows, an exception will be thrown and the transaction will fail. You can say that Tact&#39;s math is safe by default.</p>
-<p>There&#39;s no problem with mixing variables of different state sizes in the same calculation. In runtime, they are all the same type - always 257-bit signed. This is the largest supported integer type, so they all fit.</p>
-<h2 id="decimal-point-with-integers">Decimal point with integers</h2>
-<p>Arithmetics with dollars, for example, requires 2 decimal places. How can we represent the number <code>1.25</code> if we can only work with integers? The answer is to work with <em>cents</em>. So <code>1.25</code> becomes <code>125</code>. We just remember that the two lowest digits are coming after the decimal point.</p>
-<p>In the same way, working with TON coins has 9 decimal places instead of 2. So the amount 1.25 TON which can be coded in Tact as <code>ton(&quot;1.25&quot;)</code> is actually the number <code>1250000000</code> - we call these <em>nano-tons</em> instead of cents.</p>
+<p>Since all runtime calculations with integers are done at 257-bit, overflows are quite rare. An overflow can happen if the result of a math operation is too big to fit.</p>
+<p><strong>For example, multiplying 2^256 by 2^256 will not fit within 257-bit.</strong></p>
+<p>Nevertheless, if any math operation overflows, an exception will be thrown, and the transaction will fail. You could say that Tact&#39;s math is safe by default.</p>
+<p>There is no problem with mixing variables of different state sizes in the same calculation. At runtime, they are all the same type—<strong>always 257-bit signed</strong>. This is the largest supported integer type, so they all fit.</p>
+<h2 id="decimal-point-with-integers">Decimal Point with Integers</h2>
+<p>Arithmetic with dollars, for example, requires two decimal places. How can we represent the number <code>1.25</code> if we are only able to work with integers? The solution is to work with <em>cents</em>. In this way, <code>1.25</code> becomes <code>125</code>. We simply remember that the two rightmost digits represent the numbers after the decimal point.</p>
+<p>Similarly, working with TON coins requires nine decimal places instead of two. Therefore, the amount of 1.25 TON, which can be represented in Tact as <code>ton(&quot;1.25&quot;)</code>, is actually the number <code>1250000000</code>.</p>
+<p><strong>We refer to these as <em>nano-tons</em> rather than cents.</strong></p>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -150,7 +152,7 @@ contract Integers with Deployable {
 			
 			<script>
 				{
-					__sveltekit_16o0bmh = {
+					__sveltekit_wfqjrz = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -159,10 +161,10 @@ contract Integers with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.ec35243e.js"),
-						import("./_app/immutable/entry/app.d3cb7c1d.js")
+						import("./_app/immutable/entry/start.31b0bf06.js"),
+						import("./_app/immutable/entry/app.8558dfc5.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_16o0bmh.element, {
+						kit.start(app, __sveltekit_wfqjrz.element, {
 							node_ids: [0, 2, 12],
 							data,
 							form: null,

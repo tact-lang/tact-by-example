@@ -34,11 +34,11 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.ec35243e.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.31b0bf06.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0c49780f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.4a86d88e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.d3cb7c1d.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.8558dfc5.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
@@ -46,7 +46,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-structs-page.svelte.54c6bc94.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-structs-page.svelte.d8304256.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
@@ -65,6 +65,10 @@
 <p>The sender during execution of the <code>init()</code> method of the contract is the address who deployed the contract.</p>
 <h2 id="authenticating-messages">Authenticating messages</h2>
 <p>The main way to authenticate an incoming message, particularly for priviliges actions, is to verify the sender. This field is secure and impossible to fake.</p>
+<div style="padding-left: 1em; margin: 1em 0; position: relative;">
+    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
+    <strong>Info</strong>: More detail about context can find in here: <a href="https://docs.tact-lang.org/language/ref/common#context">context()</a>
+</div>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -175,7 +179,7 @@ contract Structs with Deployable {
 			
 			<script>
 				{
-					__sveltekit_16o0bmh = {
+					__sveltekit_wfqjrz = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -184,10 +188,10 @@ contract Structs with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.ec35243e.js"),
-						import("./_app/immutable/entry/app.d3cb7c1d.js")
+						import("./_app/immutable/entry/start.31b0bf06.js"),
+						import("./_app/immutable/entry/app.8558dfc5.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_16o0bmh.element, {
+						kit.start(app, __sveltekit_wfqjrz.element, {
 							node_ids: [0, 2, 23],
 							data,
 							form: null,

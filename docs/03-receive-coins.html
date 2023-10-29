@@ -34,11 +34,11 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.ec35243e.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.31b0bf06.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0c49780f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.4a86d88e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.d3cb7c1d.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.8558dfc5.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
@@ -46,7 +46,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-receive-coins-page.svelte.1125fa95.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-receive-coins-page.svelte.4a6d677b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
@@ -60,19 +60,20 @@
 
 
 <div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="messages-between-contracts">Messages Between Contracts</h1>
-<p>Different contracts can only communicate with each other by sending each other messages. This example shows two separate contracts that work together:</p>
+<p>Different contracts can communicate with each other only by sending messages. This example showcases two separate contracts working in tandem:</p>
 <ul>
-<li><p><code>Counter</code> - Our simple counter that can only increment by 1.</p>
-</li>
-<li><p><code>BulkAdder</code> - This contract will tell <code>Counter</code> to increment multiple times.</p>
-</li>
+<li><code>Counter</code> - A simple counter that can increment only by 1.</li>
+<li><code>BulkAdder</code> - This contract instructs <code>Counter</code> to increment multiple times.</li>
 </ul>
-<p>Press the <span class="mdButton blue">Deploy</span> button to deploy both. Then, to make the counter reach 5, send BulkAdder the <code>Reach</code> message by pressing the <span class="mdButton grape">Send Reach{5}</span> button.</p>
-<p>Notice how many messages are sent back and forth between the two contracts as a result. Each of these messages is processed as a <em>separate</em> transaction! Also notice that BulkAdder can&#39;t call a <em>getter</em> on Counter, it must send the <code>query</code> message instead.</p>
-<h2 id="whos-paying-for-gas">Who&#39;s paying for gas</h2>
-<p>The default behavior is that the original sender will pay for the entire cascade of messages that they triggered. This is funded from the original TON coin value sent on the first <code>Reach</code> message.</p>
-<p>Under the hood, this works by each message handler sending the remaining excess TON coin value it received on the next message it sends out.</p>
-<p><strong>Challenge:</strong> modify the code to refund the original sender any unused excess gas.</p>
+<p>Click the <span class="mdButton blue">Deploy</span> button to deploy both contracts. To make the counter reach 5, send the <code>Reach</code> message to BulkAdder by clicking the <span class="mdButton grape">Send Reach{5}</span> button.</p>
+<p>Observe the number of messages exchanged between the two contracts. Each message is processed as a <em>separate</em> transaction. Also note that BulkAdder cannot call a <em>getter</em> on Counter; it must send a <code>query</code> message instead.</p>
+<h2 id="whos-paying-for-gas">Who&#39;s Paying for Gas</h2>
+<p><strong>By default, the original sender is responsible for covering the gas costs of the entire cascade of messages they initiate.</strong> This is funded by the original TON coin value sent with the first <code>Reach</code> message.</p>
+<p>Internally, this is managed by each message handler forwarding the remaining excess TON coin value to the next message it sends.</p>
+<div style="padding-left: 1em; margin: 1em 0; position: relative;">
+    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: Purple;"></div>
+    <strong>Challenge</strong>:  Try to modify the code to refund the original sender any unused excess gas.
+</div>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -156,7 +157,7 @@ contract ReceiveCoins with Deployable {
 			
 			<script>
 				{
-					__sveltekit_16o0bmh = {
+					__sveltekit_wfqjrz = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -165,10 +166,10 @@ contract ReceiveCoins with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.ec35243e.js"),
-						import("./_app/immutable/entry/app.d3cb7c1d.js")
+						import("./_app/immutable/entry/start.31b0bf06.js"),
+						import("./_app/immutable/entry/app.8558dfc5.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_16o0bmh.element, {
+						kit.start(app, __sveltekit_wfqjrz.element, {
 							node_ids: [0, 2, 19],
 							data,
 							form: null,

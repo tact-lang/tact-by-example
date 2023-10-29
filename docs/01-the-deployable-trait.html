@@ -34,11 +34,11 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.ec35243e.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.31b0bf06.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0c49780f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.4a86d88e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.d3cb7c1d.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.8558dfc5.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
@@ -46,7 +46,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-01-the-deployable-trait-page.svelte.9e6b2cfe.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-01-the-deployable-trait-page.svelte.cab4baf4.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
@@ -64,8 +64,13 @@
 <p>This contract has a state variable <code>val</code> that persists between contract calls - the counter value. When persisted, this variable is encoded <code>as uint32</code> - a 32-bit unsigned integer. Contracts pay rent in proportion to the amount of persistent space they consume, so compact representations are encouraged.</p>
 <p>State variables should be initialized in <code>init()</code> that runs on deployment of the contract.</p>
 <h2 id="receiving-messages">Receiving messages</h2>
-<p>This contract can receive <em>messages</em> from users. Unlike getters that are just read-only, messages can do write operations and change the contract&#39;s persistent state. Incoming messages are processed in <code>receive()</code> methods as transactions and cost gas for the sender.</p>
+<p>This contract can receive <strong><em>messages</em></strong> from users.</p>
+<p>Unlike getters that are just read-only, messages can do write operations and change the contract&#39;s persistent state. Incoming messages are processed in <code>receive()</code> methods as transactions and cost gas for the sender.</p>
 <p>After deploying the contract, send the <code>increment</code> message by pressing the <span class="mdButton grape">Send increment</span> button in order to increase the counter value by one. Afterwards, call the getter <code>value()</code> to see that the value indeed changed.</p>
+<div style="padding-left: 1em; margin: 1em 0; position: relative;">
+    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
+    <strong>Info</strong>: We will learn more in details about "getter" functions in the next example.
+</div>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -134,7 +139,7 @@ contract Counter with Deployable {
 			
 			<script>
 				{
-					__sveltekit_16o0bmh = {
+					__sveltekit_wfqjrz = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -143,10 +148,10 @@ contract Counter with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.ec35243e.js"),
-						import("./_app/immutable/entry/app.d3cb7c1d.js")
+						import("./_app/immutable/entry/start.31b0bf06.js"),
+						import("./_app/immutable/entry/app.8558dfc5.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_16o0bmh.element, {
+						kit.start(app, __sveltekit_wfqjrz.element, {
 							node_ids: [0, 2, 7],
 							data,
 							form: null,
