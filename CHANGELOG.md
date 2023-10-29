@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Original goal is followed [Tact Compiler Changelog](https://github.com/tact-lang/tact/tree/main), and keep this project in sync. Enjoy! ❤️❤️❤️
 
+## [0.6.2] - 2023-10-30
+
+- Add 2 PRs from [Breakfast](https://github.com/topics/hacktoberfest)
+  - https://github.com/tact-lang/tact-by-example/commit/19288b393e07cbf14fa6bffec995eebdad7b06be
+  - https://github.com/tact-lang/tact-by-example/commit/eb8b47123218b24b5ecf8938eafe9ab31c0482d2
+- Modify and add the new content and fix the grammer errors
+
 ## [0.5.0] - 2023-10-05
 
 ### Added
