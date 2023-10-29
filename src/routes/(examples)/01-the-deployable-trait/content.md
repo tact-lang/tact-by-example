@@ -1,16 +1,20 @@
 # The Deployable Trait
 
-Tact doesn't support classical class inheritance, but contracts can implement *traits*. One of the commonly used traits is `Deployable`. It implements a simple receiver for the `Deploy` message which helps deploy contracts in a standard way.
+Tact doesn't support classical class inheritance, but contracts can implement **_traits_**.
 
-All contracts are deployed by sending them a message. This can be any message, but best practice is to designate the special `Deploy` message for this purpose.
+One commonly used trait is `Deployable`, which implements a simple receiver for the `Deploy` message. This helps deploy contracts in a standardized manner.
 
-This message has a single field, `queryId`, which is provided by the deployer (normally zero). If the deploy succeeds, the contract will reply with the message `DeployOk` and echo the same `queryId` in the response.
+All contracts are deployed by sending them a message. While any message can be used for this purpose, best practice is to use the special `Deploy` message.
+
+This message has a single field, `queryId`, provided by the deployer (usually set to zero). If the deployment succeeds, the contract will reply with a `DeployOk` message and echo the same `queryId` in the response.
+
+---
 
 If you're using Tact's [auto-generated](https://docs.tact-lang.org/tools/typescript#tact-contract-in-typescript) TypeScript classes to deploy, sending the deploy message should look like:
 
 ```ts
 const msg = { $$type: "Deploy", queryId: 0n };
- await contract.send(sender, { value: toNano(1) }, msg);
+await contract.send(sender, { value: toNano(1) }, msg);
 ```
 
-You can see the implementation of the trait [here](https://github.com/tact-lang/tact/blob/main/stdlib/libs/deploy.tact). Notice that the file *deploy.tact* needs to be imported from the standard library using the `import` keyword.
+You can see the implementation of the trait [here](https://github.com/tact-lang/tact/blob/main/stdlib/libs/deploy.tact). Notice that the file **_deploy.tact_** needs to be imported from the standard library using the `import` keyword.

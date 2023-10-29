@@ -2,7 +2,7 @@
 
 Getters are special contract functions that allow users to query information from the contract.
 
-Contract methods starting with the prefix `get fun` are all getters. You can define as many getters are you want. Each getter must also specify its return type - `counter()` for example returns an `Int`. 
+Contract methods starting with the prefix `get fun` are all getters. You can define as many getters are you want. Each getter must also specify its return type - `counter()` for example returns an `Int`.
 
 Calling getters is free and does not cost gas. The call is executed by a full node and doesn't go through consensus with all the validators nor is added to a new block.
 
@@ -12,6 +12,15 @@ If we were to omit the `get` keyword from the function declaration of a getter, 
 
 ## Getters between contracts
 
-A contract cannot execute a getter of another contract. Getters are only executable by end-users off-chain. Since contracts are running on-chain, they do not have access to each other's getters.
+**A contract cannot execute a getter of another contract.**
 
-So, if you can't call a getter, how can two contracts communicate? The only way for contracts to communicate on-chain is by sending messages to each other. Messages are handled in *receivers*.
+Getters are only executable by end-users off-chain. Since contracts are running on-chain, they do not have access to each other's getters.
+
+So, if you can't call a getter, how can two contracts communicate?
+
+The only way for contracts to communicate on-chain is by sending messages to each other. Messages are handled in _receivers_.
+
+<div style="padding-left: 1em; margin: 1em 0; position: relative;">
+    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
+    <strong>Info</strong>: TON Blockchain is an asynchronous blockchain, which means that smart contracts can interact with each other only by sending messages.
+</div>
