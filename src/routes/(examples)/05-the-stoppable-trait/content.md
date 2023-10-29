@@ -13,3 +13,9 @@ This trait implicitly adds the Ownable trait. Note that the Ownable trait doesn'
 ## How to use Stoppable
 
 Define state variables named `owner: Address` and `stopped: Bool` and call `self.requireNotStopped()` on actions that should be stopped.
+
+<div style="padding-left: 1em; margin: 1em 0; position: relative;">
+    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
+    <strong>Info</strong>: The stoppable trait is defined in the <a href="https://github.com/tact-lang/tact/blob/main/stdlib/libs/stoppable.tact">standard library</a>
+
+</div>

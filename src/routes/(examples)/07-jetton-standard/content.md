@@ -23,6 +23,6 @@ Excess gas from every operation is refunded to the original sender.
 
 <div style="padding-left: 1em; margin: 1em 0; position: relative;">
     <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
-    <strong>Info</strong>: TEP-74 is the Jetton Token Standard. Detail can check 
-    https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md
+    <strong>Info</strong>: TEP-74 is the Jetton Token Standard. Detail can check <a href="https://github.com/ton-blockchain/TEPs/blob/master/text/0074-jettons-standard.md">here</a>
+    
 </div>

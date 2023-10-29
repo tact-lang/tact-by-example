@@ -1,19 +1,21 @@
 # Messages Between Contracts
 
-Different contracts can only communicate with each other by sending each other messages. This example shows two separate contracts that work together:
+Different contracts can communicate with each other only by sending messages. This example showcases two separate contracts working in tandem:
 
-* `Counter` - Our simple counter that can only increment by 1.
+- `Counter` - A simple counter that can increment only by 1.
+- `BulkAdder` - This contract instructs `Counter` to increment multiple times.
 
-* `BulkAdder` - This contract will tell `Counter` to increment multiple times.
+Click the <span class="mdButton blue">Deploy</span> button to deploy both contracts. To make the counter reach 5, send the `Reach` message to BulkAdder by clicking the <span class="mdButton grape">Send Reach{5}</span> button.
 
-Press the <span class="mdButton blue">Deploy</span> button to deploy both. Then, to make the counter reach 5, send BulkAdder the `Reach` message by pressing the <span class="mdButton grape">Send Reach{5}</span> button.
+Observe the number of messages exchanged between the two contracts. Each message is processed as a _separate_ transaction. Also note that BulkAdder cannot call a _getter_ on Counter; it must send a `query` message instead.
 
-Notice how many messages are sent back and forth between the two contracts as a result. Each of these messages is processed as a *separate* transaction! Also notice that BulkAdder can't call a *getter* on Counter, it must send the `query` message instead.
+## Who's Paying for Gas
 
-## Who's paying for gas
+**By default, the original sender is responsible for covering the gas costs of the entire cascade of messages they initiate.** This is funded by the original TON coin value sent with the first `Reach` message.
 
-The default behavior is that the original sender will pay for the entire cascade of messages that they triggered. This is funded from the original TON coin value sent on the first `Reach` message.
+Internally, this is managed by each message handler forwarding the remaining excess TON coin value to the next message it sends.
 
-Under the hood, this works by each message handler sending the remaining excess TON coin value it received on the next message it sends out.
-
-**Challenge:** modify the code to refund the original sender any unused excess gas.
+<div style="padding-left: 1em; margin: 1em 0; position: relative;">
+    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: Purple;"></div>
+    <strong>Challenge</strong>:  Try to modify the code to refund the original sender any unused excess gas.
+</div>

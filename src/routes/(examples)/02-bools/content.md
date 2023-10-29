@@ -8,4 +8,4 @@ The only supported operations with booleans are `&&` `||` `!` - if you try to ad
 
 ## State costs
 
-Persisting bools to state is very space-efficient, they only take 1-bit. Storing 1000 bools in state [costs](https://ton.org/docs/develop/smart-contracts/fees#how-to-calculate-fees) about 0.00072 TON per year.
+Persisting bools to state is very space-efficient, they only take 1-bit. **Storing 1000 bools in state [costs](https://ton.org/docs/develop/smart-contracts/fees#how-to-calculate-fees) about 0.00072 TON per year.**
