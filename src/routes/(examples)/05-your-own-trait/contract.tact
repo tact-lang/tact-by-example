@@ -67,7 +67,7 @@ contract Counter with Deployable, Trackable {
     }
 
     // the trait allows us to override the default filtering behavior
-    overrides fun filterMessage(): Bool {
+    override fun filterMessage(): Bool {
         // our contract's custom filtering behavior is to remove all filters and count all messages
         return true;
     }
