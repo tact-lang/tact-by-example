@@ -10,4 +10,4 @@ This example shows how to write a new trait that adds simple analytics behavior 
 
 This trait also makes use of the `virtual` keyword which lets the contract relying on the trait override some of the trait's behaviors. In the example, the default filter behavior ignores messages from owner in the analytics.
 
-The contract relying on the trait can change this default behavior by specifying the `overrides` keyword and providing a new implementation to this method. In our case, the custom filter is to have no filters.
+The contract relying on the trait can change this default behavior by specifying the `override` keyword and providing a new implementation to this method. In our case, the custom filter is to have no filters.

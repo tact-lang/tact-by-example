@@ -297,7 +297,7 @@
     },
     "fun-declaration": {
       "name": "meta.function.tact",
-      "begin": "\\b(get|native|extends|mutates|virtual|overrides|fun)\\b",
+      "begin": "\\b(get|native|extends|mutates|virtual|override|fun)\\b",
       "beginCaptures": {
         "1": {
           "name": "storage.modifier.tact"
@@ -326,7 +326,7 @@
         },
         {
           "name": "storage.modifier.tact",
-          "match": "\\b(get|native|extends|mutates|virtual|overrides|fun)\\b"
+          "match": "\\b(get|native|extends|mutates|virtual|override|fun)\\b"
         },
         {
           "name": "meta.definition.function.tact entity.name.function.tact",
@@ -570,7 +570,7 @@
       "patterns": [
         {
           "name": "keyword.control.tact",
-          "match": "\\b(if|else|while|do|until|repeat|return|extends|mutates|virtual|overrides|native|let|const|fun|self|is|initOf|map|get|as)\\b"
+          "match": "\\b(if|else|while|do|until|repeat|return|extends|mutates|virtual|override|native|let|const|fun|self|is|initOf|map|get|as)\\b"
         },
         {
           "name": "keyword.operator",
