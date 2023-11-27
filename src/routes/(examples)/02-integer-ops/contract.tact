@@ -21,10 +21,10 @@ contract Integers with Deployable {
         i = self.i1 / 1000;                 // integer division (truncation toward zero), 3001 / 1000 = 3
         dump(i);
         
-        i = self.i1 >> 3;                   // shift right (multiply by 2^n)
+        i = self.i1 >> 3;                   // shift right (divide by 2^n)
         dump(i);
         
-        i = self.i1 << 2;                   // shift left (divide by 2^n)
+        i = self.i1 << 2;                   // shift left (multiply by 2^n)
         dump(i);
         
         i = min(self.i2, 11);               // minimum between two numbers
