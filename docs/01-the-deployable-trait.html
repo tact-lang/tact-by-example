@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.932e2960.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.b5438541.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0d6f68c3.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.25c14d13.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.92c75275.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.06a021a8.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.322916d1.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.d3ab02ad.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.2096c2f1.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.01f6cb21.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-01-the-deployable-trait-page.svelte.7ca70ba6.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.78404594.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-01-the-deployable-trait-page.svelte.cab4baf4.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
     <div style="display: contents">
@@ -59,14 +59,18 @@
       <div class="sk-cube3 sk-cube"></div></div></div>
 
 
-<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="hello-world">Hello World</h1>
-<p>This is probably the simplest possible Tact program. It will provide callers with the classic output &quot;hello world&quot;.</p>
-<p>Tact lets you write smart contracts. This code defines a single contract named <code>HelloWorld</code>. Smart contracts must be deployed to the blockchain network to be usable, try to deploy this contract by pressing the <span class="mdButton blue">Deploy</span> button.</p>
-<p>Contract deployments usually cost gas. This website deploys to an <a href="https://github.com/tact-lang/tact-emulator">emulator</a> of TON blockchain, so gas is emulated TON coin (which is free).</p>
-<p>If you&#39;re unfamilar with terms like <em>contract</em>, <em>deployment</em> and <em>gas</em>, please <a href="https://blog.ton.org/what_is_blockchain">read this post</a> first. It&#39;s a great introduction to all blockchain terminology you will need to learn Tact.</p>
-<h2 id="a-simple-interaction">A simple interaction</h2>
-<p>Contracts can have <em>getters</em> like <code>greeting()</code>. Getters are special external interface functions that allow users to query information from the contract. Try to call the getter by pressing the <span class="mdButton teal">Get greeting</span> button. Calling getters is free and does not cost gas.</p>
-<p>Don&#39;t worry if some things aren&#39;t clear now, we will dive into getters in more detail later.</p>
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="a-simple-counter">A Simple Counter</h1>
+<p>This is a simple counter contract that allows users to increment its value.</p>
+<p>This contract has a state variable <code>val</code> that persists between contract calls - the counter value. When persisted, this variable is encoded <code>as uint32</code> - a 32-bit unsigned integer. Contracts pay rent in proportion to the amount of persistent space they consume, so compact representations are encouraged.</p>
+<p>State variables should be initialized in <code>init()</code> that runs on deployment of the contract.</p>
+<h2 id="receiving-messages">Receiving messages</h2>
+<p>This contract can receive <strong><em>messages</em></strong> from users.</p>
+<p>Unlike getters that are just read-only, messages can do write operations and change the contract&#39;s persistent state. Incoming messages are processed in <code>receive()</code> methods as transactions and cost gas for the sender.</p>
+<p>After deploying the contract, send the <code>increment</code> message by pressing the <span class="mdButton grape">Send increment</span> button in order to increase the counter value by one. Afterwards, call the getter <code>value()</code> to see that the value indeed changed.</p>
+<div style="padding-left: 1em; margin: 1em 0; position: relative;">
+    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
+    <strong>Info</strong>: We will learn more in details about "getter" functions in the next example.
+</div>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -114,11 +118,18 @@ contract Counter with Deployable {
 
 
 <button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
-		Get greeting
+		Get value
 		<div class="ripple svelte-1dillie"></div>
 		</button>
 
-            </div>
+            
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send increment
+		<div class="ripple svelte-1dillie"></div>
+		</button></div>
           <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
 </div>
     </div>
@@ -128,7 +139,7 @@ contract Counter with Deployable {
 			
 			<script>
 				{
-					__sveltekit_102lvw5 = {
+					__sveltekit_12rs9i2 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -137,10 +148,10 @@ contract Counter with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.932e2960.js"),
-						import("./_app/immutable/entry/app.92c75275.js")
+						import("./_app/immutable/entry/start.b5438541.js"),
+						import("./_app/immutable/entry/app.06a021a8.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_102lvw5.element, {
+						kit.start(app, __sveltekit_12rs9i2.element, {
 							node_ids: [0, 2, 7],
 							data,
 							form: null,

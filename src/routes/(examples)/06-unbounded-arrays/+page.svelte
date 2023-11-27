@@ -21,6 +21,7 @@
       const deployer = await blockchain.treasury("deployer");
       sender = deployer.getSender();
       contract = blockchain.openContract(await TodoParent.fromInit());
+      
       const addresses = {
         [deployer.address.toString()]: "deployer",
         [contract.address.toString()]: "TodoParent",

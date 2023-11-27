@@ -17,16 +17,17 @@ contract TodoChild {
  
     // when deploying an instance, we must specify its index (sequence number)
     init(parent: Address, seqno: Int) {
+        require(sender() == parent, "not the parent");
         self.parent = parent;
         self.seqno = seqno;
     }
 
     receive(msg: HiFromParent) {
-        require(sender() == self.parent, "Access denied");
-        // only the real parent can get here
+        require(sender() == self.parent, "Access denied");  // only the real parent can get here
+       
         dump(self.seqno);
-        dump("handling hi from parent");
-        reply(HiFromChild{fromSeqno: self.seqno, greeting: "sup"}.toCell());
+        dump("😃 handling hi from parent");
+        self.reply(HiFromChild{fromSeqno: self.seqno, greeting: "sup"}.toCell());
     }
 }
 
@@ -42,7 +43,7 @@ contract TodoParent with Deployable {
             let init: StateInit = initOf TodoChild(myAddress(), i);
             send(SendParameters{
                 to: contractAddress(init),
-                body: HiFromParent{greeting: "darling"}.toCell(),
+                body: HiFromParent{ greeting: "darling" }.toCell(),
                 value: ton("0.1"),              // pay for message and potential deployment
                 mode: SendIgnoreErrors,
                 code: init.code,                // if child is not deployed, also deploy it
@@ -53,9 +54,11 @@ contract TodoParent with Deployable {
 
     receive(msg: HiFromChild) {
         let expectedAddress: Address = contractAddress(initOf TodoChild(myAddress(), msg.fromSeqno));
+        
         require(sender() == expectedAddress, "Access denied");
         // only the real children can get here
-        dump("handling hi from child");
+        
         dump(msg.fromSeqno);
+        dump("😑 handling hi from child");
     }
 }

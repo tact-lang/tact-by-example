@@ -1,4 +1,20 @@
+- [🔍 Changelog](/CHANGELOG.md)
+- [🫂 Telegram Group Chat](https://t.me/tactlang)
+
 ## Developing
+
+### About Tact Source Code
+
+1. Tact code is under the `src` directory. The `src` directory contains the following files: `src/routes/(examples)` - The source code for the examples.
+2. The terminal output is located in `src/routes/(examples)/+layout.svelte` file.
+3. Run `npm run tact-build` to compile the Tact code you just added.
+
+### About the Examples Order
+
+1. Check the order in the `src/routes/(examples)/examples.json` file.
+2. The `id` determines the sequence of the examples in the app.
+
+### Running the project
 
 Once you've run `npm install` start a development server:
 

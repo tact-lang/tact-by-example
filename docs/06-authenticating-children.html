@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.932e2960.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.b5438541.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0d6f68c3.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.25c14d13.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.92c75275.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.06a021a8.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.322916d1.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.d3ab02ad.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.2096c2f1.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.01f6cb21.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-06-authenticating-children-page.svelte.51d1628e.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.78404594.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-06-authenticating-children-page.svelte.cd310397.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
     <div style="display: contents">
@@ -65,7 +65,7 @@
 <h2 id="the-trackable-trait">The Trackable trait</h2>
 <p>This example shows how to write a new trait that adds simple analytics behavior to any contract.</p>
 <p>This trait also makes use of the <code>virtual</code> keyword which lets the contract relying on the trait override some of the trait&#39;s behaviors. In the example, the default filter behavior ignores messages from owner in the analytics.</p>
-<p>The contract relying on the trait can change this default behavior by specifying the <code>overrides</code> keyword and providing a new implementation to this method. In our case, the custom filter is to have no filters.</p>
+<p>The contract relying on the trait can change this default behavior by specifying the <code>override</code> keyword and providing a new implementation to this method. In our case, the custom filter is to have no filters.</p>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -94,16 +94,17 @@ contract TodoChild {
  
     // when deploying an instance, we must specify its index (sequence number)
     init(parent: Address, seqno: Int) {
+        require(sender() == parent, "not the parent");
         self.parent = parent;
         self.seqno = seqno;
     }
 
     receive(msg: HiFromParent) {
-        require(sender() == self.parent, "Access denied");
-        // only the real parent can get here
+        require(sender() == self.parent, "Access denied");  // only the real parent can get here
+       
         dump(self.seqno);
-        dump("handling hi from parent");
-        reply(HiFromChild{fromSeqno: self.seqno, greeting: "sup"}.toCell());
+        dump("😃 handling hi from parent");
+        self.reply(HiFromChild{fromSeqno: self.seqno, greeting: "sup"}.toCell());
     }
 }
 
@@ -119,7 +120,7 @@ contract TodoParent with Deployable {
             let init: StateInit = initOf TodoChild(myAddress(), i);
             send(SendParameters{
                 to: contractAddress(init),
-                body: HiFromParent{greeting: "darling"}.toCell(),
+                body: HiFromParent{ greeting: "darling" }.toCell(),
                 value: ton("0.1"),              // pay for message and potential deployment
                 mode: SendIgnoreErrors,
                 code: init.code,                // if child is not deployed, also deploy it
@@ -130,10 +131,12 @@ contract TodoParent with Deployable {
 
     receive(msg: HiFromChild) {
         let expectedAddress: Address = contractAddress(initOf TodoChild(myAddress(), msg.fromSeqno));
+        
         require(sender() == expectedAddress, "Access denied");
         // only the real children can get here
-        dump("handling hi from child");
+        
         dump(msg.fromSeqno);
+        dump("😑 handling hi from child");
     }
 }</pre></div></div></div></div>
   <div class="splitter svelte-9dft0e">
@@ -189,7 +192,7 @@ contract TodoParent with Deployable {
 			
 			<script>
 				{
-					__sveltekit_102lvw5 = {
+					__sveltekit_12rs9i2 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -198,10 +201,10 @@ contract TodoParent with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.932e2960.js"),
-						import("./_app/immutable/entry/app.92c75275.js")
+						import("./_app/immutable/entry/start.b5438541.js"),
+						import("./_app/immutable/entry/app.06a021a8.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_102lvw5.element, {
+						kit.start(app, __sveltekit_12rs9i2.element, {
 							node_ids: [0, 2, 38],
 							data,
 							form: null,

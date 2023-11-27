@@ -37,7 +37,7 @@
         return [await contract2.send(sender, { value: toNano(1) }, "identify")];
       },
       '"deploy 2nd" to 1': async () => {
-        return [await contract.send(sender, { value: toNano(1) }, "deploy next")];
+        return [await contract.send(sender, { value: toNano(1) }, "deploy 2nd")];
       },
     },
     getters: {},

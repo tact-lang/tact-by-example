@@ -26,7 +26,7 @@ contract ReceiveCoins with Deployable {
         dump(context().value);
         self.val = self.val + 1;
         // return all the unused excess TON coin value on the message back to the sender (with a textual string message)
-        reply("increment refund".asComment());
+        self.reply("increment refund".asComment());
     }
  
     get fun balance(): Int {

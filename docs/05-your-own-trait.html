@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.932e2960.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.b5438541.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0d6f68c3.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.25c14d13.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.92c75275.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.06a021a8.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.322916d1.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.d3ab02ad.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.2096c2f1.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.01f6cb21.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-05-your-own-trait-page.svelte.71da5b94.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.78404594.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-05-your-own-trait-page.svelte.6378d45b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
     <div style="display: contents">
@@ -67,6 +67,11 @@
 <p>This trait implicitly adds the Ownable trait. Note that the Ownable trait doesn&#39;t allow the owner to transfer ownership to a different owner. To allow changing ownership, also add the <code>OwnableTransferable</code> trait.</p>
 <h2 id="how-to-use-stoppable">How to use Stoppable</h2>
 <p>Define state variables named <code>owner: Address</code> and <code>stopped: Bool</code> and call <code>self.requireNotStopped()</code> on actions that should be stopped.</p>
+<div style="padding-left: 1em; margin: 1em 0; position: relative;">
+    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
+    <strong>Info</strong>: The stoppable trait is defined in the <a href="https://github.com/tact-lang/tact/blob/main/stdlib/libs/stoppable.tact">standard library</a>
+
+</div>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -94,7 +99,7 @@ trait Trackable with Ownable {          // your new trait may rely on other trai
     receive("reset stats") {            // your new trait may handle specific messages
         self.requireOwner();
         self.numMessagesReceived = 0;
-        reply("reset done".asComment());
+        self.reply("reset done".asComment());
     }
 
     // Getters
@@ -145,7 +150,7 @@ contract Counter with Deployable, Trackable {
     }
 
     // the trait allows us to override the default filtering behavior
-    overrides fun filterMessage(): Bool {
+    override fun filterMessage(): Bool {
         // our contract's custom filtering behavior is to remove all filters and count all messages
         return true;
     }
@@ -153,7 +158,8 @@ contract Counter with Deployable, Trackable {
     // receive("reset stats") is added automatically to allow owner to reset the stats
     // get fun stats(): Int is added automatically to query the stats
     // get fun owner(): Address is added automatically to query who the owner is
-}</pre></div></div></div></div>
+}
+</pre></div></div></div></div>
   <div class="splitter svelte-9dft0e">
 <div class="splitter horizontal svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
 </div>
@@ -207,7 +213,7 @@ contract Counter with Deployable, Trackable {
 			
 			<script>
 				{
-					__sveltekit_102lvw5 = {
+					__sveltekit_12rs9i2 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -216,10 +222,10 @@ contract Counter with Deployable, Trackable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.932e2960.js"),
-						import("./_app/immutable/entry/app.92c75275.js")
+						import("./_app/immutable/entry/start.b5438541.js"),
+						import("./_app/immutable/entry/app.06a021a8.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_102lvw5.element, {
+						kit.start(app, __sveltekit_12rs9i2.element, {
 							node_ids: [0, 2, 37],
 							data,
 							form: null,

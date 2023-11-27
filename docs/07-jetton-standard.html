@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index,follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Tact by example</title>
+    <meta name="description" content="Learn smart contract programming by example using Tact language" />
+    <link rel="canonical" href="https://tact-by-example.org/" />
+    <meta property="og:title" content="tact by example" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Learn smart contract programming by example using Tact language" />
+    <meta property="og:url" content="https://tact-by-example.org/" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <!--
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/favicons/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicons/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicons/favicon-16x16.png"
+		/>
+		-->
+    <meta http-equiv="content-security-policy" content="">
+		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.b5438541.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.25c14d13.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.06a021a8.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.01f6cb21.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-07-jetton-standard-page.svelte.21b6de71.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
+  </head>
+  <body>
+    <div style="display: contents">
+
+
+<div class="pageLoader"><div class="sk-folding-cube"><div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div></div></div>
+
+
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="unbounded-maps---simplified-token">Unbounded Maps - Simplified Token</h1>
+<p>In general, inifinite data structures that can actually grow to billions of elements are very difficult to implement on blockchain. As the contract persistent state grows in size, read and write operations become more expensive in gas. In the extreme, they may cost more than a transaction gas limit, rendering the contract unusable.</p>
+<p><strong>It is therefore important to design contracts to have an upper bound on state size.</strong> If so, how would we implement a token with a map of balances that can scale to billions of holders?</p>
+<h2 id="infinitely-scalable-balance-map">Infinitely scalable balance map</h2>
+<p>The secret of infinite scalability on TON is sharding the data across multiple contracts. We can apply the parent-child design pattern to do just this.</p>
+<p>In this example, we hold the balance of every holder in a separate child contract.</p>
+<p>To transfer tokens, the owner sends the <code>Transfer</code> message to the child contract holding their own balance. This will cause the child to deploy its sibling - the child contract holding the recipient&#39;s balance - by sending it the <code>InternalAddTokens</code> message.</p>
+<p>This example also handles gas efficiently. The excess gas from every operation is refunded to the original sender.</p>
+<!-- HTML_TAG_END -->
+      <div class="navMarkdown">
+        </div>
+      <a class="allExamples" href="all">All Examples</a></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter vertical svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+    </div>
+  <div class="secondary svelte-9dft0e">
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/ownable";
+
+message Mint {
+    amount: Int;
+    receiver: Address;
+}
+
+contract SampleJetton with Jetton {
+    totalSupply: Int as coins;
+    owner: Address;
+    content: Cell;
+    mintable: Bool;
+
+    max_supply: Int as coins; 
+
+    init(owner: Address, content: Cell, max_supply: Int) {
+        self.totalSupply = 0;
+        self.owner = owner;
+        self.mintable = true;
+        self.content = content;
+
+        self.max_supply = max_supply; // Initial Setting for max_supply
+    }
+
+    receive(msg: Mint) {
+        let ctx: Context = context();
+        require(ctx.sender == self.owner, "Not Owner");
+        require(self.mintable, "Can't Mint Anymore");
+        self.mint(msg.receiver, msg.amount, self.owner); // (to, amount, response_destination)
+    }
+
+    receive("Mint: 100") { // Public Minting
+        let ctx: Context = context();
+        require(self.mintable, "Can't Mint Anymore");
+        self.mint(ctx.sender, 100, self.owner);
+    }
+
+    receive("Owner: MintClose") {
+        let ctx: Context = context();
+        require(ctx.sender == self.owner, "Not Owner");
+        self.mintable = false;
+    }
+} 
+
+struct JettonData {
+    totalSupply: Int;
+    mintable: Bool;
+    owner: Address;
+    content: Cell;
+    walletCode: Cell;
+}
+
+// ============================================================================================================ //
+@interface("org.ton.jetton.master")
+trait Jetton with Ownable {
+
+    totalSupply: Int; // Already set initially 
+    mintable: Bool;
+    owner: Address;
+    content: Cell;
+
+    max_supply: Int; // This is not in the TEP-74 interface
+
+    receive(msg: TokenUpdateContent) {
+        self.requireOwner();                // Allow changing content only by owner
+        self.content = msg.content;         // Update content
+    }
+
+    receive(msg: TokenBurnNotification) {
+        self.requireWallet(msg.owner);                     // Check wallet
+        self.totalSupply = self.totalSupply - msg.amount; // Update supply
+
+        if (msg.response_destination != null) { // Cashback
+            send(SendParameters{
+                to: msg.response_destination!!, 
+                value: 0,
+                bounce: false,
+                mode: SendRemainingValue + SendIgnoreErrors,
+                body: TokenExcesses{
+                    queryId: msg.queryId
+                }.toCell()
+            });
+        }
+    }
+
+    // @to The Address receive the Jetton token after minting
+    // @amount The amount of Jetton token being minted
+    // @response_destination The previous owner address
+    fun mint(to: Address, amount: Int, response_destination: Address) {
+        require(self.totalSupply + amount <= self.max_supply, "The total supply will be overlapping.");
+        self.totalSupply = self.totalSupply + amount; // Update total supply
+
+        let winit: StateInit = self.getJettonWalletInit(to); // Create message
+        send(SendParameters{
+            to: contractAddress(winit), 
+            value: 0, 
+            bounce: false,
+            mode: SendRemainingValue,
+            body: TokenTransferInternal{ 
+                queryId: 0,
+                amount: amount,
+                from: myAddress(),
+                response_destination: response_destination,
+                forward_ton_amount: 0,
+                forward_payload: emptySlice()
+            }.toCell(),
+            code: winit.code,
+            data: winit.data
+        });
+    }
+
+    fun requireWallet(owner: Address) {
+        let ctx: Context = context();
+        let winit: StateInit = self.getJettonWalletInit(owner);
+        require(contractAddress(winit) == ctx.sender, "Invalid sender");
+    }
+
+    virtual fun getJettonWalletInit(address: Address): StateInit {
+        return initOf JettonDefaultWallet(myAddress(), address);
+    }
+
+    // ====== Get Methods ====== //
+    get fun get_jetton_data(): JettonData {
+        let code: Cell = self.getJettonWalletInit(myAddress()).code;
+        return JettonData{ 
+            totalSupply: self.totalSupply, 
+            mintable: self.mintable, 
+            owner: self.owner, 
+            content: self.content, 
+            walletCode: code
+        };
+    }
+
+    get fun get_wallet_address(owner: Address): Address {
+        let winit: StateInit = self.getJettonWalletInit(owner);
+        return contractAddress(winit);
+    }
+}
+// ============================================================ //
+@interface("org.ton.jetton.wallet")
+contract JettonDefaultWallet {
+    const minTonsForStorage: Int = ton("0.01");
+    const gasConsumption: Int = ton("0.01");
+
+    balance: Int;
+    owner: Address;
+    master: Address;
+
+    init(master: Address, owner: Address) {
+        self.balance = 0;
+        self.owner = owner;
+        self.master = master;
+    }
+
+    receive(msg: TokenTransfer) { // 0xf8a7ea5
+        let ctx: Context = context(); // Check sender
+        require(ctx.sender == self.owner, "Invalid sender");
+
+        // Gas checks
+        let fwdFee: Int = ctx.readForwardFee() + ctx.readForwardFee();  
+        let final: Int =  2 * self.gasConsumption + self.minTonsForStorage + fwdFee;
+        require(ctx.value > min(final, ton("0.01")), "Invalid value!!"); 
+
+        // Update balance
+        self.balance = self.balance - msg.amount; 
+        require(self.balance >= 0, "Invalid balance");
+
+        let init: StateInit = initOf JettonDefaultWallet(self.master, msg.destination);  
+        let walletAddress: Address = contractAddress(init);
+        send(SendParameters{
+                to: walletAddress, 
+                value: 0,
+                mode: SendRemainingValue, 
+                bounce: false,
+                body: TokenTransferInternal{
+                    queryId: msg.queryId,
+                    amount: msg.amount,
+                    from: self.owner,
+                    response_destination: msg.response_destination,
+                    forward_ton_amount: msg.forward_ton_amount,
+                    forward_payload: msg.forward_payload
+                }.toCell(),
+                code: init.code,
+                data: init.data
+            });
+    }
+
+    receive(msg: TokenTransferInternal) { // 0x178d4519
+        let ctx: Context = context();
+
+        if (ctx.sender != self.master) {
+            let sinit: StateInit = initOf JettonDefaultWallet(self.master, msg.from);
+            require(contractAddress(sinit) == ctx.sender, "Invalid sender!");
+        }
+
+        // Update balance
+        self.balance = self.balance + msg.amount;
+        require(self.balance >= 0, "Invalid balance"); 
+        
+        // Get value for gas
+        let msgValue: Int = self.msgValue(ctx.value);  
+        let fwdFee: Int = ctx.readForwardFee();
+        msgValue = msgValue - msg.forward_ton_amount - fwdFee;
+        
+         // 0x7362d09c - notify the new owner of JettonToken that the transfer is complete
+        if (msg.forward_ton_amount > 0) { 
+            send(SendParameters{
+                to: self.owner,
+                value: msg.forward_ton_amount,
+                mode: SendPayGasSeparately + SendIgnoreErrors,
+                bounce: false,
+                body: TokenNotification {
+                    queryId: msg.queryId,
+                    amount: msg.amount,
+                    from: msg.from,
+                    forward_payload: msg.forward_payload
+                }.toCell()
+            });
+        }
+
+        // 0xd53276db -- Cashback to the original Sender
+        if (msg.response_destination != null) { 
+            send(SendParameters {
+                to: msg.response_destination, 
+                value: msgValue,  
+                bounce: false,
+                body: TokenExcesses { 
+                    queryId: msg.queryId
+                }.toCell(),
+                mode: SendIgnoreErrors
+            });
+        }
+    }
+
+    receive(msg: TokenBurn) {
+        let ctx: Context = context();
+        require(ctx.sender == self.owner, "Invalid sender");  // Check sender
+
+        self.balance = self.balance - msg.amount; // Update balance
+        require(self.balance >= 0, "Invalid balance");
+
+        let fwdFee: Int = ctx.readForwardFee(); // Gas checks
+        require(ctx.value > fwdFee + 2 * self.gasConsumption + self.minTonsForStorage, "Invalid value - Burn");
+
+        // Burn tokens
+        send(SendParameters{  
+            to: self.master,
+            value: 0,
+            mode: SendRemainingValue,
+            bounce: true,
+            body: TokenBurnNotification{
+                queryId: msg.queryId,
+                amount: msg.amount,
+                owner: self.owner,
+                response_destination: self.owner
+            }.toCell()
+        });
+    }
+
+    get fun msgValue(value: Int): Int {
+        let msgValue: Int = value;
+        let tonBalanceBeforeMsg: Int = myBalance() - msgValue;
+        let storageFee: Int = self.minTonsForStorage - min(tonBalanceBeforeMsg, self.minTonsForStorage);
+        msgValue = msgValue - (storageFee + self.gasConsumption);
+        return msgValue;
+    }
+
+    bounced(src: bounced<TokenTransferInternal>) {
+        self.balance = self.balance + src.amount;
+    }
+
+    bounced(src: bounced<TokenBurnNotification>) {
+        self.balance = self.balance + src.amount;
+    }
+
+    get fun get_wallet_data(): JettonWalletData {
+        return JettonWalletData{
+            balance: self.balance,
+            owner: self.owner,
+            master: self.master,
+            walletCode: (initOf JettonDefaultWallet(self.master, self.owner)).code
+        };
+    }
+}
+
+struct JettonWalletData {
+    balance: Int;
+    owner: Address;
+    master: Address;
+    walletCode: Cell;
+}
+
+message(0xf8a7ea5) TokenTransfer {
+    queryId: Int as uint64;
+    amount: Int as coins;
+    destination: Address;
+    response_destination: Address;
+    custom_payload: Cell?;
+    forward_ton_amount: Int as coins;
+    forward_payload: Slice as remaining; // Comment Text message when Transfer the jetton
+}
+
+message(0x178d4519) TokenTransferInternal {
+    queryId: Int as uint64;
+    amount: Int as coins;
+    from: Address;
+    response_destination: Address;
+    forward_ton_amount: Int as coins;
+    forward_payload: Slice as remaining; // Comment Text message when Transfer the jetton
+}
+
+message(0x7362d09c) TokenNotification {
+    queryId: Int as uint64;
+    amount: Int as coins;
+    from: Address;
+    forward_payload: Slice as remaining; // Comment Text message when Transfer the jetton 
+}
+
+message(0x595f07bc) TokenBurn {
+    queryId: Int as uint64;
+    amount: Int as coins;
+    owner: Address;
+    response_destination: Address;
+}
+
+message(0x7bdd97de) TokenBurnNotification {
+    queryId: Int as uint64;
+    amount: Int as coins;
+    owner: Address;
+    response_destination: Address?;
+}
+
+message(0xd53276db) TokenExcesses {
+    queryId: Int as uint64;
+}
+
+message TokenUpdateContent {
+    content: Cell;
+}</pre></div></div></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter horizontal svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+        </div>
+  <div class="secondary svelte-9dft0e"><div slot="secondary" class="panelBottom" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column;"><div style="display: flex; gap: 10px; flex-wrap: wrap; overflow: hidden;">
+
+
+
+<button class="buttonAction svelteui-c-TfGwS svelteui-c-TfGwS-hQzioB-variation-filled svelteui-c-TfGwS-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Deploy
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+            
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get metadata
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get balance(childAddress(deployer))
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get balance(childAddress(user2))
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+            
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send Transfer{100,user2} (from deployer)
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-hYnOVn svelteui-c-hYnOVn-cKczaq-variation-filled svelteui-c-hYnOVn-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Send Transfer{100,deployer} (from user2)
+		<div class="ripple svelte-1dillie"></div>
+		</button></div>
+          <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
+</div>
+    </div>
+</div>
+
+
+			
+			<script>
+				{
+					__sveltekit_12rs9i2 = {
+						env: {},
+						base: new URL(".", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.b5438541.js"),
+						import("./_app/immutable/entry/app.06a021a8.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_12rs9i2.element, {
+							node_ids: [0, 2, 46],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>

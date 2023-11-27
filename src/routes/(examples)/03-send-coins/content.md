@@ -13,3 +13,9 @@ Contracts need to have a non-zero balance so they can pay storage costs occasion
 Send mode `SendRemainingValue` will add to the outgoing value any excess left from the incoming message after all gas costs are deducted from it.
 
 Send mode `SendRemainingBalance` will ignore the outgoing value and send the entire balance of the contract. Note that this will not leave any balance for storage costs so the contract may be deleted.
+
+<div style="padding-left: 1em; margin: 1em 0; position: relative;">
+    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
+    <strong>Info</strong>:  More details for different sending modes can check 
+     <a href="https://docs.tact-lang.org/language/ref/message-modes#combining-modes">here</a>
+</div>

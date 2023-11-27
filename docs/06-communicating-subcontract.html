@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="index,follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Tact by example</title>
+    <meta name="description" content="Learn smart contract programming by example using Tact language" />
+    <link rel="canonical" href="https://tact-by-example.org/" />
+    <meta property="og:title" content="tact by example" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Learn smart contract programming by example using Tact language" />
+    <meta property="og:url" content="https://tact-by-example.org/" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <!--
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="/favicons/apple-touch-icon.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="/favicons/favicon-32x32.png"
+		/>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="16x16"
+			href="/favicons/favicon-16x16.png"
+		/>
+		-->
+    <meta http-equiv="content-security-policy" content="">
+		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.b5438541.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.25c14d13.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.06a021a8.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.01f6cb21.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-06-communicating-subcontract-page.svelte.a6a9d9a0.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
+  </head>
+  <body>
+    <div style="display: contents">
+
+
+<div class="pageLoader"><div class="sk-folding-cube"><div class="sk-cube1 sk-cube"></div>
+      <div class="sk-cube2 sk-cube"></div>
+      <div class="sk-cube4 sk-cube"></div>
+      <div class="sk-cube3 sk-cube"></div></div></div>
+
+
+<div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="calculate-contract-address">Calculate Contract Address</h1>
+<p>When a contract is deployed to the chain, it receives an address by which users can refer to it and send it transactions.</p>
+<p>In this example, we have two different contracts: <code>Todo1</code> and <code>Todo2</code>. They are deployed separately and each gets its own unique address. As we&#39;ve seen before, a contract can always know its own address by running <code>myAddress()</code>.</p>
+<p>The special bit in this example is that each contract can also get the address of the other contract by running <code>contractAddress(stateInit)</code>.</p>
+<h2 id="how-is-the-contract-address-generated">How is the contract address generated?</h2>
+<p>Contract addresses on TON are <a href="https://docs.ton.org/learn/overviews/addresses#account-id">derived</a> from the initial code of the contract (the compiled bytecode) and the initial data of the contract (the arguments of init). </p>
+<p>Both contracts don&#39;t have any constructor arguments, so their initial data is the identical. Their addresses are different because their code is different.</p>
+<p>The combination of the inital code and the initial data is called the <em>stateInit</em> of the contract. Tact gives easy access to the <em>stateInit</em> using the <code>initOf</code> statement.</p>
+<!-- HTML_TAG_END -->
+      <div class="navMarkdown">
+        </div>
+      <a class="allExamples" href="all">All Examples</a></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter vertical svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+    </div>
+  <div class="secondary svelte-9dft0e">
+<div class="split horizontal svelte-9dft0e" style="--primary-size:80%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelCode" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0;"><div style="height: 100%; overflow: scroll;"><div contenteditable="false" class="dark"><pre>import "@stdlib/deploy";
+
+message HiFromParent {
+    greeting: String;
+}
+
+message HiFromChild {
+    fromSeqno: Int as uint64;
+    greeting: String;
+}
+
+// we have multiple instances of the children
+contract TodoChild {
+
+    seqno: Int as uint64;
+ 
+    // when deploying an instance, we must specify its index (sequence number)
+    init(seqno: Int) {
+        self.seqno = seqno;
+    }
+
+    receive(msg: HiFromParent) {
+        dump(self.seqno);
+        dump("😃 handling hi from parent");
+        self.reply(HiFromChild{fromSeqno: self.seqno, greeting: "sup"}.toCell());
+    }
+}
+
+// we have one instance of the parent
+contract TodoParent with Deployable {
+ 
+    init() {}
+
+    receive("greet 3") {
+        let i: Int = 0;
+        repeat (3) {
+            i = i + 1;
+            let init: StateInit = initOf TodoChild(i);
+            send(SendParameters{
+                to: contractAddress(init),
+                body: HiFromParent{greeting: "darling"}.toCell(),
+                value: ton("0.1"),              // pay for message and potential deployment
+                mode: SendIgnoreErrors,
+                code: init.code,                // if child is not deployed, also deploy it
+                data: init.data
+            });
+        }
+    }
+
+    receive(msg: HiFromChild) {
+        dump("😑 handling hi from child");
+        dump(msg.fromSeqno);
+    }
+}</pre></div></div></div></div>
+  <div class="splitter svelte-9dft0e">
+<div class="splitter horizontal svelte-7pb3g9" tabindex="0"><div class="line svelte-7pb3g9" style="--splitter-line-margin:NaNpx;--splitter-line-size:3px;--splitter-line-color:rgb(17, 17, 17);--splitter-line-hover-color:#444"></div>
+</div>
+        </div>
+  <div class="secondary svelte-9dft0e"><div slot="secondary" class="panelBottom" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; display: flex; flex-direction: column;"><div style="display: flex; gap: 10px; flex-wrap: wrap; overflow: hidden;">
+
+
+
+<button class="buttonAction svelteui-c-TfGwS svelteui-c-TfGwS-hQzioB-variation-filled svelteui-c-TfGwS-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Deploy
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+            
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get Todo1.myAddress
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get Todo1.otherAddress
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get Todo2.myAddress
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+
+
+<button class="buttonAction svelteui-c-fAernD svelteui-c-fAernD-hkqluh-variation-filled svelteui-c-fAernD-iPJLV-css   svelte-1qnpzwq" tabindex="0">
+		Get Todo2.otherAddress
+		<div class="ripple svelte-1dillie"></div>
+		</button>
+
+            </div>
+          <pre style="flex: 1; color: #666; overflow: scroll;"></pre></div></div>
+</div>
+    </div>
+</div>
+
+
+			
+			<script>
+				{
+					__sveltekit_12rs9i2 = {
+						env: {},
+						base: new URL(".", location).pathname.slice(0, -1),
+						element: document.currentScript.parentElement
+					};
+
+					const data = [null,null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.b5438541.js"),
+						import("./_app/immutable/entry/app.06a021a8.js")
+					]).then(([kit, app]) => {
+						kit.start(app, __sveltekit_12rs9i2.element, {
+							node_ids: [0, 2, 40],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+  </body>
+</html>

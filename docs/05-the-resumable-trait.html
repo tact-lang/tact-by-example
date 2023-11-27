@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.932e2960.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.b5438541.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0d6f68c3.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.25c14d13.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.92c75275.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.06a021a8.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.322916d1.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.d3ab02ad.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.2096c2f1.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.01f6cb21.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-05-the-resumable-trait-page.svelte.bdeae906.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.78404594.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-05-the-resumable-trait-page.svelte.910751fd.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
     <div style="display: contents">
@@ -66,6 +66,11 @@
 <h2 id="how-to-use-ownabletransferable">How to use OwnableTransferable</h2>
 <p>Use it in a contract just like Ownable. Define a state variable named <code>owner: Address</code> and call <code>self.requireOwner()</code> in priviliged receivers.</p>
 <p>Your contract will automatically handle the <code>ChangeOwner{newOwner: Address}</code> message which allows the owner to transfer ownership.</p>
+<div style="padding-left: 1em; margin: 1em 0; position: relative;">
+    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
+    <strong>Info</strong>: The OwnableTransferable trait is defined in the <a href="https://github.com/tact-lang/tact/blob/main/stdlib/libs/ownable.tact">standard library</a>
+
+</div>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -161,7 +166,7 @@ contract Counter with Deployable, Resumable {
 			
 			<script>
 				{
-					__sveltekit_102lvw5 = {
+					__sveltekit_12rs9i2 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -170,10 +175,10 @@ contract Counter with Deployable, Resumable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.932e2960.js"),
-						import("./_app/immutable/entry/app.92c75275.js")
+						import("./_app/immutable/entry/start.b5438541.js"),
+						import("./_app/immutable/entry/app.06a021a8.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_102lvw5.element, {
+						kit.start(app, __sveltekit_12rs9i2.element, {
 							node_ids: [0, 2, 35],
 							data,
 							form: null,

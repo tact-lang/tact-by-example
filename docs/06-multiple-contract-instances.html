@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.932e2960.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.b5438541.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0d6f68c3.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.25c14d13.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.92c75275.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.06a021a8.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.322916d1.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.d3ab02ad.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.2096c2f1.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.01f6cb21.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-06-multiple-contract-instances-page.svelte.d7f078ed.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.78404594.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-06-multiple-contract-instances-page.svelte.11f7331f.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
     <div style="display: contents">
@@ -62,7 +62,7 @@
 <div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="a-contract-deploying-another">A Contract Deploying Another</h1>
 <p>Contracts are not necessarily only deployed by users, they can also be deployed by other contracts.</p>
 <p>In this example, when pressing the <span class="mdButton blue">Deploy</span> button, we only deploy one contract instance - the one with constructor argument 1.</p>
-<p>The second instance (with constructor argument 2) will be deployed by the first contract instance when it receives the <code>deploy next</code> message. Send this message to the first instance by pressing the <span class="mdButton grape">Send &quot;deploy 2nd&quot; to 1</span> button.</p>
+<p>The second instance (with constructor argument 2) will be deployed by the first contract instance when it receives the <code>deploy 2nd</code> message. Send this message to the first instance by pressing the <span class="mdButton grape">Send &quot;deploy 2nd&quot; to 1</span> button.</p>
 <h2 id="messages-containing-state-init">Messages containing state init</h2>
 <p>The combination of the inital code and the initial data of a contract is called the <em>stateInit</em> of the contract.</p>
 <p>When sending any message to a contract, we can attach its <em>stateInit</em> by specifying the <code>code</code> and <code>data</code> fields of the message. This will deploy the contract if it has not already been deployed. If the contract has already been deployed, these fields will be ignored.</p>
@@ -140,7 +140,7 @@ contract Todo with Deployable {
 			
 			<script>
 				{
-					__sveltekit_102lvw5 = {
+					__sveltekit_12rs9i2 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -149,10 +149,10 @@ contract Todo with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.932e2960.js"),
-						import("./_app/immutable/entry/app.92c75275.js")
+						import("./_app/immutable/entry/start.b5438541.js"),
+						import("./_app/immutable/entry/app.06a021a8.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_102lvw5.element, {
+						kit.start(app, __sveltekit_12rs9i2.element, {
 							node_ids: [0, 2, 42],
 							data,
 							form: null,

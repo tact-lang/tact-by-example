@@ -32,10 +32,10 @@ contract TodoParent with Deployable, Ownable {
             body: InternalSetTask{task: msg.task}.toCell(),
             value: ton("0.02"),             // pay for the deployment and leave some TON in the child for storage
             mode: SendIgnoreErrors,
-            code: init.code,                // deploy the child
+            code: init.code,                // prepare the initial code when deploying the child contract
             data: init.data
         });
-        reply(NewTodoResponse{seqno: self.numTodos}.toCell()); // this will return excess gas to sender
+        self.reply(NewTodoResponse{seqno: self.numTodos}.toCell()); // this will return excess gas to sender
     }
 
     // only the owner can mark a todo as completed
@@ -103,6 +103,9 @@ contract TodoChild {
     }
 
      get fun details(): TodoDetails {
-        return TodoDetails{task: self.task, completed: self.completed};
+        return TodoDetails{
+            task: self.task, 
+            completed: self.completed
+        };
     }
 }

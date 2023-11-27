@@ -34,20 +34,20 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.932e2960.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.b5438541.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.0d6f68c3.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.25c14d13.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.92c75275.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.06a021a8.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.322916d1.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/store.d3ab02ad.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/examples.2096c2f1.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-layout.svelte.01f6cb21.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-04-current-time-page.svelte.66041234.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/index.78404594.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-04-current-time-page.svelte.b35ef983.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
     <div style="display: contents">
@@ -60,12 +60,12 @@
 
 
 <div class="split vertical svelte-9dft0e" style="--primary-size:47%;--min-primary-size:0;--min-secondary-size:0;--splitter-size:7px"><div class="primary svelte-9dft0e"><div slot="primary" class="panelMarkdown" style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; overflow: scroll;"><!-- HTML_TAG_START --><h1 id="arrays">Arrays</h1>
-<p>You can implement simple arrays in Tact by relying on the map type.</p>
-<p>To create an array, define a map with <code>Int</code> type as key. The key will hold the index in the array. Add another length variable to rememebr how many items are in the array.</p>
-<p>The example contract records the last 5 timestamps of when the <code>timer</code> message was received. The timestamps are held in a cyclical array implemented as a map.</p>
-<h2 id="limit-the-number-of-items">Limit the number of items</h2>
-<p>Maps are designed to hold a limited number of items. Only use a map if you know the upper bound of items that it may hold. It&#39;s also a good idea to <a href="https://github.com/tact-lang/tact-emulator">write a test</a> to add the maximum number of elements to the map and see how gas behaves under stress.</p>
-<p>If the number of items is unbounded and can potentially grow to billions, you&#39;ll need to architect your contract differently. We will discuss unbounded arrays later on under the topic of contract sharding.</p>
+<p>You can implement simple arrays in Tact by using the <code>map</code> type.</p>
+<p>To create an array, define a map with an <code>Int</code> type as the key. This key will represent the index in the array. Additionally, include a variable to keep track of the number of items in the array.</p>
+<p>The example contract records the last five timestamps when the <code>timer</code> message was received. These timestamps are stored in a cyclical array, implemented as a map.</p>
+<h2 id="limit-the-number-of-items">Limit the Number of Items</h2>
+<p>Maps are designed to hold a limited number of items. Only use a map if you know the maximum number of items it will contain. It&#39;s also a good idea to <a href="https://github.com/tact-lang/tact-emulator">write a test</a> to populate the map with its maximum number of elements and observe how gas consumption behaves under stress.</p>
+<p>If the number of items is unbounded and could potentially grow into the billions, you will need to architect your contract differently. We will discuss unbounded arrays later, under the topic of contract sharding.</p>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -159,7 +159,7 @@ contract CurrentTime with Deployable {
 			
 			<script>
 				{
-					__sveltekit_102lvw5 = {
+					__sveltekit_12rs9i2 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -168,10 +168,10 @@ contract CurrentTime with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.932e2960.js"),
-						import("./_app/immutable/entry/app.92c75275.js")
+						import("./_app/immutable/entry/start.b5438541.js"),
+						import("./_app/immutable/entry/app.06a021a8.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_102lvw5.element, {
+						kit.start(app, __sveltekit_12rs9i2.element, {
 							node_ids: [0, 2, 26],
 							data,
 							form: null,
