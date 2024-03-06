@@ -65,7 +65,7 @@
 <p>All contracts are deployed by sending them a message. While any message can be used for this purpose, best practice is to use the special <code>Deploy</code> message.</p>
 <p>This message has a single field, <code>queryId</code>, provided by the deployer (usually set to zero). If the deployment succeeds, the contract will reply with a <code>DeployOk</code> message and echo the same <code>queryId</code> in the response.</p>
 <hr>
-<p>If you&#39;re using Tact&#39;s <a href="https://docs.tact-lang.org/tools/typescript#tact-contract-in-typescript">auto-generated</a> TypeScript classes to deploy, sending the deploy message should look like:</p>
+<p>If you&#39;re using Tact&#39;s <a href="https://docs.tact-lang.org/ecosystem/tools/typescript#tact-contract-in-typescript">auto-generated</a> TypeScript classes to deploy, sending the deploy message should look like:</p>
 <pre><code class="language-ts">const msg = { $$type: &quot;Deploy&quot;, queryId: 0n };
 await contract.send(sender, { value: toNano(1) }, msg);
 </code></pre>
