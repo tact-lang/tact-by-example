@@ -17,7 +17,7 @@ Send mode \`SendRemainingBalance\` will ignore the outgoing value and send the e
 <div style="padding-left: 1em; margin: 1em 0; position: relative;">
     <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
     <strong>Info</strong>:  More details for different sending modes can check 
-     <a href="https://docs.tact-lang.org/language/ref/message-modes#combining-modes">here</a>
+     <a href="https://docs.tact-lang.org/book/message-mode#combining-modes-with-flags">here</a>
 </div>
 `,v=`import "@stdlib/deploy";
 

@@ -10,7 +10,7 @@ This message has a single field, \`queryId\`, provided by the deployer (usually 
 
 ---
 
-If you're using Tact's [auto-generated](https://docs.tact-lang.org/tools/typescript#tact-contract-in-typescript) TypeScript classes to deploy, sending the deploy message should look like:
+If you're using Tact's [auto-generated](https://docs.tact-lang.org/ecosystem/tools/typescript#tact-contract-in-typescript) TypeScript classes to deploy, sending the deploy message should look like:
 
 \`\`\`ts
 const msg = { $$type: "Deploy", queryId: 0n };
