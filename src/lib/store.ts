@@ -1,6 +1,6 @@
-import type { SendMessageResult } from "@ton-community/sandbox";
+import type { SendMessageResult } from "@ton/sandbox";
 import { writable } from "svelte/store";
-import type { Contract } from "ton-core";
+import type { Contract } from "@ton/core";
 
 interface Store {
   markdown: string;

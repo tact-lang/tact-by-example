@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { SendMessageResult } from "@ton-community/sandbox";
-  import { Address, Cell, fromNano, type Contract } from "ton-core";
+  import type { SendMessageResult } from "@ton/sandbox";
+  import { Address, Cell, fromNano, type Contract } from "@ton/core";
   import { Split, DefaultSplitter } from "@geoffcox/svelte-splitter";
   import { Button } from "@svelteuidev/core";
   import { Buffer } from "buffer";

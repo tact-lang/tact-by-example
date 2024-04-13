@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Dictionary, toNano, type Sender, Address } from "ton-core";
-  import { Blockchain, type SandboxContract } from "@ton-community/sandbox";
+  import { Dictionary, toNano, type Sender, Address } from "@ton/core";
+  import { Blockchain, type SandboxContract } from "@ton/sandbox";
   import { getExample } from "$lib/helpers";
   import store from "$lib/store";
 
