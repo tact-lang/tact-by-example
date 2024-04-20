@@ -171,7 +171,7 @@ contract JettonDefaultWallet {
                 to: walletAddress, 
                 value: 0,
                 mode: SendRemainingValue, 
-                bounce: false,
+                bounce: true,
                 body: TokenTransferInternal{
                     queryId: msg.queryId,
                     amount: msg.amount,
