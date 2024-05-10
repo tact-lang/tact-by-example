@@ -104,7 +104,7 @@ contract Interest with Deployable {
     }
 
     receive(msg: Withdraw) {
-        require(msg.amount >= self.depositAmount, "Cannot withdraw more than deposit");
+        require(msg.amount <= self.depositAmount, "Cannot withdraw more than deposit");
         self.depositAmount = self.depositAmount - msg.amount;
         let durationSeconds: Int = now() - self.depositTime;
         let earned: Int = msg.amount * durationSeconds * self.interestPercent / SecondsPerYear / 100000;
