@@ -8,7 +8,7 @@ You can query the contract balance with `myBalance()` - note that the value is i
 
 <div style="padding-left: 1em; margin: 1em 0; position: relative;">
     <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
-    <strong>Info</strong>: More detail about myBalance() can be found here: <a href="https://docs.tact-lang.org/language/ref/common#mybalance">myBalance()</a>
+    <strong>Info</strong>: More detail about myBalance() can be found here: <a href="https://docs.tact-lang.org/ref/core-common/#mybalance">myBalance()</a>
 </div>
 
 ## Refunding senders
