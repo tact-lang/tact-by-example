@@ -37,7 +37,7 @@
       length: async () => {
         return await contract.getLength();
       },
-      map: async () => {
+      mapping: async () => {
         return await contract.getMap();
       },
     },

@@ -44,7 +44,7 @@ contract Arrays with Deployable {
         return self.arrLength;
     }
 
-    get fun map(): map<Int, Int> {
+    get fun mapping(): map<Int, Int> {
         return self.arr;
     }
 }
