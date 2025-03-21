@@ -14,8 +14,4 @@ Note that this trait doesn't allow the owner to transfer ownership to a differen
 
 Define a state variable named `owner: Address` and call `self.requireOwner()` in priviliged receivers.
 
-<div style="padding-left: 1em; margin: 1em 0; position: relative;">
-    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
-    <strong>Info</strong>: The Ownable trait is defined in the <a href="https://github.com/tact-lang/tact/blob/main/stdlib/libs/ownable.tact">standard library</a>
-
-</div>
+> Info: The Ownable trait is defined in the [standard library](https://github.com/tact-lang/tact/blob/main/src/stdlib/stdlib/libs/ownable.tact)
