@@ -12,8 +12,4 @@ Use it in a contract just like Ownable. Define a state variable named `owner: Ad
 
 Your contract will automatically handle the `ChangeOwner{newOwner: Address}` message which allows the owner to transfer ownership.
 
-<div style="padding-left: 1em; margin: 1em 0; position: relative;">
-    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
-    <strong>Info</strong>: The OwnableTransferable trait is defined in the <a href="https://github.com/tact-lang/tact/blob/main/stdlib/libs/ownable.tact">standard library</a>
-
-</div>
+> Info: The OwnableTransferable trait is defined in the [standard library](https://github.com/tact-lang/tact/blob/main/src/stdlib/stdlib/libs/ownable.tact)
