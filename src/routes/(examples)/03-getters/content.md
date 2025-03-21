@@ -20,7 +20,4 @@ So, if you can't call a getter, how can two contracts communicate?
 
 The only way for contracts to communicate on-chain is by sending messages to each other. Messages are handled in _receivers_.
 
-<div style="padding-left: 1em; margin: 1em 0; position: relative;">
-    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
-    <strong>Info</strong>: TON Blockchain is an asynchronous blockchain, which means that smart contracts can interact with each other only by sending messages.
-</div>
+> **Info**: TON Blockchain is an asynchronous blockchain, which means that smart contracts can interact with each other only by sending messages.
