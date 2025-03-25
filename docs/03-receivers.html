@@ -34,11 +34,11 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.b5438541.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.4457551d.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.25c14d13.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.c7943079.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.06a021a8.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.d9486139.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
@@ -65,7 +65,7 @@
 <p>You can query the contract balance with <code>myBalance()</code> - note that the value is in nano-tons (like cents, just with 9 decimals). The balance already contains the incoming message value.</p>
 <div style="padding-left: 1em; margin: 1em 0; position: relative;">
     <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
-    <strong>Info</strong>: More detail about myBalance() can be found here: <a href="https://docs.tact-lang.org/language/ref/common#mybalance">myBalance()</a>
+    <strong>Info</strong>: More detail about myBalance() can be found here: <a href="https://docs.tact-lang.org/ref/core-common/#mybalance">myBalance()</a>
 </div>
 
 <h2 id="refunding-senders">Refunding senders</h2>
@@ -191,7 +191,7 @@ contract Receivers with Deployable {
 			
 			<script>
 				{
-					__sveltekit_12rs9i2 = {
+					__sveltekit_bxwrb2 = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -200,10 +200,10 @@ contract Receivers with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.b5438541.js"),
-						import("./_app/immutable/entry/app.06a021a8.js")
+						import("./_app/immutable/entry/start.4457551d.js"),
+						import("./_app/immutable/entry/app.d9486139.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_12rs9i2.element, {
+						kit.start(app, __sveltekit_bxwrb2.element, {
 							node_ids: [0, 2, 20],
 							data,
 							form: null,
