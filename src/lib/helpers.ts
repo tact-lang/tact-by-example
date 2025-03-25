@@ -1,4 +1,4 @@
-import { Address, Slice, Cell, Dictionary } from "ton-core";
+import { Address, Slice, Cell, Dictionary } from "@ton/core";
 import examples from "../routes/(examples)/examples.json";
 
 export function getExample(page: string) {
@@ -15,7 +15,7 @@ export function getExample(page: string) {
 
 export function convertToText(obj: any): string {
   //create an array that will later be joined into a string.
-  var string = [];
+  const string = [];
 
   //is object
   //    Both arrays and objects seem to return "object"

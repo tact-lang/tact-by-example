@@ -335,6 +335,14 @@
       "options": {
         "debug": true
       }
+    },
+    {
+      "name": "08-sign-and-verify",
+      "path": "./src/routes/(examples)/08-sign-and-verify/contract.tact",
+      "output": "./tact-output",
+      "options": {
+        "debug": true
+      }
     }
   ]
 }
