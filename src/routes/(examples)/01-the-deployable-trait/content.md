@@ -17,4 +17,4 @@ const msg = { $$type: "Deploy", queryId: 0n };
 await contract.send(sender, { value: toNano(1) }, msg);
 ```
 
-You can see the implementation of the trait [here](https://github.com/tact-lang/tact/blob/main/stdlib/libs/deploy.tact). Notice that the file **_deploy.tact_** needs to be imported from the standard library using the `import` keyword.
+You can see the implementation of the trait [here](https://github.com/tact-lang/tact/blob/main/src/stdlib/stdlib/libs/deploy.tact). Notice that the file **_deploy.tact_** needs to be imported from the standard library using the `import` keyword.
