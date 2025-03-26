@@ -34,11 +34,11 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.4457551d.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.03ac1d3b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.c7943079.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b725e045.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.d9486139.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.8e617dc5.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
@@ -46,7 +46,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-messages-between-contracts-page.svelte.c64b8ae1.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-03-messages-between-contracts-page.svelte.5de23d49.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
@@ -70,10 +70,9 @@
 <p>Getters are only executable by end-users off-chain. Since contracts are running on-chain, they do not have access to each other&#39;s getters.</p>
 <p>So, if you can&#39;t call a getter, how can two contracts communicate?</p>
 <p>The only way for contracts to communicate on-chain is by sending messages to each other. Messages are handled in <em>receivers</em>.</p>
-<div style="padding-left: 1em; margin: 1em 0; position: relative;">
-    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
-    <strong>Info</strong>: TON Blockchain is an asynchronous blockchain, which means that smart contracts can interact with each other only by sending messages.
-</div>
+<blockquote>
+<p><strong>Info</strong>: TON Blockchain is an asynchronous blockchain, which means that smart contracts can interact with each other only by sending messages.</p>
+</blockquote>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -226,7 +225,7 @@ contract BulkAdder with Deployable {
 			
 			<script>
 				{
-					__sveltekit_bxwrb2 = {
+					__sveltekit_1mts8mq = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -235,10 +234,10 @@ contract BulkAdder with Deployable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.4457551d.js"),
-						import("./_app/immutable/entry/app.d9486139.js")
+						import("./_app/immutable/entry/start.03ac1d3b.js"),
+						import("./_app/immutable/entry/app.8e617dc5.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_bxwrb2.element, {
+						kit.start(app, __sveltekit_1mts8mq.element, {
 							node_ids: [0, 2, 18],
 							data,
 							form: null,
