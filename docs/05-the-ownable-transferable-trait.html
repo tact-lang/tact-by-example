@@ -34,11 +34,11 @@
     <meta http-equiv="content-security-policy" content="">
 		<link href="./_app/immutable/assets/_layout.e2caa7e1.css" rel="stylesheet">
 		<link href="./_app/immutable/assets/app.8bddbbc4.css" rel="stylesheet">
-		<link rel="modulepreload" href="./_app/immutable/entry/start.4457551d.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.03ac1d3b.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.9fe14626.js">
-		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.c7943079.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons.b725e045.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.1c761ed5.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/app.d9486139.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.8e617dc5.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/layout.svelte.2cd9eabd.js">
 		<link rel="modulepreload" href="./_app/immutable/entry/_layout.ts.984db11e.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/_layout.da46b06b.js">
@@ -46,7 +46,7 @@
 		<link rel="modulepreload" href="./_app/immutable/chunks/store.476c3091.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/examples.ec427188.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/app.cf8f4105.js">
-		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-05-the-ownable-transferable-trait-page.svelte.3d90c8f0.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/(examples)-05-the-ownable-transferable-trait-page.svelte.1b6c78d0.js">
 		<link rel="modulepreload" href="./_app/immutable/chunks/index.c056099e.js">
   </head>
   <body>
@@ -67,11 +67,9 @@
 <p>Note that this trait doesn&#39;t allow the owner to transfer ownership to a different owner.</p>
 <h2 id="how-to-use-ownable">How to use Ownable</h2>
 <p>Define a state variable named <code>owner: Address</code> and call <code>self.requireOwner()</code> in priviliged receivers.</p>
-<div style="padding-left: 1em; margin: 1em 0; position: relative;">
-    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
-    <strong>Info</strong>: The Ownable trait is defined in the <a href="https://github.com/tact-lang/tact/blob/main/stdlib/libs/ownable.tact">standard library</a>
-
-</div>
+<blockquote>
+<p>Info: The Ownable trait is defined in the <a href="https://github.com/tact-lang/tact/blob/main/src/stdlib/stdlib/libs/ownable.tact">standard library</a></p>
+</blockquote>
 <!-- HTML_TAG_END -->
       <div class="navMarkdown">
         </div>
@@ -181,7 +179,7 @@ contract Counter with Deployable, OwnableTransferable {
 			
 			<script>
 				{
-					__sveltekit_bxwrb2 = {
+					__sveltekit_1mts8mq = {
 						env: {},
 						base: new URL(".", location).pathname.slice(0, -1),
 						element: document.currentScript.parentElement
@@ -190,10 +188,10 @@ contract Counter with Deployable, OwnableTransferable {
 					const data = [null,null,null];
 
 					Promise.all([
-						import("./_app/immutable/entry/start.4457551d.js"),
-						import("./_app/immutable/entry/app.d9486139.js")
+						import("./_app/immutable/entry/start.03ac1d3b.js"),
+						import("./_app/immutable/entry/app.8e617dc5.js")
 					]).then(([kit, app]) => {
-						kit.start(app, __sveltekit_bxwrb2.element, {
+						kit.start(app, __sveltekit_1mts8mq.element, {
 							node_ids: [0, 2, 34],
 							data,
 							form: null,

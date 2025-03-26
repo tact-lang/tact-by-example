@@ -10,7 +10,4 @@ The sender during execution of the `init()` method of the contract is the addres
 
 The main way to authenticate an incoming message, particularly for priviliges actions, is to verify the sender. This field is secure and impossible to fake.
 
-<div style="padding-left: 1em; margin: 1em 0; position: relative;">
-    <div style="position: absolute; top: 0; bottom: 0%; left: 0; width: 3px; background-color: green;"></div>
-    <strong>Info</strong>: More detail about context can find in here: <a href="https://docs.tact-lang.org/language/ref/common#context">context()</a>
-</div>
+> **Info**: More detail about context can be found here: [context()](https://docs.tact-lang.org/ref/core-contextstate/#context)
