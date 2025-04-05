@@ -321,30 +321,77 @@ function dictValueParserFactoryDeploy(): DictionaryValue<FactoryDeploy> {
     }
 }
 
- type Todo_init_args = {
-    $$type: 'Todo_init_args';
-    seqno: bigint;
+export type Check = {
+    $$type: 'Check';
+    data: Cell;
+    signature: Cell;
 }
 
-function initTodo_init_args(src: Todo_init_args) {
+export function storeCheck(src: Check) {
     return (builder: Builder) => {
         let b_0 = builder;
-        b_0.storeInt(src.seqno, 257);
+        b_0.storeUint(1340442466, 32);
+        b_0.storeRef(src.data);
+        b_0.storeRef(src.signature);
     };
 }
 
-async function Todo_init(seqno: bigint) {
-    const __code = Cell.fromBase64('te6ccgECEgEAA9UAART/APSkE/S88sgLAQIBYgIDApjQAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxZ2zzy4ILI+EMBzH8BygABAcs/ye1UBAUCAVgODwBG7UTQ1AH4Y9IAAZTTPwEx4Pgo1wsKgwm68uCJgQEB1wABAdECoO2i7fsBkjB/4HAh10nCH5UwINcLH94gghCUapi2uo6oMNMfAYIQlGqYtrry4IHTPwExyAGCEK/5D1dYyx/LP8n4QgFwbds8f+DAAJEw4w1wBgcBOm1tIm6zmVsgbvLQgG8iAZEy4hAkcAMEgEJQI9s8DAKw+QEggvB2bSGJHoZfKfCmdwduN4rCPdtOz0o5Ai1EQdtvLNSE0LqOijAg2zz+FDB/2zHggvDrHm7dvPcdsbIhf27F8kb14HpdmR1M/6Waxo5e1dlp27rjAggJAN7IIcEAmIAtAcsHAaMB3iGCODJ8snNBGdO3qaoduY4gcCBxjhQEeqkMpjAlqBKgBKoHAqQhwABFMOYwM6oCzwGOK28AcI4RI3qpCBJvjAGkA3qpBCDAABTmMyKlA5xTAm+BpjBYywcCpVnkMDHiydADvvhDcts8XHBZyHABywFzAcsBcAHLABLMzMn5AMhyAcsBcAHLABLKB8v/ydAg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIghAF9eEAcogQNUQwEn8GBQRBM9s8f9sxCgsMAGQB0PQEMG0BgVI3AYAQ9A9vofLghwGBUjciAoAQ9BfIAcj0AMkBzHABygBYAYEBAc8AyQAYAAAAAGlkZW50aWZ5AcrIcQHKAVAHAcoAcAHKAlAFINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WUAP6AnABymgjbrORf5MkbrPilzMzAXABygDjDSFus5x/AcoAASBu8tCAAcyVMXABygDiyQH7AA0AmH8BygDIcAHKAHABygAkbrOdfwHKAAQgbvLQgFAEzJY0A3ABygDiJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4nABygACfwHKAALJWMwAubu9GCcFzsPV0srnsehOw51kqFG2aCcJ3WNS0rZHyzItOvLf3xYjmCcCBVwBuAZ2OUzlg6rkclssOCcBvUne+VRZbxx1PT3gVZwyaCcJ2XTlqzTstzOg6WbZRm6KSAIBSBARABGwr7tRNDSAAGAAdbJu40NWlwZnM6Ly9RbVozdHNkdzZYSjFxV2ZjZUVhUjhzazRuanFoTHBNRGFjTXhMelN5dXlvb1ZDgg');
-    const __system = Cell.fromBase64('te6cckECFAEAA98AAQHAAQEFoKRvAgEU/wD0pBP0vPLICwMCAWIJBAIBWAgFAgFIBwYAdbJu40NWlwZnM6Ly9RbVozdHNkdzZYSjFxV2ZjZUVhUjhzazRuanFoTHBNRGFjTXhMelN5dXlvb1ZDggABGwr7tRNDSAAGAAubu9GCcFzsPV0srnsehOw51kqFG2aCcJ3WNS0rZHyzItOvLf3xYjmCcCBVwBuAZ2OUzlg6rkclssOCcBvUne+VRZbxx1PT3gVZwyaCcJ2XTlqzTstzOg6WbZRm6KSAKY0AHQ0wMBcbCjAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IhUUFMDbwT4YQL4Yts8Wds88uCCyPhDAcx/AcoAAQHLP8ntVBMKAqDtou37AZIwf+BwIddJwh+VMCDXCx/eIIIQlGqYtrqOqDDTHwGCEJRqmLa68uCB0z8BMcgBghCv+Q9XWMsfyz/J+EIBcG3bPH/gwACRMOMNcBALArD5ASCC8HZtIYkehl8p8KZ3B243isI9207PSjkCLURB228s1ITQuo6KMCDbPP4UMH/bMeCC8Osebt289x2xsiF/bsXyRvXgel2ZHUz/pZrGjl7V2WnbuuMCDwwDvvhDcts8XHBZyHABywFzAcsBcAHLABLMzMn5AMhyAcsBcAHLABLKB8v/ydAg10mBAQu68uCIINcLCiCBBP+68tCJgwm68uCIghAF9eEAcogQNUQwEn8GBQRBM9s8f9sxDg0RABgAAAAAaWRlbnRpZnkAZAHQ9AQwbQGBUjcBgBD0D2+h8uCHAYFSNyICgBD0F8gByPQAyQHMcAHKAFgBgQEBzwDJAN7IIcEAmIAtAcsHAaMB3iGCODJ8snNBGdO3qaoduY4gcCBxjhQEeqkMpjAlqBKgBKoHAqQhwABFMOYwM6oCzwGOK28AcI4RI3qpCBJvjAGkA3qpBCDAABTmMyKlA5xTAm+BpjBYywcCpVnkMDHiydABOm1tIm6zmVsgbvLQgG8iAZEy4hAkcAMEgEJQI9s8EQHKyHEBygFQBwHKAHABygJQBSDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IjPFlAD+gJwAcpoI26zkX+TJG6z4pczMwFwAcoA4w0hbrOcfwHKAAEgbvLQgAHMlTFwAcoA4skB+wASAJh/AcoAyHABygBwAcoAJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4iRus51/AcoABCBu8tCAUATMljQDcAHKAOJwAcoAAn8BygACyVjMAEbtRNDUAfhj0gABlNM/ATHg+CjXCwqDCbry4ImBAQHXAAEB0dAxevM=');
+export function loadCheck(slice: Slice) {
+    let sc_0 = slice;
+    if (sc_0.loadUint(32) !== 1340442466) { throw Error('Invalid prefix'); }
+    let _data = sc_0.loadRef();
+    let _signature = sc_0.loadRef();
+    return { $$type: 'Check' as const, data: _data, signature: _signature };
+}
+
+function loadTupleCheck(source: TupleReader) {
+    let _data = source.readCell();
+    let _signature = source.readCell();
+    return { $$type: 'Check' as const, data: _data, signature: _signature };
+}
+
+function storeTupleCheck(source: Check) {
+    let builder = new TupleBuilder();
+    builder.writeCell(source.data);
+    builder.writeCell(source.signature);
+    return builder.build();
+}
+
+function dictValueParserCheck(): DictionaryValue<Check> {
+    return {
+        serialize: (src, buidler) => {
+            buidler.storeRef(beginCell().store(storeCheck(src)).endCell());
+        },
+        parse: (src) => {
+            return loadCheck(src.loadRef().beginParse());
+        }
+    }
+}
+
+ type SignAndVerify_init_args = {
+    $$type: 'SignAndVerify_init_args';
+    public_key: bigint;
+}
+
+function initSignAndVerify_init_args(src: SignAndVerify_init_args) {
+    return (builder: Builder) => {
+        let b_0 = builder;
+        b_0.storeInt(src.public_key, 257);
+    };
+}
+
+async function SignAndVerify_init(public_key: bigint) {
+    const __code = Cell.fromBase64('te6ccgECDgEAApEAART/APSkE/S88sgLAQIBYgIDAp7QAdDTAwFxsKMB+kABINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiFRQUwNvBPhhAvhi2zxZ2zzy4ILI+EMBzH8BygABAYEBAc8Aye1UBAUCAVgKCwBM7UTQ1AH4Y9IAAZeBAQHXAAEx4Pgo1wsKgwm68uCJgQEB1wABAdEC3gGSMH/gcCHXScIflTAg1wsf3iCCEE/lh2K6jp8w0x8BghBP5YdiuvLggdTUWWwSWYIA4g8D2zwS8vR/4IIQlGqYtrqOp9MfAYIQlGqYtrry4IHTPwExyAGCEK/5D1dYyx/LP8n4QgFwbds8f+AwcAYHABAB+QAB0CL5EAE6bW0ibrOZWyBu8tCAbyIBkTLiECRwAwSAQlAj2zwIAcrIcQHKAVAHAcoAcAHKAlAFINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WUAP6AnABymgjbrORf5MkbrPilzMzAXABygDjDSFus5x/AcoAASBu8tCAAcyVMXABygDiyQH7AAkAmH8BygDIcAHKAHABygAkbrOdfwHKAAQgbvLQgFAEzJY0A3ABygDiJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4nABygACfwHKAALJWMwAubu9GCcFzsPV0srnsehOw51kqFG2aCcJ3WNS0rZHyzItOvLf3xYjmCcCBVwBuAZ2OUzlg6rkclssOCcBvUne+VRZbxx1PT3gVZwyaCcJ2XTlqzTstzOg6WbZRm6KSAIBSAwNABGwr7tRNDSAAGAAdbJu40NWlwZnM6Ly9RbWFCOTVQTXc1M0dWVGNnSG5oMlJzNDE4QTViWGtYOFNZeWFvM1oxWFhBemp2gg');
+    const __system = Cell.fromBase64('te6cckECEAEAApsAAQHAAQEFoNdTAgEU/wD0pBP0vPLICwMCAWIJBAIBWAgFAgFIBwYAdbJu40NWlwZnM6Ly9RbWFCOTVQTXc1M0dWVGNnSG5oMlJzNDE4QTViWGtYOFNZeWFvM1oxWFhBemp2ggABGwr7tRNDSAAGAAubu9GCcFzsPV0srnsehOw51kqFG2aCcJ3WNS0rZHyzItOvLf3xYjmCcCBVwBuAZ2OUzlg6rkclssOCcBvUne+VRZbxx1PT3gVZwyaCcJ2XTlqzTstzOg6WbZRm6KSAKe0AHQ0wMBcbCjAfpAASDXSYEBC7ry4Igg1wsKIIEE/7ry0ImDCbry4IhUUFMDbwT4YQL4Yts8Wds88uCCyPhDAcx/AcoAAQGBAQHPAMntVA8KAt4BkjB/4HAh10nCH5UwINcLH94gghBP5Ydiuo6fMNMfAYIQT+WHYrry4IHU1FlsElmCAOIPA9s8EvL0f+CCEJRqmLa6jqfTHwGCEJRqmLa68uCB0z8BMcgBghCv+Q9XWMsfyz/J+EIBcG3bPH/gMHAOCwE6bW0ibrOZWyBu8tCAbyIBkTLiECRwAwSAQlAj2zwMAcrIcQHKAVAHAcoAcAHKAlAFINdJgQELuvLgiCDXCwoggQT/uvLQiYMJuvLgiM8WUAP6AnABymgjbrORf5MkbrPilzMzAXABygDjDSFus5x/AcoAASBu8tCAAcyVMXABygDiyQH7AA0AmH8BygDIcAHKAHABygAkbrOdfwHKAAQgbvLQgFAEzJY0A3ABygDiJG6znX8BygAEIG7y0IBQBMyWNANwAcoA4nABygACfwHKAALJWMwAEAH5AAHQIvkQAEztRNDUAfhj0gABl4EBAdcAATHg+CjXCwqDCbry4ImBAQHXAAEB0TduddE=');
     let builder = beginCell();
     builder.storeRef(__system);
     builder.storeUint(0, 1);
-    initTodo_init_args({ $$type: 'Todo_init_args', seqno })(builder);
+    initSignAndVerify_init_args({ $$type: 'SignAndVerify_init_args', public_key })(builder);
     const __data = builder.endCell();
     return { code: __code, data: __data };
 }
 
-const Todo_errors: { [key: number]: { message: string } } = {
+const SignAndVerify_errors: { [key: number]: { message: string } } = {
     2: { message: `Stack undeflow` },
     3: { message: `Stack overflow` },
     4: { message: `Integer overflow` },
@@ -369,50 +416,51 @@ const Todo_errors: { [key: number]: { message: string } } = {
     135: { message: `Code of a contract was not found` },
     136: { message: `Invalid address` },
     137: { message: `Masterchain support is not enabled for this contract` },
+    57871: { message: `Invalid` },
 }
 
-const Todo_types: ABIType[] = [
+const SignAndVerify_types: ABIType[] = [
     {"name":"StateInit","header":null,"fields":[{"name":"code","type":{"kind":"simple","type":"cell","optional":false}},{"name":"data","type":{"kind":"simple","type":"cell","optional":false}}]},
     {"name":"Context","header":null,"fields":[{"name":"bounced","type":{"kind":"simple","type":"bool","optional":false}},{"name":"sender","type":{"kind":"simple","type":"address","optional":false}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"raw","type":{"kind":"simple","type":"slice","optional":false}}]},
     {"name":"SendParameters","header":null,"fields":[{"name":"bounce","type":{"kind":"simple","type":"bool","optional":false}},{"name":"to","type":{"kind":"simple","type":"address","optional":false}},{"name":"value","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"mode","type":{"kind":"simple","type":"int","optional":false,"format":257}},{"name":"body","type":{"kind":"simple","type":"cell","optional":true}},{"name":"code","type":{"kind":"simple","type":"cell","optional":true}},{"name":"data","type":{"kind":"simple","type":"cell","optional":true}}]},
     {"name":"Deploy","header":2490013878,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}}]},
     {"name":"DeployOk","header":2952335191,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}}]},
     {"name":"FactoryDeploy","header":1829761339,"fields":[{"name":"queryId","type":{"kind":"simple","type":"uint","optional":false,"format":64}},{"name":"cashback","type":{"kind":"simple","type":"address","optional":false}}]},
+    {"name":"Check","header":1340442466,"fields":[{"name":"data","type":{"kind":"simple","type":"cell","optional":false}},{"name":"signature","type":{"kind":"simple","type":"cell","optional":false}}]},
 ]
 
-const Todo_getters: ABIGetter[] = [
+const SignAndVerify_getters: ABIGetter[] = [
 ]
 
-const Todo_receivers: ABIReceiver[] = [
-    {"receiver":"internal","message":{"kind":"text","text":"identify"}},
-    {"receiver":"internal","message":{"kind":"text","text":"deploy 2nd"}},
+const SignAndVerify_receivers: ABIReceiver[] = [
+    {"receiver":"internal","message":{"kind":"typed","type":"Check"}},
     {"receiver":"internal","message":{"kind":"typed","type":"Deploy"}},
 ]
 
-export class Todo implements Contract {
+export class SignAndVerify implements Contract {
     
-    static async init(seqno: bigint) {
-        return await Todo_init(seqno);
+    static async init(public_key: bigint) {
+        return await SignAndVerify_init(public_key);
     }
     
-    static async fromInit(seqno: bigint) {
-        const init = await Todo_init(seqno);
+    static async fromInit(public_key: bigint) {
+        const init = await SignAndVerify_init(public_key);
         const address = contractAddress(0, init);
-        return new Todo(address, init);
+        return new SignAndVerify(address, init);
     }
     
     static fromAddress(address: Address) {
-        return new Todo(address);
+        return new SignAndVerify(address);
     }
     
     readonly address: Address; 
     readonly init?: { code: Cell, data: Cell };
     readonly abi: ContractABI = {
-        types: [{"name":"StateInit","header":null,"fields":[]},{"name":"Context","header":null,"fields":[]},{"name":"SendParameters","header":null,"fields":[]},{"name":"Deploy","header":2490013878,"fields":[]},{"name":"DeployOk","header":2952335191,"fields":[]},{"name":"FactoryDeploy","header":1829761339,"fields":[]}],
-        types:  Todo_types,
-        getters: Todo_getters,
-        receivers: Todo_receivers,
-        errors: Todo_errors,
+        types: [{"name":"StateInit","header":null,"fields":[]},{"name":"Context","header":null,"fields":[]},{"name":"SendParameters","header":null,"fields":[]},{"name":"Deploy","header":2490013878,"fields":[]},{"name":"DeployOk","header":2952335191,"fields":[]},{"name":"FactoryDeploy","header":1829761339,"fields":[]},{"name":"Check","header":1340442466,"fields":[]}],
+        types:  SignAndVerify_types,
+        getters: SignAndVerify_getters,
+        receivers: SignAndVerify_receivers,
+        errors: SignAndVerify_errors,
     };
     
     private constructor(address: Address, init?: { code: Cell, data: Cell }) {
@@ -420,14 +468,11 @@ export class Todo implements Contract {
         this.init = init;
     }
     
-    async send(provider: ContractProvider, via: Sender, args: { value: bigint, bounce?: boolean| null | undefined }, message: 'identify' | 'deploy 2nd' | Deploy) {
+    async send(provider: ContractProvider, via: Sender, args: { value: bigint, bounce?: boolean| null | undefined }, message: Check | Deploy) {
         
         let body: Cell | null = null;
-        if (message === 'identify') {
-            body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
-        }
-        if (message === 'deploy 2nd') {
-            body = beginCell().storeUint(0, 32).storeStringTail(message).endCell();
+        if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'Check') {
+            body = beginCell().store(storeCheck(message)).endCell();
         }
         if (message && typeof message === 'object' && !(message instanceof Slice) && message.$$type === 'Deploy') {
             body = beginCell().store(storeDeploy(message)).endCell();

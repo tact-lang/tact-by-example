@@ -1,6 +1,6 @@
 import { Sha256 } from "@aws-crypto/sha256-js";
-import { beginCell, Cell } from "ton";
-import { Dictionary } from "ton-core";
+import { beginCell, Cell } from "@ton/ton";
+import { Dictionary } from "@ton/core";
 
 const ONCHAIN_CONTENT_PREFIX = 0x00;
 const SNAKE_PREFIX = 0x00;
@@ -18,7 +18,7 @@ const toKey = (key: string) => {
 
 export function makeSnakeCell(data: Buffer) {
   // Create a cell that package the data
-  let chunks = bufferToChunks(data, CELL_MAX_SIZE_BYTES);
+  const chunks = bufferToChunks(data, CELL_MAX_SIZE_BYTES);
 
   const b = chunks.reduceRight((curCell, chunk, index) => {
     if (index === 0) {
@@ -36,7 +36,7 @@ export function makeSnakeCell(data: Buffer) {
 }
 
 function bufferToChunks(buff: Buffer, chunkSize: number) {
-  let chunks: Buffer[] = [];
+  const chunks: Buffer[] = [];
   while (buff.byteLength > 0) {
     chunks.push(buff.slice(0, chunkSize));
     buff = buff.slice(chunkSize);
@@ -45,7 +45,7 @@ function bufferToChunks(buff: Buffer, chunkSize: number) {
 }
 
 export function buildOnchainMetadata(data: { name: string; description: string; image: string }): Cell {
-  let dict = Dictionary.empty(Dictionary.Keys.BigUint(256), Dictionary.Values.Cell());
+  const dict = Dictionary.empty(Dictionary.Keys.BigUint(256), Dictionary.Values.Cell());
 
   // Store the on-chain metadata in the dictionary
   Object.entries(data).forEach(([key, value]) => {
@@ -62,6 +62,6 @@ export function JettonContent(): Cell {
     symbol: "TTN",
     image: "https://avatars.githubusercontent.com/u/104382459?s=200&v=4",
   };
-  let content = buildOnchainMetadata(jettonParams);
+  const content = buildOnchainMetadata(jettonParams);
   return content;
 }
