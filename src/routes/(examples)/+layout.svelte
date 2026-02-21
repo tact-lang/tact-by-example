@@ -10,11 +10,19 @@
   import { convertToText } from "$lib/helpers";
   import { mobile } from "$lib/mobile";
   import store from "$lib/store";
+  import { locale, tt } from "$lib/i18n";
+  import { page } from "$app/stores";
+  import LanguageSwitcher from "$lib/components/LanguageSwitcher.svelte";
 
   import "../../loader.css";
   import "../../app.css";
   import "../../shiki.css";
   import { slide } from "svelte/transition";
+
+  // Load all translated content files at build time
+  const allTranslations: Record<string, string> = import.meta.glob(
+    './*/content.*.md', { as: 'raw', eager: true }
+  );
 
   BigInt.prototype.toJSON = function () {
     return this.toString();
@@ -38,6 +46,26 @@
     prev = s.prev;
     terminalContent = "";
   });
+
+  // Reactively update markdown when locale or page changes
+  $: {
+    const currentLocale = $locale;
+    const pathname = $page?.url?.pathname ?? '';
+    const exampleId = pathname.replace(/^\//, '').replace(/\/$/, '');
+    // Trigger re-run when store markdown changes (page navigation)
+    const _storeMarkdown = $store.markdown;
+
+    if (currentLocale === 'en') {
+      // Restore English content from store
+      if (_storeMarkdown) markdownHtml = marked(_storeMarkdown);
+    } else if (exampleId) {
+      const translated = allTranslations[`./${exampleId}/content.${currentLocale}.md`];
+      if (translated) {
+        markdownHtml = marked(translated);
+      }
+      // If no translation exists, English from store.subscribe stays
+    }
+  }
 
   onMount(() => {
     loaded = true;
@@ -218,6 +246,8 @@
   }
 </script>
 
+<LanguageSwitcher />
+
 {#if !loaded}
   <div class="pageLoader">
     <div class="sk-folding-cube">
@@ -244,19 +274,19 @@
               class="nx-inline nx-h-5 nx-shrink-0 ltr:nx-rotate-180"
               ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg
             >
-            {prev.name}
+            {$tt(`example.${prev.id}`) || prev.name}
           </a>
         {/if}
         {#if next}
           <a style="position: absolute; right: 50px;" href={next.id}>
-            {next.name}
+            {$tt(`example.${next.id}`) || next.name}
             <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="nx-inline nx-h-5 nx-shrink-0 rtl:nx-rotate-180"
               ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg
             >
           </a>
         {/if}
       </div>
-      <a class="allExamples" href="all">All Examples</a>
+      <a class="allExamples" href="all">{$tt('nav.allExamples')}</a>
     </div>
     <svelte:fragment slot="splitter">
       <DefaultSplitter color="rgb(17, 17, 17)" hoverColor="#444" dragColor="#444" />
@@ -337,17 +367,17 @@
           class="nx-inline nx-h-5 nx-shrink-0 ltr:nx-rotate-180"
           ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg
         >
-        {prev.name}
+        {$tt(`example.${prev.id}`) || prev.name}
       </a>
     {/if}
     {#if next}
       <a style="float: right; margin-bottom: 15px;" href={next.id}>
-        {next.name}
+        {$tt(`example.${next.id}`) || next.name}
         <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="nx-inline nx-h-5 nx-shrink-0 rtl:nx-rotate-180"
           ><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg
         >
       </a>
     {/if}
   </div>
-  <a class="allExamples" style="margin-bottom: 30px;" href="all">All Examples</a>
+  <a class="allExamples" style="margin-bottom: 30px;" href="all">{$tt('nav.allExamples')}</a>
 {/if}
