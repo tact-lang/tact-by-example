@@ -1,3 +1,6 @@
+> [!CAUTION]
+> Deprecated! Please, learn the [Tolk Language](https://docs.ton.org/blockchain-basics/tolk/overview)
+
 - [🔍 Changelog](/CHANGELOG.md)
 - [🫂 Telegram Group Chat](https://t.me/tactlang)
 
