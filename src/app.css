@@ -8,6 +8,12 @@ html {
 }
 :root {
   --app-height: 100%;
+  --tact-banner-height: clamp(40px, calc(60px - 3.5vw), 46px);
+  --tact-banner-padding-block: 6px;
+  --tact-banner-font-size: clamp(13px, calc(12px + 0.25vw), 14px);
+  --tact-banner-bg: #c62828;
+  --tact-banner-text: #ffffff;
+  --tact-banner-text-muted: #ffd6d6;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
