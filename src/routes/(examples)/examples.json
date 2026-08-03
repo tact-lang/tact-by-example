@@ -166,5 +166,9 @@
   {
     "id": "07-jetton-standard",
     "name": "Jetton Token"
+  },
+  {
+    "id": "08-sign-and-verify",
+    "name": "Sign and verify"
   }
 ]
